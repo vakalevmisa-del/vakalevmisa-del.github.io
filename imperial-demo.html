@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imperial Hair Salong — se fargen før du bestemmer deg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tone:#B5643C;
+  --tone-dyp:#7E4327;
+  --tone-lys:#E0A97F;
+  --kull:#14110F;
+  --kull-lys:#1E1A17;
+  --krem:#F2EDE6;
+  --krem-dus:#9C948B;
+  --rand:rgba(242,237,230,.13);
+  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Public Sans",system-ui,sans-serif;
+  --mono:"Space Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--kull);color:var(--krem);
+  font-family:var(--sans);font-size:17px;line-height:1.65;font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:96px;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--tone-lys);outline-offset:4px}
+.seksjon{width:min(1040px,92vw);margin:0 auto;padding:clamp(60px,9vw,110px) 0}
+
+/* tone-driven elements share this transition */
+.tone-farge,h1 em,.tall,.strek,.sving{transition:color 700ms ease,background 700ms ease,border-color 700ms ease}
+
+/* ---- topp ---- */
+.topp{
+  width:min(1040px,92vw);margin:0 auto;
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:28px 0;border-bottom:1px solid var(--rand);
+}
+.merke{font-family:var(--serif);font-size:24px;letter-spacing:.01em}
+.merke em{font-style:italic;color:var(--tone);transition:color 700ms ease}
+.topp .sted{font-family:var(--mono);font-size:12px;color:var(--krem-dus);letter-spacing:.1em;text-transform:uppercase}
+
+/* ---- hero ---- */
+.hero{padding-top:clamp(50px,7vw,80px)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--tone);margin-bottom:26px;transition:color 700ms ease}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(46px,8.5vw,104px);line-height:1.02;letter-spacing:-.015em;
+  max-width:15ch;
+}
+h1 em{font-style:italic;color:var(--tone)}
+.hero p{color:var(--krem-dus);max-width:44ch;margin-top:26px;font-size:18px}
+
+/* ---- tonevelger (signature) ---- */
+.tonepanel{
+  margin-top:clamp(40px,6vw,64px);
+  border:1px solid var(--rand);border-radius:2px;
+  background:var(--kull-lys);
+  overflow:hidden;
+}
+.tonepanel-topp{
+  padding:22px clamp(20px,3vw,32px);
+  border-bottom:1px solid var(--rand);
+  display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.tonepanel-topp h2{font-family:var(--serif);font-weight:400;font-size:26px}
+.naavaerende{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--krem-dus)}
+.naavaerende b{color:var(--tone);font-weight:700;transition:color 700ms ease}
+
+.svatsjer{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.svatsj{
+  border:0;border-right:1px solid var(--rand);
+  background:transparent;color:var(--krem);
+  padding:26px 16px 22px;cursor:pointer;text-align:left;
+  font-family:var(--sans);font-size:14px;
+  display:flex;flex-direction:column;gap:14px;
+  transition:background 240ms ease;
+}
+.svatsj:last-child{border-right:0}
+.svatsj:hover{background:rgba(242,237,230,.05)}
+.svatsj[aria-pressed="true"]{background:rgba(242,237,230,.09)}
+.prove{width:100%;height:52px;border-radius:1px;position:relative}
+.prove::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(255,255,255,.28),rgba(0,0,0,.18) 55%,rgba(255,255,255,.12));
+}
+.svatsj .navn{font-weight:500;letter-spacing:.01em}
+.svatsj .kode{font-family:var(--mono);font-size:11px;color:var(--krem-dus)}
+
+.tonepanel-fot{
+  padding:18px clamp(20px,3vw,32px);
+  border-top:1px solid var(--rand);
+  font-family:var(--mono);font-size:12px;color:var(--krem-dus);
+}
+
+/* ---- tjenester ---- */
+h2.avsnitt{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5.5vw,58px);line-height:1.06;max-width:16ch}
+.tjenestelinje{
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;
+  padding:24px 2px;border-bottom:1px solid var(--rand);
+}
+.tjenestelinje:first-of-type{border-top:1px solid var(--rand);margin-top:40px}
+.tjenestelinje h3{font-family:var(--serif);font-weight:400;font-size:27px}
+.tjenestelinje p{color:var(--krem-dus);font-size:15px;margin-top:6px;max-width:52ch}
+.tjenestelinje .pris{font-family:var(--mono);font-size:15px;color:var(--tone);white-space:nowrap;transition:color 700ms ease}
+
+/* ---- sitat ---- */
+.sitat{
+  margin-top:clamp(56px,8vw,96px);
+  border-left:2px solid var(--tone);
+  padding:6px 0 6px 28px;
+  transition:border-color 700ms ease;
+}
+.sitat p{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3.6vw,38px);line-height:1.28;max-width:26ch}
+.sitat span{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--krem-dus);margin-top:20px}
+
+/* ---- bestill ---- */
+.knapp{
+  display:inline-block;text-decoration:none;
+  font-family:var(--sans);font-weight:500;font-size:16px;
+  background:var(--tone);color:var(--kull);
+  padding:16px 34px;border-radius:1px;margin-top:32px;
+  transition:background 700ms ease,transform 160ms ease;
+}
+.knapp:hover{transform:translateY(-2px)}
+.knapp.tom{background:transparent;color:var(--krem);border:1px solid var(--rand);margin-left:10px}
+.knapp.tom:hover{border-color:var(--krem)}
+
+/* ---- kontakt ---- */
+.kontaktrad{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin-top:44px}
+.kontaktrad span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--krem-dus);margin-bottom:8px}
+
+footer{
+  border-top:1px solid var(--rand);width:min(1040px,92vw);margin:0 auto;
+  padding:30px 0 40px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  font-family:var(--mono);font-size:11.5px;color:var(--krem-dus);letter-spacing:.04em;
+}
+
+/* ---- fast tonelinje nederst ---- */
+.tonelinje{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(20,17,15,.94);backdrop-filter:blur(10px);
+  border-top:1px solid var(--rand);
+  display:flex;align-items:center;gap:14px;
+  padding:12px clamp(14px,4vw,32px);
+  font-family:var(--mono);font-size:11.5px;color:var(--krem-dus);
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.tonelinje .band{flex:1;height:6px;border-radius:3px;background:var(--tone);transition:background 700ms ease}
+
+.avslor{opacity:0;transform:translateY(20px);transition:opacity 650ms ease,transform 650ms ease}
+.avslor.inne{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+@media (max-width:600px){
+  .svatsjer{grid-template-columns:repeat(2,1fr)}
+  .svatsj{border-bottom:1px solid var(--rand)}
+  .tjenestelinje{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="topp">
+  <div class="merke">Imperial <em>Hair Salong</em></div>
+  <div class="sted">Kristiansand</div>
+</div>
+
+<header class="seksjon hero">
+  <p class="kicker">Farge · Klipp · Styling</p>
+  <h1>Se fargen <em>før</em> du sier ja til den</h1>
+  <p>De fleste bestemmer seg for hårfarge ut fra et bilde av noen andre. Hos oss starter vi med en fargeprat — og du får se tonen mot din egen hud før saksen kommer fram.</p>
+
+  <!-- SIGNATURELEMENT: tonevelger som farger hele siden -->
+  <div class="tonepanel avslor">
+    <div class="tonepanel-topp">
+      <h2>Prøv en tone</h2>
+      <div class="naavaerende">Du ser nå: <b id="tone-navn">Kobber</b></div>
+    </div>
+    <div class="svatsjer" role="group" aria-label="Velg hårtone">
+      <button class="svatsj" data-tone="#B5643C" data-dyp="#7E4327" data-lys="#E0A97F" data-navn="Kobber" aria-pressed="true">
+        <span class="prove" style="background:#B5643C"></span>
+        <span class="navn">Kobber</span><span class="kode">7.43 — varm</span>
+      </button>
+      <button class="svatsj" data-tone="#C9BFA8" data-dyp="#9A9080" data-lys="#E6DFCF" data-navn="Askblond" aria-pressed="false">
+        <span class="prove" style="background:#C9BFA8"></span>
+        <span class="navn">Askblond</span><span class="kode">8.1 — kjølig</span>
+      </button>
+      <button class="svatsj" data-tone="#8E5A3B" data-dyp="#5B3722" data-lys="#C08D69" data-navn="Sjokolade" aria-pressed="false">
+        <span class="prove" style="background:#5C3A28"></span>
+        <span class="navn">Sjokolade</span><span class="kode">4.0 — nøytral</span>
+      </button>
+      <button class="svatsj" data-tone="#D8D5CE" data-dyp="#A5A29B" data-lys="#EFEDE8" data-navn="Platina" aria-pressed="false">
+        <span class="prove" style="background:#D8D5CE"></span>
+        <span class="navn">Platina</span><span class="kode">10.1 — kjølig</span>
+      </button>
+      <button class="svatsj" data-tone="#A63E42" data-dyp="#6E2427" data-lys="#D07E80" data-navn="Rødtone" aria-pressed="false">
+        <span class="prove" style="background:#A63E42"></span>
+        <span class="navn">Rødtone</span><span class="kode">6.66 — intens</span>
+      </button>
+    </div>
+    <div class="tonepanel-fot">Tonen følger deg gjennom hele siden — trykk deg gjennom og se hva som kler deg.</div>
+  </div>
+</header>
+
+<main>
+  <section class="seksjon avslor">
+    <h2 class="avsnitt">Hva vi gjør</h2>
+
+    <div class="tjenestelinje">
+      <div><h3>Fargekonsultasjon</h3><p>20 minutter uten forpliktelse. Vi ser på hudtone, utgangsfarge og hva håret ditt tåler.</p></div>
+      <div class="pris">gratis</div>
+    </div>
+    <div class="tjenestelinje">
+      <div><h3>Klipp og føn</h3><p>Klipp tilpasset hårets fall, ikke bare et bilde. Vask og styling inkludert.</p></div>
+      <div class="pris">fra 690 kr</div>
+    </div>
+    <div class="tjenestelinje">
+      <div><h3>Helfarge</h3><p>Jevn farge fra rot til tupp. Vi blander tonen på stedet — ikke rett fra tube.</p></div>
+      <div class="pris">fra 1 290 kr</div>
+    </div>
+    <div class="tjenestelinje">
+      <div><h3>Striper og balayage</h3><p>Myke overganger som vokser pent ut, så du slipper skarp rotstripe etter seks uker.</p></div>
+      <div class="pris">fra 1 890 kr</div>
+    </div>
+    <div class="tjenestelinje">
+      <div><h3>Oppfriskning av tone</h3><p>Mellom fargene — trekker tilbake glansen uten å belaste håret.</p></div>
+      <div class="pris">fra 490 kr</div>
+    </div>
+
+    <div class="sitat">
+      <p>Vi sier fra hvis fargen du ønsker vil ødelegge håret ditt. Det er derfor folk kommer tilbake.</p>
+      <span>Fargekonsultasjonen er alltid gratis</span>
+    </div>
+  </section>
+
+  <section class="seksjon avslor" id="bestill">
+    <h2 class="avsnitt">Bestill en fargeprat</h2>
+    <p style="color:var(--krem-dus);max-width:46ch;margin-top:20px">Kom innom for en prat før du bestiller behandling. Ingen binding, ingen press — bare en ærlig vurdering av hva som fungerer på håret ditt.</p>
+    <div>
+      <a class="knapp" href="tel:+4700000000">Ring salongen</a>
+      <a class="knapp tom" href="#kontakt">Finn oss</a>
+    </div>
+  </section>
+
+  <section class="seksjon avslor" id="kontakt">
+    <h2 class="avsnitt">Kontakt</h2>
+    <div class="kontaktrad">
+      <div><span>Adresse</span><p>Kristiansand sentrum</p></div>
+      <div><span>Telefon</span><p>00 00 00 00</p></div>
+      <div><span>Åpent</span><p>Tir–Fre 10–18 · Lør 10–15</p></div>
+      <div><span>Betaling</span><p>Kort og Vipps</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Imperial Hair Salong — Kristiansand</span>
+  <span>Designforslag — ikke en offisiell nettside</span>
+</footer>
+
+<div class="tonelinje" aria-hidden="true">
+  <span>Valgt tone</span>
+  <span class="band" id="band"></span>
+  <span id="tone-navn-2">Kobber</span>
+</div>
+
+<script>
+(function(){
+  var rot = document.documentElement;
+  var knapper = document.querySelectorAll(".svatsj");
+  var navn1 = document.getElementById("tone-navn");
+  var navn2 = document.getElementById("tone-navn-2");
+
+  knapper.forEach(function(k){
+    k.addEventListener("click",function(){
+      rot.style.setProperty("--tone", k.dataset.tone);
+      rot.style.setProperty("--tone-dyp", k.dataset.dyp);
+      rot.style.setProperty("--tone-lys", k.dataset.lys);
+      navn1.textContent = k.dataset.navn;
+      navn2.textContent = k.dataset.navn;
+      knapper.forEach(function(a){a.setAttribute("aria-pressed","false");});
+      k.setAttribute("aria-pressed","true");
+    });
+  });
+
+  if("IntersectionObserver" in window){
+    var obs = new IntersectionObserver(function(p){
+      p.forEach(function(x){ if(x.isIntersecting){x.target.classList.add("inne");obs.unobserve(x.target);} });
+    },{threshold:.12});
+    document.querySelectorAll(".avslor").forEach(function(el){obs.observe(el);});
+  } else {
+    document.querySelectorAll(".avslor").forEach(function(el){el.classList.add("inne");});
+  }
+})();
+</script>
+</body>
+</html>

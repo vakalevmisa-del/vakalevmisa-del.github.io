@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nettsider for lokale bedrifter i Kristiansand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F1012;
+  --bg2:#17191C;
+  --tekst:#EDEDEA;
+  --dus:#8E9096;
+  --aksent:#5BE0A5;
+  --rand:rgba(237,237,234,.12);
+  --sans:"Sora",system-ui,sans-serif;
+  --mono:"Space Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--tekst);
+  font-family:var(--sans);font-size:17px;line-height:1.65;font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--aksent);outline-offset:4px}
+.inn{width:min(940px,90vw);margin:0 auto}
+
+header{padding:clamp(64px,10vw,120px) 0 clamp(40px,6vw,70px)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--aksent);margin-bottom:22px}
+h1{font-weight:700;font-size:clamp(32px,5.5vw,54px);line-height:1.1;letter-spacing:-.02em;max-width:18ch}
+header p{color:var(--dus);max-width:52ch;margin-top:22px}
+
+.liste{padding-bottom:clamp(60px,8vw,100px);display:grid;gap:1px;background:var(--rand);border-top:1px solid var(--rand);border-bottom:1px solid var(--rand)}
+.arbeid{
+  background:var(--bg);padding:30px 4px;
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
+  text-decoration:none;transition:background 200ms ease,padding-left 200ms ease;
+}
+.arbeid:hover{background:var(--bg2);padding-left:18px}
+.arbeid h2{font-weight:600;font-size:clamp(21px,3vw,27px);letter-spacing:-.01em}
+.arbeid .type{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--aksent);margin-bottom:8px}
+.arbeid p{color:var(--dus);font-size:15px;margin-top:8px;max-width:56ch}
+.arbeid .gaa{font-family:var(--mono);font-size:13px;color:var(--dus);white-space:nowrap}
+.arbeid:hover .gaa{color:var(--tekst)}
+
+.om{padding:clamp(50px,7vw,80px) 0}
+.om h3{font-weight:600;font-size:22px;margin-bottom:14px}
+.om p{color:var(--dus);max-width:56ch}
+.om .kontakt{margin-top:26px;font-family:var(--mono);font-size:14px}
+.om .kontakt a{color:var(--aksent);text-decoration:none;border-bottom:1px solid transparent}
+.om .kontakt a:hover{border-bottom-color:var(--aksent)}
+
+footer{border-top:1px solid var(--rand);padding:26px 0 50px;font-family:var(--mono);font-size:11.5px;color:var(--dus)}
+
+@media (max-width:600px){
+  .arbeid{grid-template-columns:1fr}
+  .arbeid .gaa{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="inn">
+  <header>
+    <p class="kicker">Webdesign · Kristiansand</p>
+    <h1>Nettsider for lokale bedrifter som fortjener bedre enn en mal</h1>
+    <p>Hver side under er bygget for én bestemt bedrift, med en egen idé — ikke samme oppsett med byttet logo. Klikk deg inn og se forskjellen.</p>
+  </header>
+
+  <div class="liste">
+    <a class="arbeid" href="cutngo/">
+      <div>
+        <p class="type">Frisør</p>
+        <h2>Cut'n Go</h2>
+        <p>Himmelen på siden følger klokka, og neonskiltet tennes når det mørkner — bygget rundt at de holder åpent til 21 hver dag.</p>
+      </div>
+      <span class="gaa">Se siden →</span>
+    </a>
+
+    <a class="arbeid" href="kjellemo/">
+      <div>
+        <p class="type">Bilverksted</p>
+        <h2>Kjellemo Bilverksted</h2>
+        <p>Et instrumentpanel som viser løftet deres i tall: null skjulte kostnader, full åpenhet på pris, 25 år på gulvet.</p>
+      </div>
+      <span class="gaa">Se siden →</span>
+    </a>
+
+    <a class="arbeid" href="imperial/">
+      <div>
+        <p class="type">Hårsalong</p>
+        <h2>Imperial Hair Salong</h2>
+        <p>Velg en hårtone, og hele siden farges om. Kunden ser fargen i sammenheng før hun bestiller time.</p>
+      </div>
+      <span class="gaa">Se siden →</span>
+    </a>
+
+    <a class="arbeid" href="kafe/">
+      <div>
+        <p class="type">Kafé</p>
+        <h2>Kafé Bryggen</h2>
+        <p>Siden blas sidelengs, som å gå innover i lokalet: kaffebaren, bakeriet, lunsjdisken — i den rekkefølgen du møter dem.</p>
+      </div>
+      <span class="gaa">Se siden →</span>
+    </a>
+  </div>
+
+  <section class="om">
+    <h3>Om arbeidet</h3>
+    <p>Alle sidene her er designforslag, laget uten oppdrag fra bedriftene. De viser hvordan siden kunne sett ut — innhold, priser og kontaktinfo er plassholdere.</p>
+    <div class="kontakt">Vil du ha en slik side til din bedrift? <a href="mailto:vakalevmisa@gmail.com">Ta kontakt</a></div>
+  </section>
+</div>
+
+<div class="inn"><footer>Designforslag — ingen av sidene er offisielle nettsider for bedriftene som er nevnt.</footer></div>
+
+</body>
+</html>

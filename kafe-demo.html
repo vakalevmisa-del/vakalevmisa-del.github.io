@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kafé Bryggen — gå langs disken</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Figtree:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --skog:#152A20;
+  --skog-dyp:#0D1B14;
+  --sand:#EDE2CC;
+  --sand-dus:#B6A98F;
+  --gul:#F2C230;
+  --terr:#C4552F;
+  --rand:rgba(237,226,204,.16);
+  --disp:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Figtree",system-ui,sans-serif;
+  --mono:"Space Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--skog);color:var(--sand);
+  font-family:var(--body);font-size:17px;line-height:1.6;font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gul);outline-offset:3px}
+
+/* ---------- TOPP ---------- */
+.topp{
+  position:fixed;top:0;left:0;right:0;z-index:30;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px clamp(16px,4vw,40px);
+  background:linear-gradient(to bottom,var(--skog) 55%,transparent);
+}
+.merke{font-family:var(--disp);font-weight:800;font-size:19px;letter-spacing:-.01em}
+.merke span{color:var(--gul)}
+.topp .hint{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sand-dus)}
+
+/* ---------- HORISONTAL DISK (signature) ---------- */
+.disk{
+  display:flex;
+  height:100svh;
+  overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+}
+.disk::-webkit-scrollbar{display:none}
+
+.stasjon{
+  flex:0 0 100vw;height:100svh;
+  scroll-snap-align:start;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(80px,10vh,120px) clamp(20px,6vw,90px) clamp(90px,12vh,130px);
+  position:relative;
+  border-right:1px solid var(--rand);
+}
+.stasjon:nth-child(even){background:var(--skog-dyp)}
+
+.stasjon-nr{
+  font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gul);margin-bottom:18px;
+}
+.stasjon h2{
+  font-family:var(--disp);font-weight:800;
+  font-size:clamp(40px,7.5vw,86px);line-height:.98;letter-spacing:-.025em;
+  max-width:14ch;
+}
+.stasjon h2 em{font-style:normal;color:var(--gul)}
+.stasjon .beskrivelse{color:var(--sand-dus);max-width:42ch;margin-top:22px;font-size:18px}
+
+.meny{margin-top:34px;max-width:520px}
+.menyrad{
+  display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:13px 0;border-bottom:1px solid var(--rand);
+}
+.menyrad:first-child{border-top:1px solid var(--rand)}
+.menyrad .hva{font-weight:500}
+.menyrad .om{display:block;font-size:14px;color:var(--sand-dus);font-weight:300;margin-top:2px}
+.menyrad .kr{font-family:var(--mono);font-size:14px;color:var(--gul);white-space:nowrap}
+
+/* stasjon 1 hero-variant */
+.stasjon.start h1{
+  font-family:var(--disp);font-weight:800;
+  font-size:clamp(46px,10vw,120px);line-height:.92;letter-spacing:-.035em;
+  max-width:12ch;
+}
+.stasjon.start h1 em{font-style:normal;color:var(--terr)}
+.stasjon.start .beskrivelse{font-size:19px;max-width:40ch}
+
+/* siste stasjon: kontakt */
+.kontaktblokk{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:26px;margin-top:34px;max-width:640px}
+.kontaktblokk span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sand-dus);margin-bottom:6px}
+
+/* ---------- POSISJONSLINJE ---------- */
+.gulvlinje{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  padding:0 clamp(16px,4vw,40px) 18px;
+  background:linear-gradient(to top,var(--skog) 60%,transparent);
+}
+.spor{
+  position:relative;height:2px;background:var(--rand);margin-bottom:12px;
+}
+.markor{
+  position:absolute;top:-4px;left:0;width:44px;height:10px;
+  background:var(--gul);border-radius:5px;
+  transition:left 220ms ease;
+}
+.etiketter{
+  display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--sand-dus);
+}
+.etiketter b{color:var(--sand);font-weight:400}
+
+.pil{
+  position:fixed;right:clamp(16px,4vw,40px);top:50%;z-index:31;
+  transform:translateY(-50%);
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--sand-dus);
+  writing-mode:vertical-rl;
+  display:flex;align-items:center;gap:10px;
+  pointer-events:none;
+  animation:puls 2.6s ease-in-out infinite;
+}
+@keyframes puls{0%,100%{opacity:.45}50%{opacity:1}}
+
+.fot{
+  position:fixed;left:clamp(16px,4vw,40px);bottom:56px;z-index:29;
+  font-family:var(--mono);font-size:10.5px;color:var(--sand-dus);letter-spacing:.05em;
+}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* mobil: bytt til vanlig vertikal scroll */
+@media (max-width:820px){
+  .disk{display:block;height:auto;overflow:visible;scroll-snap-type:none}
+  .stasjon{flex:none;width:100%;height:auto;min-height:auto;border-right:0;border-bottom:1px solid var(--rand);padding:64px 22px 56px}
+  .gulvlinje,.pil{display:none}
+  .fot{position:static;padding:22px;text-align:center}
+  body{overflow-x:hidden}
+}
+</style>
+</head>
+<body>
+
+<div class="topp">
+  <div class="merke">Kafé <span>Bryggen</span></div>
+  <div class="hint">Kristiansand</div>
+</div>
+
+<div class="disk" id="disk">
+
+  <section class="stasjon start">
+    <p class="stasjon-nr">00 — inngangen</p>
+    <h1>Gå langs <em>disken</em></h1>
+    <p class="beskrivelse">Bla mot høyre, som om du gikk innover i lokalet. Kaffen først, så bakeriet, så lunsjen — akkurat i den rekkefølgen du møter dem hos oss.</p>
+  </section>
+
+  <section class="stasjon">
+    <p class="stasjon-nr">01 — kaffebaren</p>
+    <h2>Vi brenner <em>selv</em>, hver tirsdag</h2>
+    <p class="beskrivelse">Bønnene kommer fra to gårder. Er du usikker, spør baristaen — vi lar deg smake før du kjøper hel pose.</p>
+    <div class="meny">
+      <div class="menyrad"><span class="hva">Filterkaffe<span class="om">Ukens brenning, servert i glass</span></span><span class="kr">39 kr</span></div>
+      <div class="menyrad"><span class="hva">Flat white<span class="om">Dobbel shot, tett melkeskum</span></span><span class="kr">55 kr</span></div>
+      <div class="menyrad"><span class="hva">Cortado<span class="om">Til deg som vil smake bønnen</span></span><span class="kr">45 kr</span></div>
+      <div class="menyrad"><span class="hva">Hel pose, 250 g<span class="om">Brent samme uke</span></span><span class="kr">169 kr</span></div>
+    </div>
+  </section>
+
+  <section class="stasjon">
+    <p class="stasjon-nr">02 — bakeriet</p>
+    <h2>Bakt i natt, <em>ikke</em> i går</h2>
+    <p class="beskrivelse">Alt går ut av ovnen mellom fire og seks om morgenen. Det som ikke blir solgt, gis bort på slutten av dagen — vi setter det aldri tilbake i disken.</p>
+    <div class="meny">
+      <div class="menyrad"><span class="hva">Kanelsnurr<span class="om">Klassisk, med kardemomme i deigen</span></span><span class="kr">45 kr</span></div>
+      <div class="menyrad"><span class="hva">Surdeigsbolle<span class="om">Lang heving, sprø skorpe</span></span><span class="kr">39 kr</span></div>
+      <div class="menyrad"><span class="hva">Dagens kake<span class="om">Spør i disken — den byttes daglig</span></span><span class="kr">65 kr</span></div>
+    </div>
+  </section>
+
+  <section class="stasjon">
+    <p class="stasjon-nr">03 — lunsjdisken</p>
+    <h2>Lunsj fra <em>elleve</em></h2>
+    <p class="beskrivelse">Enkle ting, laget når du bestiller. Vegetar er ikke et unntak på menyen — halvparten av retten er det uansett.</p>
+    <div class="meny">
+      <div class="menyrad"><span class="hva">Dagens suppe<span class="om">Med brød fra eget bakeri</span></span><span class="kr">139 kr</span></div>
+      <div class="menyrad"><span class="hva">Smørbrød<span class="om">På surdeig, tre varianter</span></span><span class="kr">129 kr</span></div>
+      <div class="menyrad"><span class="hva">Salat med linser<span class="om">Kan tas med</span></span><span class="kr">149 kr</span></div>
+    </div>
+  </section>
+
+  <section class="stasjon">
+    <p class="stasjon-nr">04 — ut igjen</p>
+    <h2>Finn oss</h2>
+    <p class="beskrivelse">Vi ligger nede ved bryggen. Ta med kaffen ut om det er sol — koppen kan leveres tilbake dagen etter.</p>
+    <div class="kontaktblokk">
+      <div><span>Adresse</span><p>Kristiansand</p></div>
+      <div><span>Telefon</span><p>00 00 00 00</p></div>
+      <div><span>Åpent</span><p>Man–Fre 07–17 · Lør–Søn 09–17</p></div>
+      <div><span>Betaling</span><p>Kort og Vipps</p></div>
+    </div>
+  </section>
+
+</div>
+
+<div class="pil" aria-hidden="true">Bla mot høyre →</div>
+
+<div class="gulvlinje" aria-hidden="true">
+  <div class="spor"><div class="markor" id="markor"></div></div>
+  <div class="etiketter">
+    <span id="e0"><b>Inngang</b></span>
+    <span id="e1">Kaffe</span>
+    <span id="e2">Bakeri</span>
+    <span id="e3">Lunsj</span>
+    <span id="e4">Kontakt</span>
+  </div>
+</div>
+
+<div class="fot">Designforslag — ikke en offisiell nettside</div>
+
+<script>
+(function(){
+  var disk = document.getElementById("disk");
+  var markor = document.getElementById("markor");
+  var etiketter = [0,1,2,3,4].map(function(i){return document.getElementById("e"+i);});
+
+  function oppdater(){
+    var maks = disk.scrollWidth - disk.clientWidth;
+    if(maks <= 0) return;
+    var andel = disk.scrollLeft / maks;
+    markor.style.left = "calc(" + (andel*100) + "% - " + (andel*44) + "px)";
+
+    var aktiv = Math.round(andel * (etiketter.length - 1));
+    etiketter.forEach(function(e,i){
+      e.innerHTML = (i === aktiv) ? "<b>" + e.textContent + "</b>" : e.textContent;
+    });
+  }
+
+  disk.addEventListener("scroll", oppdater, {passive:true});
+  window.addEventListener("resize", oppdater);
+  oppdater();
+
+  // piltaster for tastaturnavigasjon
+  window.addEventListener("keydown", function(e){
+    if(e.key === "ArrowRight"){ disk.scrollBy({left:disk.clientWidth,behavior:"smooth"}); }
+    if(e.key === "ArrowLeft"){ disk.scrollBy({left:-disk.clientWidth,behavior:"smooth"}); }
+  });
+
+  // gjør vanlig musehjul til horisontal bevegelse på desktop
+  disk.addEventListener("wheel", function(e){
+    if(window.innerWidth <= 820) return;
+    if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+      disk.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, {passive:false});
+})();
+</script>
+</body>
+</html>
