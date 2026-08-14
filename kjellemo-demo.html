@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kjellemo Bilverksted — ærlig pris, ingen overraskelser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --grafitt:#1B1D1F;
+  --stal:#2C3034;
+  --stal-lys:#454B52;
+  --papir:#EEEAE1;
+  --papir-dus:#B9B4A8;
+  --orange:#FF6A1A;
+  --gul:#FFC23C;
+  --gronn:#4CAF7D;
+  --rand:rgba(238,234,225,.12);
+  --display:"Oswald",sans-serif;
+  --body:"Work Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--grafitt);
+  color:var(--papir);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+a{color:inherit}
+
+/* faint garage-floor grid texture */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--rand) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rand) 1px,transparent 1px);
+  background-size:64px 64px;
+  opacity:.35;
+}
+
+.wrap{position:relative;z-index:1}
+.seksjon{width:min(1080px,92vw);margin:0 auto;padding:clamp(64px,9vw,110px) 0}
+
+/* ---------- TOPBAR ---------- */
+.topbar{
+  position:relative;z-index:5;
+  width:min(1080px,92vw);margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:26px 0;
+}
+.logo{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.02em;text-transform:uppercase}
+.logo span{color:var(--orange)}
+.topbar a.knapp-liten{
+  font-family:var(--mono);font-size:13px;text-decoration:none;
+  border:1px solid var(--rand);padding:9px 16px;border-radius:3px;
+  transition:border-color 160ms ease;
+}
+.topbar a.knapp-liten:hover{border-color:var(--orange)}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  padding:clamp(40px,6vw,64px) 0 clamp(60px,8vw,100px);
+  display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
+}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--orange);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--orange)}
+h1{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(40px,6vw,68px);line-height:.98;letter-spacing:-.005em;
+}
+h1 .u{color:var(--orange)}
+.hero p.lead{color:var(--papir-dus);margin-top:22px;max-width:46ch;font-size:18px}
+.knapper{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.knapp{
+  font-family:var(--body);font-weight:600;font-size:16px;text-decoration:none;
+  padding:15px 28px;border-radius:3px;display:inline-block;
+  transition:transform 160ms ease,background 160ms ease;
+}
+.knapp.primar{background:var(--orange);color:var(--grafitt)}
+.knapp.primar:hover{background:var(--gul);transform:translateY(-2px)}
+.knapp.sekundar{border:1px solid var(--rand);color:var(--papir)}
+.knapp.sekundar:hover{border-color:var(--papir);transform:translateY(-2px)}
+
+/* ---------- DASHBOARD / SIGNATURE ---------- */
+.dashboard{
+  background:var(--stal);
+  border:1px solid var(--rand);
+  border-radius:8px;
+  padding:clamp(24px,3.5vw,38px);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;text-align:center}
+.gauge-wrap svg{width:100%;height:auto;max-width:130px}
+.gauge-verdi{font-family:var(--mono);font-weight:600;font-size:22px;margin-top:6px}
+.gauge-verdi.orange{color:var(--orange)}
+.gauge-verdi.gul{color:var(--gul)}
+.gauge-verdi.gronn{color:var(--gronn)}
+.gauge-etikett{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--papir-dus);margin-top:4px}
+.nal{transform-origin:65px 65px;transition:transform 1400ms cubic-bezier(.2,.8,.2,1)}
+.dashboard-fot{
+  grid-column:1/-1;margin-top:8px;padding-top:16px;border-top:1px solid var(--rand);
+  font-family:var(--mono);font-size:12px;color:var(--papir-dus);text-align:center;
+}
+
+/* ---------- SLIK JOBBER VI ---------- */
+.steg-liste{margin-top:44px;display:grid;gap:1px;background:var(--rand)}
+.steg{background:var(--grafitt);padding:28px clamp(18px,3vw,32px);display:grid;grid-template-columns:56px 1fr;gap:22px;align-items:start}
+.steg-tall{font-family:var(--mono);font-size:14px;color:var(--orange);border:1px solid var(--rand);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+.steg h3{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:21px;letter-spacing:.01em}
+.steg p{color:var(--papir-dus);margin-top:8px;max-width:56ch}
+
+/* ---------- TJENESTER ---------- */
+.tjenester{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--rand)}
+.tj-kort{background:var(--grafitt);padding:28px 24px}
+.tj-kort .ikon{font-family:var(--mono);font-size:11px;color:var(--orange);letter-spacing:.08em;text-transform:uppercase}
+.tj-kort h3{font-family:var(--display);font-weight:600;text-transform:uppercase;font-size:22px;margin-top:10px}
+.tj-kort .pris{font-family:var(--mono);font-size:14px;color:var(--gul);margin-top:8px}
+.tj-kort p{color:var(--papir-dus);font-size:14.5px;margin-top:10px}
+
+/* ---------- TILLIT / TALL ---------- */
+.tillit{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px}
+.tillit-tall{font-family:var(--display);font-weight:700;font-size:clamp(30px,4vw,44px);color:var(--orange)}
+.tillit-etikett{font-family:var(--mono);font-size:12px;color:var(--papir-dus);letter-spacing:.04em;margin-top:6px;text-transform:uppercase}
+
+/* ---------- KONTAKT ---------- */
+.kontakt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;margin-top:44px}
+.kontakt-grid div span{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--papir-dus);margin-bottom:8px}
+.kontakt-grid div p{font-size:17px}
+
+footer{
+  border-top:1px solid var(--rand);
+  padding:32px 0 56px;width:min(1080px,92vw);margin:0 auto;
+  display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;
+  font-family:var(--mono);font-size:12px;color:var(--papir-dus);
+}
+
+.avslor{opacity:0;transform:translateY(22px);transition:opacity 650ms ease,transform 650ms ease}
+.avslor.inne{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+
+@media (max-width:640px){
+  .dashboard{grid-template-columns:1fr;text-align:center}
+  .steg{grid-template-columns:44px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="topbar">
+  <div class="logo">KJELLEMO <span>BILVERKSTED</span></div>
+  <a class="knapp-liten" href="tel:+4700000000">Ring verkstedet</a>
+</div>
+
+<header class="seksjon hero">
+  <div>
+    <p class="eyebrow">Familiedrevet · Kristiansand</p>
+    <h1>Ingen jobb<br>uten <span class="u">godkjent</span><br>pris først</h1>
+    <p class="lead">Vi sjekker bilen, skriver ned hva som faktisk er galt, og ringer deg med pris før vi løfter en skrutrekker. Ingen overraskelser på fakturaen.</p>
+    <div class="knapper">
+      <a class="knapp primar" href="#bestill">Book time</a>
+      <a class="knapp sekundar" href="#tjenester">Se tjenester</a>
+    </div>
+  </div>
+
+  <div class="dashboard avslor" id="dash">
+    <div class="gauge-wrap">
+      <svg viewBox="0 0 130 90" aria-hidden="true">
+        <path d="M15 75 A50 50 0 0 1 115 75" fill="none" stroke="var(--rand)" stroke-width="8" stroke-linecap="round"/>
+        <path d="M15 75 A50 50 0 0 1 115 75" fill="none" stroke="var(--orange)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157" id="bue-1"/>
+        <line class="nal" id="nal-1" x1="65" y1="75" x2="65" y2="32" stroke="var(--papir)" stroke-width="3" stroke-linecap="round" style="transform:rotate(-90deg)"/>
+        <circle cx="65" cy="75" r="4" fill="var(--papir)"/>
+      </svg>
+      <div class="gauge-verdi orange" id="tall-1">0</div>
+      <div class="gauge-etikett">Skjulte kostnader</div>
+    </div>
+
+    <div class="gauge-wrap">
+      <svg viewBox="0 0 130 90" aria-hidden="true">
+        <path d="M15 75 A50 50 0 0 1 115 75" fill="none" stroke="var(--rand)" stroke-width="8" stroke-linecap="round"/>
+        <path d="M15 75 A50 50 0 0 1 115 75" fill="none" stroke="var(--gul)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="0" id="bue-2"/>
+        <line class="nal" id="nal-2" x1="65" y1="75" x2="65" y2="32" stroke="var(--papir)" stroke-width="3" stroke-linecap="round" style="transform:rotate(-90deg)"/>
+        <circle cx="65" cy="75" r="4" fill="var(--papir)"/>
+      </svg>
+      <div class="gauge-verdi gul" id="tall-2">100%</div>
+      <div class="gauge-etikett">Åpenhet på pris</div>
+    </div>
+
+    <div class="gauge-wrap">
+      <svg viewBox="0 0 130 90" aria-hidden="true">
+        <path d="M15 75 A50 50 0 0 1 115 75" fill="none" stroke="var(--rand)" stroke-width="8" stroke-linecap="round"/>
+        <path d="M15 75 A50 50 0 0 1 115 75" fill="none" stroke="var(--gronn)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="40" id="bue-3"/>
+        <line class="nal" id="nal-3" x1="65" y1="75" x2="65" y2="32" stroke="var(--papir)" stroke-width="3" stroke-linecap="round" style="transform:rotate(-90deg)"/>
+        <circle cx="65" cy="75" r="4" fill="var(--papir)"/>
+      </svg>
+      <div class="gauge-verdi gronn" id="tall-3">25 ÅR</div>
+      <div class="gauge-etikett">Erfaring på verkstedgulvet</div>
+    </div>
+
+    <div class="dashboard-fot">Diagnose før pris — hver gang, uten unntak</div>
+  </div>
+</header>
+
+<section class="seksjon avslor" id="slik">
+  <p class="eyebrow">Slik jobber vi</p>
+  <h2 style="font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(32px,5vw,50px);max-width:18ch">Tre steg, ingen gjetting</h2>
+  <div class="steg-liste">
+    <div class="steg">
+      <div class="steg-tall">1</div>
+      <div><h3>Vi sjekker bilen</h3><p>Feilsøking og visuell kontroll. Du får vite nøyaktig hva som er galt — ikke bare at "noe høres rart ut".</p></div>
+    </div>
+    <div class="steg">
+      <div class="steg-tall">2</div>
+      <div><h3>Du får pris skriftlig</h3><p>Fast pris eller tydelig estimat, sendt på SMS eller sagt rett ut over telefon. Du bestemmer om vi går videre.</p></div>
+    </div>
+    <div class="steg">
+      <div class="steg-tall">3</div>
+      <div><h3>Vi reparerer — ingen påslag</h3><p>Dukker det opp noe nytt underveis, ringer vi før vi gjør mer enn avtalt. Alltid.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="seksjon avslor" id="tjenester">
+  <p class="eyebrow">Tjenester</p>
+  <h2 style="font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(32px,5vw,50px);max-width:18ch">Service og reparasjon</h2>
+  <div class="tjenester">
+    <div class="tj-kort">
+      <span class="ikon">Service</span>
+      <h3>Periodisk service</h3>
+      <div class="pris">fra 1 490 kr</div>
+      <p>Olje, filter og full sjekkliste etter fabrikkens serviceplan.</p>
+    </div>
+    <div class="tj-kort">
+      <span class="ikon">Kontroll</span>
+      <h3>EU-kontroll</h3>
+      <div class="pris">fra 990 kr</div>
+      <p>Vi kjører kontrollen og fikser eventuelle avvik samme dag, om du vil.</p>
+    </div>
+    <div class="tj-kort">
+      <span class="ikon">Dekk</span>
+      <h3>Dekkskift og lagring</h3>
+      <div class="pris">fra 490 kr</div>
+      <p>Skift, balansering, og oppbevaring av det settet du ikke bruker.</p>
+    </div>
+    <div class="tj-kort">
+      <span class="ikon">Feilsøk</span>
+      <h3>Diagnose og feilsøking</h3>
+      <div class="pris">fra 690 kr</div>
+      <p>Motorlampe, rare lyder, dårlig gange — vi finner rotårsaken før noe skiftes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="seksjon avslor tillit">
+  <div><div class="tillit-tall">0 kr</div><div class="tillit-etikett">i overraskelser på faktura</div></div>
+  <div><div class="tillit-tall">Samme dag</div><div class="tillit-etikett">svar på de fleste diagnoser</div></div>
+  <div><div class="tillit-tall">25 år</div><div class="tillit-etikett">på samme adresse</div></div>
+</section>
+
+<section class="seksjon avslor" id="bestill">
+  <p class="eyebrow">Book time</p>
+  <h2 style="font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(32px,5vw,50px);max-width:18ch">Ring, eller møt opp</h2>
+  <p style="color:var(--papir-dus);max-width:52ch;margin-top:18px">Ingen nettbestilling ennå — ring verkstedet, så finner vi en time som passer. Vanligvis ledig time innen 2–3 dager.</p>
+  <div class="knapper">
+    <a class="knapp primar" href="tel:+4700000000">Ring verkstedet</a>
+    <a class="knapp sekundar" href="#kontakt">Finn oss</a>
+  </div>
+</section>
+
+<section class="seksjon avslor" id="kontakt">
+  <p class="eyebrow">Kontakt</p>
+  <h2 style="font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(32px,5vw,50px);max-width:18ch">Kjellemo Bilverksted</h2>
+  <div class="kontakt-grid">
+    <div><span>Adresse</span><p>Kristiansand</p></div>
+    <div><span>Telefon</span><p>00 00 00 00</p></div>
+    <div><span>Åpent</span><p>Man–Fre 08–16</p></div>
+    <div><span>Merker</span><p>Alle bilmerker</p></div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <span>Kjellemo Bilverksted — Kristiansand</span>
+  <span>Designforslag — ikke en offisiell nettside</span>
+</footer>
+
+<script>
+(function(){
+  // animate gauge needles + arcs on load
+  window.addEventListener("load",function(){
+    setTimeout(function(){
+      document.getElementById("nal-1").style.transform = "rotate(-90deg)"; // 0%
+      document.getElementById("nal-2").style.transform = "rotate(90deg)";  // 100%
+      document.getElementById("nal-3").style.transform = "rotate(45deg)";  // ~75%
+      document.getElementById("bue-1").style.strokeDashoffset = "157";
+      document.getElementById("bue-2").style.strokeDashoffset = "0";
+      document.getElementById("bue-3").style.strokeDashoffset = "40";
+    },300);
+  });
+
+  if("IntersectionObserver" in window){
+    var obs = new IntersectionObserver(function(poster){
+      poster.forEach(function(post){
+        if(post.isIntersecting){ post.target.classList.add("inne"); obs.unobserve(post.target); }
+      });
+    },{threshold:.15});
+    document.querySelectorAll(".avslor").forEach(function(el){obs.observe(el);});
+  } else {
+    document.querySelectorAll(".avslor").forEach(function(el){el.classList.add("inne");});
+  }
+})();
+</script>
+</body>
+</html>
