@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Picazzo frisør — samme stol, samme hender</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@500;700;800&family=Inter+Tight:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papir:#EFEBE4;
+  --papir-2:#E5DFD5;
+  --blekk:#14181F;
+  --blekk-mild:#5C6373;
+  --kobolt:#2A4BD8;
+  --rand:rgba(20,24,31,.14);
+  --disp:"Darker Grotesque",system-ui,sans-serif;
+  --body:"Inter Tight",system-ui,sans-serif;
+  --mono:"DM Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--papir);color:var(--blekk);
+  font-family:var(--body);font-size:17px;line-height:1.6;font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--kobolt);outline-offset:4px}
+.inn{width:min(1000px,91vw);margin:0 auto}
+.seksjon{padding:clamp(56px,8vw,100px) 0}
+
+/* topp */
+.topp{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--rand)}
+.merke{font-family:var(--disp);font-weight:800;font-size:27px;letter-spacing:-.01em;text-transform:uppercase;line-height:1}
+.merke span{color:var(--kobolt)}
+.topp a{font-family:var(--mono);font-size:12.5px;text-decoration:none;border-bottom:1px solid var(--kobolt);padding-bottom:2px}
+
+/* hero */
+.hero{padding:clamp(48px,7vw,88px) 0 clamp(30px,4vw,50px)}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--kobolt);margin-bottom:20px}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(52px,10vw,124px);line-height:.86;letter-spacing:-.025em;text-transform:uppercase;max-width:13ch}
+h1 span{color:var(--kobolt)}
+.hero p{max-width:44ch;margin-top:24px;font-size:18.5px;color:var(--blekk-mild)}
+.knapper{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.knapp{display:inline-block;text-decoration:none;font-weight:500;font-size:16px;padding:15px 30px;border-radius:2px;transition:transform 160ms ease,background 160ms ease}
+.knapp.hoved{background:var(--kobolt);color:var(--papir)}
+.knapp.hoved:hover{background:var(--blekk);transform:translateY(-2px)}
+.knapp.tom{border:1px solid var(--rand)}
+.knapp.tom:hover{border-color:var(--blekk);transform:translateY(-2px)}
+
+/* SIGNATUR: tidslinje som tegnes ved scroll */
+.tid{position:relative;padding-left:clamp(34px,6vw,72px)}
+.tid-spor{position:absolute;left:clamp(8px,2vw,24px);top:8px;bottom:8px;width:2px;background:var(--rand)}
+.tid-fylt{position:absolute;left:0;top:0;width:2px;height:0;background:var(--kobolt);transition:height 120ms linear}
+.hendelse{position:relative;padding:26px 0 26px 0;border-bottom:1px solid var(--rand)}
+.hendelse:last-child{border-bottom:0}
+.hendelse::before{
+  content:"";position:absolute;
+  left:calc(clamp(34px,6vw,72px) * -1 + clamp(8px,2vw,24px) - 5px);
+  top:34px;width:12px;height:12px;border-radius:50%;
+  background:var(--papir);border:2px solid var(--rand);
+  transition:border-color 400ms ease,background 400ms ease;
+}
+.hendelse.naadd::before{border-color:var(--kobolt);background:var(--kobolt)}
+.hendelse .aar{font-family:var(--mono);font-size:13px;color:var(--kobolt);letter-spacing:.05em}
+.hendelse h3{font-family:var(--disp);font-weight:700;font-size:clamp(26px,3.6vw,36px);text-transform:uppercase;line-height:1.02;margin-top:6px}
+.hendelse p{color:var(--blekk-mild);margin-top:8px;max-width:50ch;font-size:16px}
+
+h2.avsn{font-family:var(--disp);font-weight:800;font-size:clamp(36px,6vw,64px);line-height:.94;text-transform:uppercase;letter-spacing:-.02em;max-width:16ch}
+.ingress{color:var(--blekk-mild);max-width:48ch;margin-top:18px}
+
+/* priser */
+.priser{margin-top:38px;border-top:1px solid var(--rand)}
+.prisrad{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;padding:18px 2px;border-bottom:1px solid var(--rand)}
+.prisrad .hva{font-weight:500;font-size:18px}
+.prisrad .om{display:block;color:var(--blekk-mild);font-size:14.5px;font-weight:300;margin-top:3px}
+.prisrad .kr{font-family:var(--mono);font-size:15px;white-space:nowrap}
+
+/* sitat */
+.sitat{background:var(--blekk);color:var(--papir);border-radius:3px;padding:clamp(28px,5vw,52px);margin-top:clamp(46px,7vw,80px)}
+.sitat p{font-family:var(--disp);font-weight:700;font-size:clamp(27px,4.4vw,46px);line-height:1.1;text-transform:uppercase;max-width:20ch}
+.sitat span{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;margin-top:20px}
+
+/* kontakt */
+.kontakt{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px;margin-top:38px}
+.kontakt span{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--blekk-mild);margin-bottom:7px}
+
+footer{border-top:1px solid var(--rand);padding:26px 0 46px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--blekk-mild)}
+
+.avslor{opacity:0;transform:translateY(18px);transition:opacity 600ms ease,transform 600ms ease}
+.avslor.inne{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+@media (max-width:560px){.prisrad{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="inn">
+  <div class="topp">
+    <div class="merke">Picazzo <span>frisør</span></div>
+    <a href="tel:+4747336746">Ring 473 36 746</a>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Kristian IVs gate 27 · Kristiansand</p>
+    <h1>Samme stol.<br><span>Samme</span> hender.</h1>
+    <p>Noen av kundene våre har sittet i denne stolen i over tjue år. Det sier mer om håndverket enn noen prisliste kan.</p>
+    <div class="knapper">
+      <a class="knapp hoved" href="#bestill">Bestill time</a>
+      <a class="knapp tom" href="#priser">Se priser</a>
+    </div>
+  </header>
+</div>
+
+<section class="inn seksjon avslor">
+  <h2 class="avsn">Historien i stolen</h2>
+  <p class="ingress">Ikke en kjede. Ikke ny frisør hver gang. Én mann, samme sted, år etter år.</p>
+
+  <div class="tid" id="tid" style="margin-top:46px">
+    <div class="tid-spor"><div class="tid-fylt" id="fylt"></div></div>
+
+    <div class="hendelse">
+      <p class="aar">Starten</p>
+      <h3>Døra åpnet i Kristian IVs gate</h3>
+      <p>Ett speil, én stol, og en idé om at folk kommer tilbake hvis klippen sitter.</p>
+    </div>
+    <div class="hendelse">
+      <p class="aar">Etter noen år</p>
+      <h3>De første faste kundene</h3>
+      <p>Folk begynte å be om samme frisør hver gang. Det er fortsatt sånn vi driver.</p>
+    </div>
+    <div class="hendelse">
+      <p class="aar">I dag</p>
+      <h3>Over 20 år med de samme hodene</h3>
+      <p>Fedre som kom hit selv, kommer nå med sønnene sine. Vi husker hvordan du liker den.</p>
+    </div>
+    <div class="hendelse">
+      <p class="aar">Nå</p>
+      <h3>Fortsatt plass i stolen</h3>
+      <p>Ring, eller kom innom. Er det ledig, klipper vi med en gang.</p>
+    </div>
+  </div>
+</section>
+
+<section class="inn seksjon avslor" id="priser">
+  <h2 class="avsn">Priser</h2>
+  <div class="priser">
+    <div class="prisrad"><span class="hva">Herreklipp<span class="om">Maskin og saks, vask og styling</span></span><span class="kr">fra 000 kr</span></div>
+    <div class="prisrad"><span class="hva">Barneklipp<span class="om">Under 12 år</span></span><span class="kr">fra 000 kr</span></div>
+    <div class="prisrad"><span class="hva">Skjegg og kanting<span class="om">Kan legges til enhver klipp</span></span><span class="kr">fra 000 kr</span></div>
+    <div class="prisrad"><span class="hva">Klipp og skjegg<span class="om">Hele stellet i én time</span></span><span class="kr">fra 000 kr</span></div>
+  </div>
+  <p class="ingress" style="margin-top:20px;font-size:15px">Prisene over er plassholdere — fylles inn med salongens egne.</p>
+
+  <div class="sitat">
+    <p>Nassar har klippet meg i 24 år. Vi blir grå sammen.</p>
+    <span>Fra en Google-anmeldelse</span>
+  </div>
+</section>
+
+<section class="inn seksjon avslor" id="bestill">
+  <h2 class="avsn">Bestill time</h2>
+  <p class="ingress">Ring salongen, eller kom innom. Trenger du time etter jobb, si fra så setter vi av tid.</p>
+  <div class="knapper">
+    <a class="knapp hoved" href="tel:+4747336746">Ring 473 36 746</a>
+    <a class="knapp tom" href="#kontakt">Finn oss</a>
+  </div>
+</section>
+
+<section class="inn seksjon avslor" id="kontakt">
+  <h2 class="avsn">Kontakt</h2>
+  <div class="kontakt">
+    <div><span>Adresse</span><p>Kristian IVs gate 27, 4612 Kristiansand</p></div>
+    <div><span>Telefon</span><p>473 36 746</p></div>
+    <div><span>Åpent</span><p>Man–Lør 09–17</p></div>
+    <div><span>Betaling</span><p>Kort og Vipps</p></div>
+  </div>
+</section>
+
+<div class="inn">
+  <footer>
+    <span>Picazzo frisør — Kristiansand</span>
+    <span>Designforslag — ikke en offisiell nettside</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var tid = document.getElementById("tid");
+  var fylt = document.getElementById("fylt");
+  var hendelser = document.querySelectorAll(".hendelse");
+
+  function tegn(){
+    if(!tid) return;
+    var boks = tid.getBoundingClientRect();
+    var midt = window.innerHeight * 0.55;
+    var andel = (midt - boks.top) / boks.height;
+    andel = Math.max(0, Math.min(1, andel));
+    fylt.style.height = (andel * 100) + "%";
+
+    hendelser.forEach(function(h){
+      var r = h.getBoundingClientRect();
+      if(r.top < midt) h.classList.add("naadd");
+      else h.classList.remove("naadd");
+    });
+  }
+
+  window.addEventListener("scroll", tegn, {passive:true});
+  window.addEventListener("resize", tegn);
+  tegn();
+
+  if("IntersectionObserver" in window){
+    var obs = new IntersectionObserver(function(p){
+      p.forEach(function(x){ if(x.isIntersecting){x.target.classList.add("inne");obs.unobserve(x.target);} });
+    },{threshold:.1});
+    document.querySelectorAll(".avslor").forEach(function(el){obs.observe(el);});
+  } else {
+    document.querySelectorAll(".avslor").forEach(function(el){el.classList.add("inne");});
+  }
+})();
+</script>
+</body>
+</html>
