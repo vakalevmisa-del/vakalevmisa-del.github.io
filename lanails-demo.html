@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaNails studio — velg formen før du booker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --jord:#1A1512;
+  --jord-2:#241D19;
+  --kritt:#F0EAE2;
+  --kritt-dus:#9C918A;
+  --teal:#17A398;
+  --negl:#E9D5C9;
+  --negl-kant:#D3B9AB;
+  --rand:rgba(240,234,226,.13);
+  --disp:"Syne",system-ui,sans-serif;
+  --body:"Manrope",system-ui,sans-serif;
+  --mono:"DM Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--jord);color:var(--kritt);
+  font-family:var(--body);font-size:17px;line-height:1.62;font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
+.inn{width:min(1000px,91vw);margin:0 auto}
+.seksjon{padding:clamp(56px,8vw,100px) 0}
+
+.topp{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--rand)}
+.merke{font-family:var(--disp);font-weight:800;font-size:20px;letter-spacing:-.02em}
+.merke span{color:var(--teal)}
+.topp .adr{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--kritt-dus)}
+
+/* hero */
+.hero{padding:clamp(44px,6vw,76px) 0 0}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(38px,6.6vw,74px);line-height:1;letter-spacing:-.03em;max-width:15ch}
+h1 em{font-style:normal;color:var(--teal)}
+.hero p.lead{max-width:44ch;margin-top:22px;font-size:18px;color:var(--kritt-dus)}
+
+/* ---------- SIGNATUR: formvelger ---------- */
+.velger{
+  margin-top:clamp(38px,5vw,60px);
+  background:var(--jord-2);border:1px solid var(--rand);border-radius:5px;
+  overflow:hidden;
+}
+.scene{
+  padding:clamp(34px,5vw,58px) 20px clamp(26px,4vw,40px);
+  display:flex;align-items:flex-end;justify-content:center;gap:clamp(9px,1.8vw,18px);
+  min-height:200px;
+}
+.negl{
+  width:clamp(30px,5.2vw,46px);
+  background:linear-gradient(150deg,#FBF1EA 0%,var(--negl) 38%,var(--negl-kant) 100%);
+  box-shadow:0 6px 18px rgba(0,0,0,.32);
+  transition:height 620ms cubic-bezier(.22,.9,.28,1), clip-path 620ms cubic-bezier(.22,.9,.28,1);
+  position:relative;
+}
+.negl::after{
+  content:"";position:absolute;left:16%;top:10%;width:22%;height:64%;
+  background:linear-gradient(to bottom,rgba(255,255,255,.75),rgba(255,255,255,0));
+  border-radius:40%;
+}
+
+.kontroller{border-top:1px solid var(--rand);display:grid;grid-template-columns:1fr 1fr}
+.kolonne{padding:20px clamp(16px,3vw,28px)}
+.kolonne + .kolonne{border-left:1px solid var(--rand)}
+.kolonne h3{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--kritt-dus);margin-bottom:14px}
+.valg{display:flex;flex-wrap:wrap;gap:8px}
+.valg button{
+  font-family:var(--body);font-size:14px;font-weight:500;
+  background:transparent;color:var(--kritt);
+  border:1px solid var(--rand);border-radius:100px;
+  padding:9px 16px;cursor:pointer;
+  transition:border-color 180ms ease,background 180ms ease,color 180ms ease;
+}
+.valg button:hover{border-color:var(--kritt-dus)}
+.valg button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--jord)}
+
+.utlesning{
+  border-top:1px solid var(--rand);
+  padding:16px clamp(16px,3vw,28px);
+  display:flex;flex-wrap:wrap;gap:8px 22px;align-items:baseline;
+  font-family:var(--mono);font-size:12.5px;color:var(--kritt-dus);letter-spacing:.03em;
+}
+.utlesning b{color:var(--kritt);font-weight:500}
+.utlesning .tips{color:var(--teal)}
+
+/* seksjoner */
+h2.avsn{font-family:var(--disp);font-weight:700;font-size:clamp(30px,5vw,52px);line-height:1.02;letter-spacing:-.025em;max-width:17ch}
+.ingress{color:var(--kritt-dus);max-width:50ch;margin-top:16px}
+
+.priser{margin-top:34px;border-top:1px solid var(--rand)}
+.prisrad{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:baseline;padding:17px 2px;border-bottom:1px solid var(--rand)}
+.prisrad .hva{font-weight:500;font-size:17.5px}
+.prisrad .om{display:block;color:var(--kritt-dus);font-size:14.5px;font-weight:300;margin-top:3px}
+.prisrad .kr{font-family:var(--mono);font-size:14.5px;color:var(--teal);white-space:nowrap}
+
+.faktabokser{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rand);margin-top:34px}
+.faktaboks{background:var(--jord);padding:26px 22px}
+.faktaboks .tall{font-family:var(--disp);font-weight:700;font-size:34px;color:var(--teal);letter-spacing:-.02em}
+.faktaboks p{color:var(--kritt-dus);font-size:15px;margin-top:8px}
+
+.knapper{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.knapp{display:inline-block;text-decoration:none;font-weight:600;font-size:16px;padding:15px 30px;border-radius:100px;transition:transform 160ms ease,background 160ms ease}
+.knapp.hoved{background:var(--teal);color:var(--jord)}
+.knapp.hoved:hover{background:var(--kritt);transform:translateY(-2px)}
+.knapp.tom{border:1px solid var(--rand)}
+.knapp.tom:hover{border-color:var(--kritt);transform:translateY(-2px)}
+
+.kontakt{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:26px;margin-top:34px}
+.kontakt span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--kritt-dus);margin-bottom:7px}
+
+footer{border-top:1px solid var(--rand);padding:26px 0 46px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--kritt-dus)}
+
+.avslor{opacity:0;transform:translateY(18px);transition:opacity 600ms ease,transform 600ms ease}
+.avslor.inne{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+@media (max-width:620px){
+  .kontroller{grid-template-columns:1fr}
+  .kolonne + .kolonne{border-left:0;border-top:1px solid var(--rand)}
+  .prisrad{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="inn">
+  <div class="topp">
+    <div class="merke">LaNails <span>studio</span></div>
+    <div class="adr">Henrik Wergelands gate 15 · Kristiansand</div>
+  </div>
+
+  <header class="hero">
+    <p class="kick">Negledesign</p>
+    <h1>Velg formen <em>her</em>, ikke i stolen</h1>
+    <p class="lead">De fleste vet ikke hva de skal be om før de sitter i stolen. Prøv deg fram under — så vet vi begge hva vi skal lage når du kommer.</p>
+
+    <!-- SIGNATURELEMENT -->
+    <div class="velger avslor">
+      <div class="scene" id="scene" aria-hidden="true">
+        <div class="negl" data-skala="0.74"></div>
+        <div class="negl" data-skala="0.92"></div>
+        <div class="negl" data-skala="1"></div>
+        <div class="negl" data-skala="0.90"></div>
+        <div class="negl" data-skala="0.66"></div>
+      </div>
+
+      <div class="kontroller">
+        <div class="kolonne">
+          <h3>Form</h3>
+          <div class="valg" id="former" role="group" aria-label="Velg form">
+            <button data-form="firkant" aria-pressed="false">Firkant</button>
+            <button data-form="rund" aria-pressed="false">Rund</button>
+            <button data-form="mandel" aria-pressed="true">Mandel</button>
+            <button data-form="coffin" aria-pressed="false">Coffin</button>
+            <button data-form="stiletto" aria-pressed="false">Stiletto</button>
+          </div>
+        </div>
+        <div class="kolonne">
+          <h3>Lengde</h3>
+          <div class="valg" id="lengder" role="group" aria-label="Velg lengde">
+            <button data-lengde="kort" aria-pressed="false">Kort</button>
+            <button data-lengde="medium" aria-pressed="true">Medium</button>
+            <button data-lengde="lang" aria-pressed="false">Lang</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="utlesning">
+        <span>Ditt valg: <b id="ut-form">Mandel</b> · <b id="ut-lengde">medium</b></span>
+        <span>Tid i stolen: <b id="ut-tid">ca. 90 min</b></span>
+        <span class="tips" id="ut-tips">Vanligste valget hos oss</span>
+      </div>
+    </div>
+  </header>
+</div>
+
+<main>
+  <section class="inn seksjon avslor" id="priser">
+    <h2 class="avsn">Priser, uten å måtte ringe først</h2>
+    <p class="ingress">Du skal slippe å gjette hva det koster. Alt står her.</p>
+    <div class="priser">
+      <div class="prisrad"><span class="hva">Nytt sett, gel<span class="om">Forming, bygging og farge</span></span><span class="kr">fra 890 kr</span></div>
+      <div class="prisrad"><span class="hva">Påfyll<span class="om">Etter 3–4 uker, samme form</span></span><span class="kr">fra 650 kr</span></div>
+      <div class="prisrad"><span class="hva">Manikyr uten forlengelse<span class="om">Stell av neglebånd og polering</span></span><span class="kr">fra 490 kr</span></div>
+      <div class="prisrad"><span class="hva">Design per negl<span class="om">Krom, french, håndmalt</span></span><span class="kr">fra 30 kr</span></div>
+      <div class="prisrad"><span class="hva">Fjerning<span class="om">Gratis ved nytt sett hos oss</span></span><span class="kr">250 kr</span></div>
+    </div>
+    <p class="ingress" style="font-size:14.5px;margin-top:16px">Prisene over er eksempler — byttes ut med salongens egne.</p>
+  </section>
+
+  <section class="inn seksjon avslor">
+    <h2 class="avsn">Hvor lenge holder de?</h2>
+    <div class="faktabokser">
+      <div class="faktaboks"><div class="tall">3–4 uker</div><p>før du trenger påfyll, avhengig av hvor fort neglene dine vokser.</p></div>
+      <div class="faktaboks"><div class="tall">90 min</div><p>for et nytt sett. Sett av tiden — vi haster ikke gjennom.</p></div>
+      <div class="faktaboks"><div class="tall">0 skader</div><p>Vi filer aldri ned den naturlige neglen for å spare tid.</p></div>
+    </div>
+  </section>
+
+  <section class="inn seksjon avslor" id="bestill">
+    <h2 class="avsn">Book time</h2>
+    <p class="ingress">Har du valgt form og lengde over, si det når du booker — så er alt klart når du kommer.</p>
+    <div class="knapper">
+      <a class="knapp hoved" href="tel:+4746712261">Ring 467 12 261</a>
+      <a class="knapp tom" href="#kontakt">Finn oss</a>
+    </div>
+  </section>
+
+  <section class="inn seksjon avslor" id="kontakt">
+    <h2 class="avsn">Kontakt</h2>
+    <div class="kontakt">
+      <div><span>Adresse</span><p>Henrik Wergelands gate 15, 4612 Kristiansand</p></div>
+      <div><span>Telefon</span><p>467 12 261</p></div>
+      <div><span>Åpent</span><p>Man–Tor 10–17 · Fre 10–16</p></div>
+      <div><span>Betaling</span><p>Kort og Vipps</p></div>
+    </div>
+  </section>
+</main>
+
+<div class="inn">
+  <footer>
+    <span>LaNails studio — Kristiansand</span>
+    <span>Designforslag — ikke en offisiell nettside</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var BUNN = "100% 88%, 85% 100%, 15% 100%, 0% 88%";
+  var FORMER = {
+    firkant:  {topp:"0% 2%, 20% 0%, 80% 0%, 100% 2%",   navn:"Firkant",  tips:"Holder best på korte negler"},
+    rund:     {topp:"2% 16%, 32% 0%, 68% 0%, 98% 16%",  navn:"Rund",     tips:"Mykest, sjelden knekk"},
+    mandel:   {topp:"10% 26%, 44% 0%, 56% 0%, 90% 26%", navn:"Mandel",   tips:"Vanligste valget hos oss"},
+    coffin:   {topp:"14% 20%, 30% 0%, 70% 0%, 86% 20%", navn:"Coffin",   tips:"Trenger litt lengde for å sitte"},
+    stiletto: {topp:"12% 30%, 49% 0%, 51% 0%, 88% 30%", navn:"Stiletto", tips:"Mest dramatisk — krever lang"}
+  };
+  var LENGDER = {
+    kort:   {px:52,  navn:"kort",   tid:"ca. 70 min"},
+    medium: {px:76,  navn:"medium", tid:"ca. 90 min"},
+    lang:   {px:104, navn:"lang",   tid:"ca. 120 min"}
+  };
+
+  var negler = document.querySelectorAll(".negl");
+  var valgtForm = "mandel", valgtLengde = "medium";
+
+  function tegn(){
+    var f = FORMER[valgtForm], l = LENGDER[valgtLengde];
+    negler.forEach(function(n){
+      var skala = parseFloat(n.dataset.skala) || 1;
+      n.style.height = Math.round(l.px * skala) + "px";
+      n.style.clipPath = "polygon(" + f.topp + ", " + BUNN + ")";
+    });
+    document.getElementById("ut-form").textContent = f.navn;
+    document.getElementById("ut-lengde").textContent = l.navn;
+    document.getElementById("ut-tid").textContent = l.tid;
+    document.getElementById("ut-tips").textContent = f.tips;
+  }
+
+  function koble(id, attr, sett){
+    var boks = document.getElementById(id);
+    boks.querySelectorAll("button").forEach(function(b){
+      b.addEventListener("click", function(){
+        sett(b.dataset[attr]);
+        boks.querySelectorAll("button").forEach(function(a){a.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");
+        tegn();
+      });
+    });
+  }
+  koble("former","form",function(v){valgtForm=v;});
+  koble("lengder","lengde",function(v){valgtLengde=v;});
+
+  tegn();
+
+  if("IntersectionObserver" in window){
+    var obs = new IntersectionObserver(function(p){
+      p.forEach(function(x){ if(x.isIntersecting){x.target.classList.add("inne");obs.unobserve(x.target);} });
+    },{threshold:.1});
+    document.querySelectorAll(".avslor").forEach(function(el){obs.observe(el);});
+  } else {
+    document.querySelectorAll(".avslor").forEach(function(el){el.classList.add("inne");});
+  }
+})();
+</script>
+</body>
+</html>
