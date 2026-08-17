@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negler TOUCH — neglsalong i Kristiansand</title>
+<meta name="description" content="Negler TOUCH er en neglsalong i hjertet av Kristiansand. Manikyr, gellakk, forlengelser og neglkunst — book time hos oss.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --creme:#F6EFEA;
+  --creme-dyp:#EBDFD6;
+  --rose:#E7B6B2;
+  --rose-dyp:#D98C90;
+  --plomme:#4A2233;
+  --plomme-lys:#6E3A4E;
+  --gull:#C29A54;
+  --kull:#2A1B22;
+  --dus:#9C8189;
+  --rand:rgba(74,34,51,.14);
+  --disp:"Fraunces",Georgia,serif;
+  --body:"Jost",system-ui,sans-serif;
+  --mono:"DM Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--creme);
+  color:var(--kull);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--plomme);outline-offset:3px}
+
+/* subtle grain / glow backdrop */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60vw 40vw at 80% -5%, rgba(231,182,178,.35), transparent 60%),
+    radial-gradient(50vw 40vw at -5% 30%, rgba(194,154,84,.12), transparent 60%);
+}
+.wrap{position:relative;z-index:1}
+.seksjon{width:min(1080px,92vw);margin:0 auto;padding:clamp(56px,9vw,120px) 0}
+
+/* ---------- TOPBAR ---------- */
+.topp{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter:blur(10px);
+  background:rgba(246,239,234,.72);
+  border-bottom:1px solid var(--rand);
+}
+.topp-inn{
+  width:min(1080px,92vw);margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0;
+}
+.logo{font-family:var(--disp);font-weight:600;font-size:22px;letter-spacing:-.01em}
+.logo b{font-weight:600}
+.logo span{
+  font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.28em;
+  color:var(--rose-dyp);text-transform:uppercase;vertical-align:middle;
+}
+.topp-nav{display:flex;gap:26px;align-items:center;font-size:14.5px;letter-spacing:.02em}
+.topp-nav a{color:var(--plomme-lys);transition:color .25s}
+.topp-nav a:hover{color:var(--plomme)}
+.knapp{
+  display:inline-block;font-family:var(--body);font-weight:500;font-size:15px;
+  padding:11px 22px;border-radius:999px;cursor:pointer;border:1px solid transparent;
+  transition:transform .2s ease, background .25s, color .25s, box-shadow .25s;
+}
+.knapp-fyll{background:var(--plomme);color:var(--creme)}
+.knapp-fyll:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(74,34,51,.24)}
+.knapp-linje{border-color:var(--plomme);color:var(--plomme);background:transparent}
+.knapp-linje:hover{background:var(--plomme);color:var(--creme)}
+.topp-nav .knapp{padding:9px 18px}
+@media(max-width:720px){.topp-nav a:not(.knapp){display:none}}
+
+/* ---------- HERO ---------- */
+.hero{padding-top:clamp(40px,7vw,86px);padding-bottom:clamp(20px,4vw,40px)}
+.kicker{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--rose-dyp);margin-bottom:22px;
+}
+.hero h1{
+  font-family:var(--disp);font-weight:500;font-size:clamp(44px,8vw,88px);
+  line-height:.98;letter-spacing:-.02em;max-width:14ch;
+}
+.hero h1 em{font-style:italic;color:var(--plomme-lys)}
+.hero .ingress{max-width:46ch;margin-top:26px;font-size:19px;color:var(--plomme-lys)}
+.hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.hero-note{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--dus);letter-spacing:.04em}
+
+/* ---------- SIGNATURE: POLISH STUDIO ---------- */
+.studio{
+  background:linear-gradient(180deg,#fff,rgba(255,255,255,.55));
+  border:1px solid var(--rand);
+  border-radius:28px;
+  padding:clamp(24px,4vw,44px);
+  box-shadow:0 30px 60px -30px rgba(74,34,51,.35);
+}
+.studio-topp{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:8px}
+.studio-topp h2{font-family:var(--disp);font-weight:500;font-size:clamp(26px,4vw,38px);line-height:1.05;letter-spacing:-.01em}
+.studio-topp p{color:var(--plomme-lys);max-width:38ch;font-size:15.5px}
+
+/* hand */
+.hand-scene{
+  display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,1.6vw,18px);
+  padding:clamp(26px,5vw,52px) 0 clamp(14px,3vw,30px);
+  min-height:220px;
+}
+.finger{display:flex;flex-direction:column;align-items:center;gap:6px}
+.finger .knoke{
+  width:clamp(34px,5vw,52px);height:clamp(74px,11vw,120px);
+  background:linear-gradient(180deg,#F3D9CE,#E6C0B4);
+  border-radius:26px 26px 20px 20px;
+  position:relative;
+  box-shadow:inset 0 6px 10px rgba(255,255,255,.6), inset 0 -8px 14px rgba(180,120,110,.35);
+}
+/* the nail */
+.finger .negl{
+  position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:82%;height:58%;
+  border-radius:60% 60% 46% 46% / 70% 70% 30% 30%;
+  background:var(--neglfarge,#F0D9D0);
+  transition:background .55s ease, box-shadow .55s ease, filter .55s ease;
+  box-shadow:inset 0 3px 6px rgba(255,255,255,.5), inset 0 -6px 10px rgba(0,0,0,.08);
+}
+/* thumb sits lower and wider */
+.finger.tommel{align-self:flex-end;margin-bottom:2px}
+.finger.tommel .knoke{width:clamp(40px,6vw,62px);height:clamp(56px,8vw,86px);border-radius:26px 22px 24px 24px}
+.finger.f2 .knoke,.finger.f4 .knoke{height:clamp(84px,12.5vw,132px)}
+.finger.f3 .knoke{height:clamp(92px,14vw,146px)}
+
+/* finishes */
+.neglemaling.blank .negl{box-shadow:inset 0 4px 8px rgba(255,255,255,.75), inset 0 -6px 10px rgba(0,0,0,.12)}
+.neglemaling.matt .negl{filter:saturate(.92) brightness(.98);box-shadow:inset 0 2px 3px rgba(255,255,255,.25), inset 0 -4px 8px rgba(0,0,0,.1)}
+.neglemaling.glitter .negl{
+  box-shadow:inset 0 4px 8px rgba(255,255,255,.6), inset 0 -6px 10px rgba(0,0,0,.12);
+  background-image:
+    radial-gradient(rgba(255,255,255,.9) 12%, transparent 13%),
+    radial-gradient(rgba(255,255,255,.7) 12%, transparent 13%);
+  background-size:9px 9px, 13px 13px;
+  background-position:0 0, 5px 6px;
+  background-blend-mode:screen;
+}
+
+/* controls */
+.studio-panel{display:grid;grid-template-columns:1fr;gap:26px;border-top:1px solid var(--rand);padding-top:24px}
+.blokk h3{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dus);margin-bottom:12px}
+.farger{display:flex;flex-wrap:wrap;gap:12px}
+.swatch{
+  width:38px;height:38px;border-radius:50%;cursor:pointer;border:2px solid rgba(255,255,255,.85);
+  box-shadow:0 3px 8px rgba(74,34,51,.2);position:relative;transition:transform .2s ease;
+}
+.swatch:hover{transform:scale(1.12)}
+.swatch[aria-pressed="true"]{outline:2px solid var(--plomme);outline-offset:3px;transform:scale(1.12)}
+.valg{display:inline-flex;background:var(--creme-dyp);border-radius:999px;padding:4px}
+.valg button{
+  font-family:var(--body);font-size:14px;font-weight:400;color:var(--plomme-lys);
+  border:none;background:transparent;padding:8px 18px;border-radius:999px;cursor:pointer;transition:all .25s;
+}
+.valg button[aria-pressed="true"]{background:#fff;color:var(--plomme);box-shadow:0 2px 8px rgba(74,34,51,.14)}
+.studio-ut{
+  margin-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  font-family:var(--mono);font-size:13px;color:var(--plomme-lys);
+}
+.studio-ut b{color:var(--plomme);font-weight:500}
+.studio-ut .kode{color:var(--dus)}
+@media(min-width:760px){.studio-panel{grid-template-columns:1.4fr 1fr;align-items:start}}
+
+/* ---------- TJENESTER ---------- */
+.avsnitt-tittel{font-family:var(--disp);font-weight:500;font-size:clamp(30px,5vw,52px);line-height:1.02;letter-spacing:-.02em;max-width:16ch}
+.avsnitt-topp .kicker{margin-bottom:14px}
+.avsnitt-topp p{max-width:44ch;margin-top:16px;color:var(--plomme-lys)}
+.tjenester{display:grid;grid-template-columns:1fr;gap:2px;margin-top:44px;border-top:1px solid var(--rand)}
+.tjeneste{
+  display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:baseline;
+  padding:24px 4px;border-bottom:1px solid var(--rand);transition:background .3s, padding-left .3s;
+}
+.tjeneste:hover{background:rgba(255,255,255,.5);padding-left:14px}
+.tj-nr{font-family:var(--mono);font-size:12px;color:var(--rose-dyp)}
+.tj-navn{font-family:var(--disp);font-size:22px;font-weight:500}
+.tj-navn small{display:block;font-family:var(--body);font-size:14.5px;font-weight:300;color:var(--dus);margin-top:4px;letter-spacing:0}
+.tj-pris{font-family:var(--mono);font-size:15px;color:var(--plomme);white-space:nowrap}
+
+/* ---------- OM / HVORFOR ---------- */
+.split{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+@media(min-width:820px){.split{grid-template-columns:1.05fr .95fr;gap:60px}}
+.om-kort{
+  background:var(--plomme);color:var(--creme);border-radius:24px;padding:clamp(28px,4vw,44px);
+  box-shadow:0 30px 60px -30px rgba(74,34,51,.5);
+}
+.om-kort .kicker{color:var(--rose)}
+.om-kort h2{font-family:var(--disp);font-weight:500;font-size:clamp(26px,4vw,36px);line-height:1.08;margin-bottom:16px}
+.om-kort p{color:rgba(246,239,234,.82);font-size:16px}
+.om-kort p + p{margin-top:14px}
+.trekk{display:grid;gap:18px}
+.trekk .rad{display:flex;gap:16px;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--rand)}
+.trekk .rad:last-child{border-bottom:none}
+.trekk .ikon{
+  flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+  background:var(--rose);color:var(--plomme);font-family:var(--disp);font-weight:600;font-size:18px;
+}
+.trekk h4{font-family:var(--disp);font-weight:500;font-size:19px;margin-bottom:3px}
+.trekk p{font-size:15px;color:var(--plomme-lys)}
+
+/* ---------- BOOKING CTA ---------- */
+.booking{
+  text-align:center;background:linear-gradient(180deg,#fff,rgba(255,255,255,.4));
+  border:1px solid var(--rand);border-radius:28px;padding:clamp(40px,7vw,80px) clamp(20px,5vw,40px);
+  box-shadow:0 30px 60px -34px rgba(74,34,51,.3);
+}
+.booking .kicker{margin-bottom:16px}
+.booking h2{font-family:var(--disp);font-weight:500;font-size:clamp(30px,6vw,58px);line-height:1.02;letter-spacing:-.02em;max-width:18ch;margin:0 auto}
+.booking p{max-width:42ch;margin:20px auto 0;color:var(--plomme-lys)}
+.booking-cta{display:flex;gap:14px;justify-content:center;margin-top:32px;flex-wrap:wrap}
+
+/* ---------- FOOTER ---------- */
+.bunn{border-top:1px solid var(--rand);margin-top:40px}
+.bunn-inn{width:min(1080px,92vw);margin:0 auto;padding:40px 0;display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:720px){.bunn-inn{grid-template-columns:1.4fr 1fr 1fr}}
+.bunn h5{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dus);margin-bottom:12px}
+.bunn a,.bunn p{color:var(--plomme-lys);font-size:15px;display:block;margin-bottom:6px}
+.bunn a:hover{color:var(--plomme)}
+.bunn .logo{margin-bottom:10px}
+.bunn-note{width:min(1080px,92vw);margin:0 auto;padding:16px 0 40px;font-family:var(--mono);font-size:11.5px;color:var(--dus);border-top:1px solid var(--rand);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* ---------- reveal ---------- */
+.avslor{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1)}
+.avslor.inne{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .avslor{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <header class="topp">
+    <div class="topp-inn">
+      <div class="logo"><b>Negler</b> <span>Touch</span></div>
+      <nav class="topp-nav">
+        <a href="#studio">Fargestudio</a>
+        <a href="#tjenester">Tjenester</a>
+        <a href="#om">Om oss</a>
+        <a href="#booking" class="knapp knapp-fyll">Book time</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="seksjon hero">
+    <p class="kicker">Neglsalong · Kristiansand sentrum</p>
+    <h1>Neglene dine, <em>helt</em> som du vil ha dem.</h1>
+    <p class="ingress">Hos Negler TOUCH tar vi oss tid. Rene linjer, holdbar gellakk og en farge som er akkurat din — i rolige omgivelser midt i byen.</p>
+    <div class="hero-cta">
+      <a href="#booking" class="knapp knapp-fyll">Book time</a>
+      <a href="#studio" class="knapp knapp-linje">Prøv fargestudioet ↓</a>
+    </div>
+    <p class="hero-note">Åpent tirsdag–lørdag · Drop-in når vi har ledig</p>
+  </section>
+
+  <!-- SIGNATURE: FARGESTUDIO -->
+  <section class="seksjon" id="studio">
+    <div class="studio avslor">
+      <div class="studio-topp">
+        <h2>Fargestudioet</h2>
+        <p>Lek deg fram før du kommer. Velg lakk og finish — så ser du fargen på hånden med én gang.</p>
+      </div>
+
+      <div class="hand-scene neglemaling blank" id="hand">
+        <div class="finger tommel"><span class="knoke"><span class="negl"></span></span></div>
+        <div class="finger f2"><span class="knoke"><span class="negl"></span></span></div>
+        <div class="finger f3"><span class="knoke"><span class="negl"></span></span></div>
+        <div class="finger f4"><span class="knoke"><span class="negl"></span></span></div>
+        <div class="finger f5"><span class="knoke"><span class="negl"></span></span></div>
+      </div>
+
+      <div class="studio-panel">
+        <div class="blokk">
+          <h3>Velg lakk</h3>
+          <div class="farger" id="farger" role="group" aria-label="Velg neglelakk"></div>
+        </div>
+        <div class="blokk">
+          <h3>Finish</h3>
+          <div class="valg" id="finish" role="group" aria-label="Velg finish">
+            <button data-finish="blank" aria-pressed="true">Blank</button>
+            <button data-finish="matt" aria-pressed="false">Matt</button>
+            <button data-finish="glitter" aria-pressed="false">Glitter</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="studio-ut">
+        <span>Ditt valg: <b id="ut-farge">Rosé Nude</b> · <b id="ut-finish">blank</b> <span class="kode" id="ut-kode">#E7B6B2</span></span>
+        <span>Tid i stolen: ca. <b id="ut-tid">45 min</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TJENESTER -->
+  <section class="seksjon" id="tjenester">
+    <div class="avsnitt-topp avslor">
+      <p class="kicker">Priser · alt oppgitt fra</p>
+      <h2 class="avsnitt-tittel">Behandlinger, uten skjulte tillegg</h2>
+      <p>Vi bruker kun kvalitetsprodukter og setter av god tid til hver kunde. Prisene under er startpriser — vi sier fra om noe kommer i tillegg før vi begynner.</p>
+    </div>
+    <div class="tjenester avslor">
+      <div class="tjeneste">
+        <span class="tj-nr">01</span>
+        <span class="tj-navn">Klassisk manikyr<small>Stell, forming og pleie av neglebånd</small></span>
+        <span class="tj-pris">fra 490 kr</span>
+      </div>
+      <div class="tjeneste">
+        <span class="tj-nr">02</span>
+        <span class="tj-navn">Gellakk<small>Holdbar farge som varer i uker</small></span>
+        <span class="tj-pris">fra 590 kr</span>
+      </div>
+      <div class="tjeneste">
+        <span class="tj-nr">03</span>
+        <span class="tj-navn">Forlengelser<small>Bygg i akryl eller gel, formet som du vil</small></span>
+        <span class="tj-pris">fra 850 kr</span>
+      </div>
+      <div class="tjeneste">
+        <span class="tj-nr">04</span>
+        <span class="tj-navn">Påfyll<small>Vedlikehold av eksisterende sett</small></span>
+        <span class="tj-pris">fra 650 kr</span>
+      </div>
+      <div class="tjeneste">
+        <span class="tj-nr">05</span>
+        <span class="tj-navn">Neglkunst &amp; design<small>Fra én detalj til full dekor — pris per negl</small></span>
+        <span class="tj-pris">fra 30 kr</span>
+      </div>
+      <div class="tjeneste">
+        <span class="tj-nr">06</span>
+        <span class="tj-navn">Pedikyr med gellakk<small>Fotstell og farge som holder hele sommeren</small></span>
+        <span class="tj-pris">fra 690 kr</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- OM OSS -->
+  <section class="seksjon" id="om">
+    <div class="split">
+      <div class="om-kort avslor">
+        <p class="kicker">Om oss</p>
+        <h2>En liten salong med plass til det viktige — deg.</h2>
+        <p>Negler TOUCH startet fordi vi savnet et sted der neglstell føles som en pause, ikke et hastverk. Vi er et lite team i Kristiansand sentrum som er like opptatt av gode samtaler som av rene linjer.</p>
+        <p>Enten du vil ha en diskret nude til jobb eller noe som virkelig synes, tar vi oss tid til å finne uttrykket som passer deg.</p>
+      </div>
+      <div class="trekk avslor">
+        <div class="rad">
+          <span class="ikon">✽</span>
+          <div><h4>Hygiene i første rekke</h4><p>Sterilisert utstyr og friske filer til hver kunde — alltid.</p></div>
+        </div>
+        <div class="rad">
+          <span class="ikon">♥</span>
+          <div><h4>Tid til deg</h4><p>Vi dobbeltbooker aldri. Timen din er din alene.</p></div>
+        </div>
+        <div class="rad">
+          <span class="ikon">✦</span>
+          <div><h4>Farger som holder</h4><p>Kvalitetslakk og riktig teknikk gir et resultat som varer.</p></div>
+        </div>
+        <div class="rad">
+          <span class="ikon">◍</span>
+          <div><h4>Midt i byen</h4><p>Sentralt i Kristiansand, lett å stikke innom i lunsjen.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="seksjon" id="booking">
+    <div class="booking avslor">
+      <p class="kicker">Book time</p>
+      <h2>Klar for nye negler?</h2>
+      <p>Send oss en melding eller book direkte. Vi svarer så fort vi er ute av en behandling.</p>
+      <div class="booking-cta">
+        <a href="#" class="knapp knapp-fyll" onclick="return false;">Book time online</a>
+        <a href="#" class="knapp knapp-linje" onclick="return false;">Skriv til oss</a>
+      </div>
+      <p class="hero-note" style="margin-top:22px">Demo-side · booking-knappene er kun for visning</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bunn">
+    <div class="bunn-inn">
+      <div>
+        <div class="logo"><b>Negler</b> <span>Touch</span></div>
+        <p>Neglsalong midt i Kristiansand. Manikyr, gellakk, forlengelser og neglkunst — i rolig tempo.</p>
+      </div>
+      <div>
+        <h5>Besøk oss</h5>
+        <p>Kristiansand sentrum</p>
+        <p>Tirsdag–lørdag</p>
+        <a href="#booking">Book time</a>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <a href="#">post@neglertouch.no</a>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+    <div class="bunn-note">
+      <span>© <span id="aar"></span> Negler TOUCH — demoside</span>
+      <span>Kontaktinfo er plassholdere for demo</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- Fargestudio (signature interaction) ----
+  var LAKKER = [
+    {navn:"Rosé Nude",   kode:"#E7B6B2", tid:"45 min"},
+    {navn:"Myk Beige",   kode:"#E4CBB4", tid:"45 min"},
+    {navn:"Dus Lavendel",kode:"#C9B6D8", tid:"45 min"},
+    {navn:"Fersken",     kode:"#F0A98C", tid:"45 min"},
+    {navn:"Kirsebær",    kode:"#9E2B3E", tid:"50 min"},
+    {navn:"Burgunder",   kode:"#5E1F2E", tid:"50 min"},
+    {navn:"Midnatt",     kode:"#232437", tid:"50 min"},
+    {navn:"Champagne",   kode:"#D8B36B", tid:"55 min"},
+    {navn:"Rød Klassiker",kode:"#C81D3B",tid:"50 min"},
+    {navn:"Perlerosa",   kode:"#F4D7DC", tid:"45 min"}
+  ];
+
+  var hand    = document.getElementById("hand");
+  var fargerEl = document.getElementById("farger");
+  var negler  = document.querySelectorAll(".negl");
+  var utFarge = document.getElementById("ut-farge");
+  var utFinish= document.getElementById("ut-finish");
+  var utKode  = document.getElementById("ut-kode");
+  var utTid   = document.getElementById("ut-tid");
+
+  var valgtIndex = 0, valgtFinish = "blank";
+
+  function settFarge(){
+    var l = LAKKER[valgtIndex];
+    negler.forEach(function(n){ n.style.setProperty("--neglfarge", l.kode); });
+    utFarge.textContent = l.navn;
+    utKode.textContent = l.kode.toUpperCase();
+    utTid.textContent = l.tid;
+  }
+
+  // build swatches
+  LAKKER.forEach(function(l, i){
+    var b = document.createElement("button");
+    b.className = "swatch";
+    b.style.background = l.kode;
+    b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+    b.setAttribute("aria-label", l.navn);
+    b.title = l.navn;
+    b.addEventListener("click", function(){
+      valgtIndex = i;
+      fargerEl.querySelectorAll(".swatch").forEach(function(s){ s.setAttribute("aria-pressed","false"); });
+      b.setAttribute("aria-pressed","true");
+      settFarge();
+    });
+    fargerEl.appendChild(b);
+  });
+
+  // finish toggle
+  document.getElementById("finish").querySelectorAll("button").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      valgtFinish = btn.getAttribute("data-finish");
+      document.getElementById("finish").querySelectorAll("button").forEach(function(a){ a.setAttribute("aria-pressed","false"); });
+      btn.setAttribute("aria-pressed","true");
+      hand.classList.remove("blank","matt","glitter");
+      hand.classList.add(valgtFinish);
+      utFinish.textContent = valgtFinish;
+    });
+  });
+
+  settFarge();
+
+  // ---- year ----
+  document.getElementById("aar").textContent = new Date().getFullYear();
+
+  // ---- scroll reveal ----
+  var mål = document.querySelectorAll(".avslor");
+  if("IntersectionObserver" in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("inne"); obs.unobserve(e.target); }
+      });
+    }, {threshold:.14});
+    mål.forEach(function(el){ obs.observe(el); });
+  } else {
+    mål.forEach(function(el){ el.classList.add("inne"); });
+  }
+})();
+</script>
+</body>
+</html>
