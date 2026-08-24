@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duo Frisører — frisørsalong i Kristiansand</title>
+<meta name="description" content="Duo Frisører er en frisørsalong i Kristiansand med to stylister. Ta stiltesten og finn din neste frisyre. Book time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#F3ECE2;
+  --sand-2:#E8DDCD;
+  --leire:#C2734E;
+  --leire-dyp:#A15736;
+  --espresso:#2A2019;
+  --grå:#6E625A;
+  --salvie:#7C8768;
+  --rand:rgba(42,32,25,.12);
+  --disp:"Playfair Display",Georgia,serif;
+  --body:"Mulish",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--sand);color:var(--espresso);font-family:var(--body);font-size:16.5px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--leire);outline-offset:3px}
+.seksjon{width:min(1080px,92vw);margin:0 auto;padding:clamp(52px,8vw,110px) 0}
+
+.topp{position:sticky;top:0;z-index:20;background:rgba(243,236,226,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rand)}
+.topp-inn{width:min(1080px,92vw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:.01em}
+.logo em{font-style:italic;font-weight:500;color:var(--leire)}
+.nav{display:flex;gap:24px;align-items:center;font-size:14.5px;font-weight:600}
+.nav a:not(.knapp){color:var(--grå)}
+.nav a:not(.knapp):hover{color:var(--espresso)}
+.knapp{display:inline-block;font-family:var(--body);font-weight:700;font-size:14.5px;padding:11px 24px;border-radius:999px;cursor:pointer;border:1.5px solid transparent;transition:transform .18s,background .2s,color .2s}
+.knapp-fyll{background:var(--espresso);color:var(--sand)}
+.knapp-fyll:hover{transform:translateY(-2px);background:var(--leire)}
+.knapp-linje{border-color:var(--espresso);color:var(--espresso)}
+.knapp-linje:hover{background:var(--espresso);color:var(--sand)}
+@media(max-width:720px){.nav a:not(.knapp){display:none}}
+
+.hero{padding-top:clamp(34px,6vw,74px);text-align:center}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--leire);margin-bottom:22px}
+.hero h1{font-family:var(--disp);font-weight:600;font-size:clamp(44px,9vw,102px);line-height:.98;letter-spacing:-.01em;max-width:16ch;margin:0 auto}
+.hero h1 em{font-style:italic;color:var(--leire)}
+.hero .ingress{max-width:52ch;margin:24px auto 0;font-size:18px;color:var(--grå)}
+.hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;justify-content:center}
+
+/* ---- SIGNATURE: STILTEST ---- */
+.test{background:var(--espresso);color:var(--sand);border-radius:28px;padding:clamp(28px,5vw,56px);position:relative;overflow:hidden;min-height:440px;display:flex;flex-direction:column}
+.test::before{content:"";position:absolute;inset:0;background:radial-gradient(50vw 40vw at 90% -10%,rgba(194,115,78,.4),transparent 60%);pointer-events:none}
+.test-hode{display:flex;justify-content:space-between;align-items:center;gap:14px;position:relative;z-index:1;margin-bottom:8px}
+.test-hode .steg{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,236,226,.55)}
+.progress{height:4px;background:rgba(243,236,226,.16);border-radius:99px;overflow:hidden;position:relative;z-index:1;margin-bottom:34px}
+.progress i{display:block;height:100%;width:0;background:var(--leire);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.sporsmal{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center}
+.sporsmal h2{font-family:var(--disp);font-weight:600;font-size:clamp(26px,4.4vw,42px);line-height:1.08;max-width:18ch;margin-bottom:26px}
+.svar{display:grid;grid-template-columns:1fr;gap:12px;max-width:640px}
+@media(min-width:640px){.svar{grid-template-columns:1fr 1fr}}
+.svar button{
+  text-align:left;font-family:var(--body);font-size:16px;color:var(--sand);
+  background:rgba(243,236,226,.06);border:1.5px solid rgba(243,236,226,.2);border-radius:16px;
+  padding:18px 20px;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:3px;
+}
+.svar button:hover{background:rgba(194,115,78,.22);border-color:var(--leire);transform:translateY(-2px)}
+.svar button b{font-weight:700;font-size:16.5px}
+.svar button span{font-size:13.5px;color:rgba(243,236,226,.6)}
+
+/* resultat */
+.resultat{position:relative;z-index:1;flex:1;display:none;flex-direction:column;justify-content:center;text-align:center}
+.resultat.vis{display:flex;animation:fade .6s ease}
+@keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.resultat .lbl{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--leire);margin-bottom:14px}
+.resultat h2{font-family:var(--disp);font-weight:600;font-size:clamp(30px,5vw,52px);line-height:1.02;margin-bottom:14px}
+.resultat h2 em{font-style:italic;color:var(--leire)}
+.resultat p{max-width:46ch;margin:0 auto;color:rgba(243,236,226,.8)}
+.stylist{margin-top:22px;display:inline-flex;align-items:center;gap:12px;background:rgba(243,236,226,.08);border:1px solid rgba(243,236,226,.18);border-radius:999px;padding:8px 8px 8px 8px}
+.stylist .sirkel{width:38px;height:38px;border-radius:50%;background:var(--leire);color:var(--sand);display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:17px}
+.stylist .navn{padding-right:14px;font-size:14.5px}.stylist .navn b{font-weight:700}
+.resultat-cta{margin-top:28px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.resultat .knapp-fyll{background:var(--leire)}
+.resultat .knapp-fyll:hover{background:var(--leire-dyp)}
+.lenke{background:none;border:none;color:rgba(243,236,226,.7);font-family:var(--body);font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.lenke:hover{color:var(--sand)}
+
+/* stylister */
+.tittel{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.5vw,58px);line-height:1;letter-spacing:-.01em}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--leire);margin-bottom:12px}
+.duo{display:grid;grid-template-columns:1fr;gap:20px;margin-top:44px}
+@media(min-width:700px){.duo{grid-template-columns:1fr 1fr}}
+.person{background:var(--sand-2);border:1px solid var(--rand);border-radius:22px;padding:30px}
+.person .avatar{width:64px;height:64px;border-radius:50%;background:var(--leire);color:var(--sand);display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:26px;margin-bottom:16px}
+.person h3{font-family:var(--disp);font-weight:600;font-size:24px}
+.person .rolle{color:var(--leire);font-weight:600;font-size:13.5px;text-transform:uppercase;letter-spacing:.08em;margin:2px 0 12px}
+.person p{color:var(--grå);font-size:15px}
+
+/* priser */
+.prisliste{margin-top:44px;border-top:1px solid var(--rand)}
+.prisrad{display:flex;justify-content:space-between;gap:20px;align-items:baseline;padding:20px 4px;border-bottom:1px solid var(--rand)}
+.prisrad .navn{font-family:var(--disp);font-size:21px;font-weight:500}
+.prisrad .navn small{display:block;font-family:var(--body);font-size:14px;color:var(--grå);margin-top:3px}
+.prisrad .pris{font-weight:700;white-space:nowrap;color:var(--leire-dyp)}
+
+/* booking */
+.booking{text-align:center;background:var(--sand-2);border:1px solid var(--rand);border-radius:28px;padding:clamp(44px,7vw,84px) 20px}
+.booking h2{font-family:var(--disp);font-weight:600;font-size:clamp(32px,6vw,60px);line-height:1;max-width:16ch;margin:0 auto}
+.booking h2 em{font-style:italic;color:var(--leire)}
+.booking p{max-width:42ch;margin:16px auto 0;color:var(--grå)}
+.booking-cta{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+
+.bunn{border-top:1px solid var(--rand)}
+.bunn-inn{width:min(1080px,92vw);margin:0 auto;padding:38px 0;display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:720px){.bunn-inn{grid-template-columns:1.5fr 1fr 1fr}}
+.bunn h5{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--grå);margin-bottom:12px}
+.bunn a,.bunn p{color:var(--grå);font-size:14.5px;display:block;margin-bottom:6px}
+.bunn a:hover{color:var(--leire-dyp)}
+.bunn-note{width:min(1080px,92vw);margin:0 auto;padding:14px 0 38px;font-size:12px;color:var(--grå);border-top:1px solid var(--rand);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+.avslor{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.avslor.inne{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+  <header class="topp">
+    <div class="topp-inn">
+      <div class="logo">Duo <em>Frisører</em></div>
+      <nav class="nav">
+        <a href="#test">Stiltest</a>
+        <a href="#stylister">Stylistene</a>
+        <a href="#priser">Priser</a>
+        <a href="#booking" class="knapp knapp-fyll">Book time</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seksjon hero">
+    <p class="eyebrow">Frisørsalong · Kristiansand</p>
+    <h1>To hoder. Én <em>følelse</em> av å bli sett.</h1>
+    <p class="ingress">Duo Frisører er en salong for deg som vil ha et hår som passer livet ditt — ikke bare bildet på skjermen. Usikker på hva du vil ha? Ta stiltesten under.</p>
+    <div class="hero-cta">
+      <a href="#test" class="knapp knapp-fyll">Finn din frisyre ↓</a>
+      <a href="#booking" class="knapp knapp-linje">Book time</a>
+    </div>
+  </section>
+
+  <section class="seksjon" id="test">
+    <div class="test avslor">
+      <div class="test-hode">
+        <span class="steg" id="steg-tekst">Stiltest</span>
+        <button class="lenke" id="nullstill" style="display:none">Start på nytt</button>
+      </div>
+      <div class="progress"><i id="progress-bar"></i></div>
+
+      <div class="sporsmal" id="sporsmal">
+        <h2 id="sp-tekst"></h2>
+        <div class="svar" id="sp-svar"></div>
+      </div>
+
+      <div class="resultat" id="resultat">
+        <span class="lbl">Vår anbefaling</span>
+        <h2 id="res-tittel"></h2>
+        <p id="res-tekst"></p>
+        <div class="stylist"><span class="sirkel" id="res-init"></span><span class="navn">Anbefalt stylist: <b id="res-stylist"></b></span></div>
+        <div class="resultat-cta">
+          <a href="#booking" class="knapp knapp-fyll">Book denne timen</a>
+          <button class="lenke" id="ta-igjen">Ta testen på nytt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="stylister">
+    <div class="avslor">
+      <p class="kicker">Duoen</p>
+      <h2 class="tittel">To stylister, to styrker</h2>
+    </div>
+    <div class="duo avslor">
+      <div class="person">
+        <div class="avatar">M</div>
+        <h3>Mari</h3>
+        <div class="rolle">Farge & kreativ</div>
+        <p>Mari elsker farge, dimensjon og de store forandringene. Balayage, toning og alt som gir håret liv — det er hennes hjemmebane.</p>
+      </div>
+      <div class="person">
+        <div class="avatar">J</div>
+        <h3>Jonas</h3>
+        <div class="rolle">Klipp & presisjon</div>
+        <p>Jonas er mannen for formen. Presise klipp, god vekst og frisyrer som sitter like fint dag to som dag én — uansett hårtype.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="priser">
+    <div class="avslor">
+      <p class="kicker">Priser · fra</p>
+      <h2 class="tittel">Oversikt</h2>
+    </div>
+    <div class="prisliste avslor">
+      <div class="prisrad"><span class="navn">Dameklipp<small>Klipp, vask og føn</small></span><span class="pris">fra 749 kr</span></div>
+      <div class="prisrad"><span class="navn">Herreklipp<small>Klipp og styling</small></span><span class="pris">fra 549 kr</span></div>
+      <div class="prisrad"><span class="navn">Farge & dimensjon<small>Balayage, striper eller helfarge</small></span><span class="pris">fra 1 690 kr</span></div>
+      <div class="prisrad"><span class="navn">Toning<small>Frisk opp fargen</small></span><span class="pris">fra 690 kr</span></div>
+      <div class="prisrad"><span class="navn">Den store forandringen<small>Konsultasjon, klipp og farge sammen</small></span><span class="pris">fra 2 290 kr</span></div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="booking">
+    <div class="booking avslor">
+      <h2>Klar for en <em>ny start?</em></h2>
+      <p>Book time hos Mari eller Jonas — eller la oss finne den rette for deg.</p>
+      <div class="booking-cta">
+        <a href="#" class="knapp knapp-fyll" onclick="return false;">Book time online</a>
+        <a href="#" class="knapp knapp-linje" onclick="return false;">Ring oss</a>
+      </div>
+      <p style="margin-top:18px;font-size:12px;color:var(--grå)">Demo-side · knappene er kun for visning</p>
+    </div>
+  </section>
+
+  <footer class="bunn">
+    <div class="bunn-inn">
+      <div><div class="logo" style="margin-bottom:10px">Duo <em>Frisører</em></div><p>Frisørsalong i Kristiansand. To stylister, ett mål: hår du trives i.</p></div>
+      <div><h5>Besøk</h5><p>Kristiansand sentrum</p><p>Tirsdag–lørdag</p><a href="#booking">Book time</a></div>
+      <div><h5>Kontakt</h5><a href="#">post@duofrisorer.no</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+    </div>
+    <div class="bunn-note"><span>© <span id="aar"></span> Duo Frisører — demoside</span><span>Kontaktinfo er plassholdere</span></div>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+  var SP = [
+    {n:"Hvor langt er håret ditt nå?", valg:[
+      {v:"kort", t:"Kort", d:"Øre-lengde eller kortere"},
+      {v:"midt", t:"Midtlangt", d:"Til skuldrene"},
+      {v:"langt", t:"Langt", d:"Under skuldrene"},
+      {v:"vokser", t:"Prøver å la det gro", d:"I en mellomfase"}
+    ]},
+    {n:"Hva er du mest ute etter?", valg:[
+      {v:"form", t:"Ny form eller klipp", d:"Friske opp fasongen"},
+      {v:"farge", t:"Farge & dimensjon", d:"Lysne, mørkne eller toning"},
+      {v:"stell", t:"Vedlikehold & stell", d:"Holde det pent"},
+      {v:"forandring", t:"En stor forandring", d:"Noe helt nytt"}
+    ]},
+    {n:"Hvilken stil kjenner du deg igjen i?", valg:[
+      {v:"naturlig", t:"Naturlig & lettstelt", d:"Lite styling hjemme"},
+      {v:"klassisk", t:"Klassisk & elegant", d:"Tidløst og pent"},
+      {v:"moderne", t:"Rå & moderne", d:"Litt kant"},
+      {v:"leken", t:"Leken & fargerik", d:"Tør å skille seg ut"}
+    ]}
+  ];
+
+  var RES = {
+    form: {tittel:"Signaturklipp", stylist:"Jonas", init:"J",
+      tekst:"En klipp som er formet for ansiktet ditt og hårtypen din — så det sitter fint uten timevis foran speilet."},
+    farge:{tittel:"Farge & dimensjon", stylist:"Mari", init:"M",
+      tekst:"Mykt fargespill som gir håret dybde og liv. Vi legger fargen der lyset naturlig ville truffet."},
+    stell:{tittel:"Klipp & stell", stylist:"Jonas", init:"J",
+      tekst:"Vi holder formen frisk og håret sunt — en trygg time som gir deg det lille løftet."},
+    forandring:{tittel:"Den store forandringen", stylist:"Mari & Jonas sammen", init:"D",
+      tekst:"Den store dagen tar vi som et lag. Konsultasjon først, så klipp og farge — med to par hender og null hastverk."}
+  };
+  var STIL = {
+    naturlig:"Vi holder det lettstelt, med en form som gror pent ut.",
+    klassisk:"Vi går for et tidløst, elegant uttrykk som alltid kler deg.",
+    moderne:"Vi legger inn litt kant og bevegelse for et moderne preg.",
+    leken:"Vi tør å leke — med farge og form som skiller seg ut."
+  };
+
+  var svar = [], steg = 0;
+  var spTekst = document.getElementById("sp-tekst");
+  var spSvar = document.getElementById("sp-svar");
+  var bar = document.getElementById("progress-bar");
+  var stegTekst = document.getElementById("steg-tekst");
+  var sporsmalBlokk = document.getElementById("sporsmal");
+  var resBlokk = document.getElementById("resultat");
+  var nullstill = document.getElementById("nullstill");
+
+  function tegn(){
+    var q = SP[steg];
+    spTekst.textContent = q.n;
+    spSvar.innerHTML = "";
+    q.valg.forEach(function(o){
+      var b = document.createElement("button");
+      b.innerHTML = "<b>"+o.t+"</b><span>"+o.d+"</span>";
+      b.addEventListener("click", function(){
+        svar[steg] = o.v; steg++;
+        if(steg < SP.length){ tegn(); oppdaterProgress(); }
+        else visResultat();
+      });
+      spSvar.appendChild(b);
+    });
+    stegTekst.textContent = "Spørsmål " + (steg+1) + " av " + SP.length;
+    nullstill.style.display = steg>0 ? "block" : "none";
+  }
+  function oppdaterProgress(){ bar.style.width = (steg/SP.length*100) + "%"; }
+
+  function visResultat(){
+    bar.style.width = "100%";
+    stegTekst.textContent = "Ferdig";
+    nullstill.style.display = "none";
+    var r = RES[svar[1]] || RES.form;
+    document.getElementById("res-tittel").innerHTML = r.tittel;
+    document.getElementById("res-tekst").textContent = r.tekst + " " + (STIL[svar[2]]||"");
+    document.getElementById("res-stylist").textContent = r.stylist;
+    document.getElementById("res-init").textContent = r.init;
+    sporsmalBlokk.style.display = "none";
+    resBlokk.classList.add("vis");
+  }
+
+  function reset(){
+    svar = []; steg = 0;
+    resBlokk.classList.remove("vis");
+    sporsmalBlokk.style.display = "flex";
+    bar.style.width = "0%";
+    tegn();
+  }
+  nullstill.addEventListener("click", reset);
+  document.getElementById("ta-igjen").addEventListener("click", reset);
+
+  tegn(); oppdaterProgress();
+  document.getElementById("aar").textContent = new Date().getFullYear();
+
+  var mål=document.querySelectorAll(".avslor");
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("inne");obs.unobserve(e.target);}});},{threshold:.12});
+    mål.forEach(function(el){obs.observe(el);});
+  } else { mål.forEach(function(el){el.classList.add("inne");}); }
+})();
+</script>
+</body>
+</html>
