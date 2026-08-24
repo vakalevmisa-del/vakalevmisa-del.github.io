@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onigiri Café — japansk kafé i Kristiansand</title>
+<meta name="description" content="Onigiri Café er en liten japansk kafé i Kristiansand. Lag din egen onigiri, se prisen med én gang, og smak Japan midt i byen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --washi:#F7F3EA;
+  --washi-2:#EEE8DA;
+  --sumi:#23201C;
+  --sumi-2:#4A453E;
+  --shu:#C8483A;
+  --shu-dyp:#A5382C;
+  --matcha:#7C8B57;
+  --grå:#7C756A;
+  --rand:rgba(35,32,28,.13);
+  --disp:"Shippori Mincho",serif;
+  --body:"Zen Kaku Gothic New",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--washi);color:var(--sumi);font-family:var(--body);font-size:16.5px;line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--shu);outline-offset:3px}
+.seksjon{width:min(1040px,92vw);margin:0 auto;padding:clamp(54px,8vw,116px) 0}
+
+.topp{position:sticky;top:0;z-index:20;background:rgba(247,243,234,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--rand)}
+.topp-inn{width:min(1040px,92vw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-family:var(--disp);font-weight:600;font-size:22px;letter-spacing:.02em;display:flex;align-items:center;gap:9px}
+.logo .maru{width:9px;height:9px;border-radius:50%;background:var(--shu)}
+.nav{display:flex;gap:26px;align-items:center;font-size:14px;font-weight:500}
+.nav a:not(.knapp){color:var(--grå)}
+.nav a:not(.knapp):hover{color:var(--sumi)}
+.knapp{display:inline-block;font-family:var(--body);font-weight:700;font-size:14px;padding:11px 22px;border-radius:4px;cursor:pointer;border:1.5px solid transparent;transition:transform .18s,background .2s,color .2s}
+.knapp-fyll{background:var(--sumi);color:var(--washi)}
+.knapp-fyll:hover{transform:translateY(-2px);background:var(--shu)}
+.knapp-linje{border-color:var(--sumi);color:var(--sumi)}
+.knapp-linje:hover{background:var(--sumi);color:var(--washi)}
+@media(max-width:720px){.nav a:not(.knapp){display:none}}
+
+.hero{padding-top:clamp(40px,7vw,88px);text-align:center}
+.kanji{font-family:var(--disp);font-size:15px;letter-spacing:.5em;color:var(--shu);margin-bottom:18px}
+.hero h1{font-family:var(--disp);font-weight:600;font-size:clamp(42px,8.4vw,94px);line-height:1.06;letter-spacing:.01em;max-width:15ch;margin:0 auto}
+.hero h1 span{color:var(--shu)}
+.hero .ingress{max-width:48ch;margin:24px auto 0;font-size:17.5px;color:var(--grå)}
+.hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center}
+
+/* ---- SIGNATURE: LAG DIN ONIGIRI ---- */
+.studio{background:#fff;border:1px solid var(--rand);border-radius:8px;padding:clamp(26px,4vw,52px);box-shadow:0 30px 60px -44px rgba(35,32,28,.4)}
+.studio-topp{text-align:center;margin-bottom:8px}
+.studio-topp h2{font-family:var(--disp);font-weight:600;font-size:clamp(26px,4vw,40px)}
+.studio-topp p{color:var(--grå);margin-top:4px;font-size:15px}
+.studio-inn{display:grid;grid-template-columns:1fr;gap:34px;margin-top:28px;align-items:center}
+@media(min-width:820px){.studio-inn{grid-template-columns:300px 1fr}}
+
+/* onigiri drawing */
+.scene{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 0}
+.onigiri{position:relative;width:210px;height:186px}
+.ris{
+  position:absolute;inset:0;
+  clip-path:polygon(50% 3%, 96% 94%, 4% 94%);
+  background:radial-gradient(120% 90% at 50% 20%, #FDFBF6, #EFE9DB);
+  filter:drop-shadow(0 14px 20px rgba(35,32,28,.18));
+}
+.ris::after{content:"";position:absolute;inset:0;clip-path:polygon(50% 3%, 96% 94%, 4% 94%);
+  background:linear-gradient(115deg,rgba(255,255,255,.5),transparent 42%)}
+.nori{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);
+  width:78px;height:80px;background:linear-gradient(180deg,#2C3A2E,#1C2620);border-radius:6px;
+  transition:width .4s,height .4s,background .4s;z-index:2}
+.onigiri.t-nori .nori{width:104px;height:96px}
+.vindu{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+  width:56px;height:56px;border-radius:50%;background-color:var(--fyllfarge,#E7896A);z-index:3;
+  box-shadow:inset 0 3px 6px rgba(255,255,255,.5), inset 0 -5px 9px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.12);
+  transition:transform .3s ease}
+/* toppings garnish */
+.garnish{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .35s}
+.onigiri.t-sesam .garnish.sesam{opacity:1}
+.onigiri.t-furikake .garnish.furikake{opacity:1}
+.prikk{position:absolute;width:6px;height:9px;border-radius:50%;background:#3B342B;transform:rotate(20deg)}
+.prikk.hvit{background:#F4EEDD}
+.spekk{position:absolute;width:6px;height:6px;border-radius:2px}
+.byttepop{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.06)}100%{transform:scale(1)}}
+.onigiri-navn{margin-top:14px;font-family:var(--disp);font-weight:600;font-size:21px;text-align:center;min-height:28px}
+.onigiri-pris{font-family:var(--body);font-weight:700;font-size:15px;color:var(--shu);text-align:center;margin-top:2px}
+
+.kontroll{display:flex;flex-direction:column;gap:22px}
+.rad h3{font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--grå);margin-bottom:10px}
+.valg{display:flex;flex-wrap:wrap;gap:9px}
+.valg button{
+  font-family:var(--body);font-size:14px;font-weight:500;color:var(--sumi);
+  background:var(--washi);border:1.5px solid var(--rand);border-radius:6px;
+  padding:10px 14px;cursor:pointer;transition:all .18s;display:inline-flex;align-items:center;gap:8px;
+}
+.valg button .dot{width:12px;height:12px;border-radius:50%;flex:none}
+.valg button:hover{border-color:var(--shu)}
+.valg button[aria-pressed="true"]{background:var(--sumi);border-color:var(--sumi);color:var(--washi);font-weight:700}
+.studio-cta{margin-top:4px}
+.studio-cta .knapp{background:var(--shu);color:#fff;border:none}
+.studio-cta .knapp:hover{background:var(--shu-dyp)}
+
+/* meny */
+.tittel{font-family:var(--disp);font-weight:600;font-size:clamp(30px,5vw,54px);line-height:1.05}
+.kicker{font-family:var(--disp);font-size:13px;letter-spacing:.3em;color:var(--shu);margin-bottom:14px}
+.avsnitt-topp p{max-width:46ch;margin-top:14px;color:var(--grå)}
+.meny{margin-top:44px;display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:760px){.meny{grid-template-columns:1fr 1fr;gap:8px 48px}}
+.menyrad{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--rand)}
+.menyrad .n{font-family:var(--disp);font-size:19px}
+.menyrad .n small{display:block;font-family:var(--body);font-size:13px;color:var(--grå);margin-top:2px}
+.menyrad .p{font-weight:700;color:var(--sumi-2);white-space:nowrap}
+
+/* om */
+.split{display:grid;grid-template-columns:1fr;gap:34px;align-items:center}
+@media(min-width:820px){.split{grid-template-columns:1fr 1fr;gap:56px}}
+.om h2{font-family:var(--disp);font-weight:600;font-size:clamp(26px,4vw,42px);line-height:1.12;margin-bottom:14px}
+.om h2 span{color:var(--shu)}
+.om p{color:var(--grå)}.om p+p{margin-top:12px}
+.kort-info{background:var(--washi-2);border:1px solid var(--rand);border-radius:8px;padding:30px}
+.kort-info .rad2{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--rand);font-size:15px}
+.kort-info .rad2:last-child{border-bottom:none}
+.kort-info b{font-weight:700}
+
+/* booking */
+.booking{text-align:center;background:var(--sumi);color:var(--washi);border-radius:8px;padding:clamp(44px,7vw,84px) 20px;position:relative;overflow:hidden}
+.booking .maru-stor{position:absolute;width:220px;height:220px;border-radius:50%;background:var(--shu);opacity:.16;top:-90px;right:-60px}
+.booking h2{font-family:var(--disp);font-weight:600;font-size:clamp(30px,6vw,58px);line-height:1.06;max-width:16ch;margin:0 auto;position:relative}
+.booking p{max-width:42ch;margin:16px auto 0;color:rgba(247,243,234,.72);position:relative}
+.booking .knapp-fyll{background:var(--shu);color:#fff;position:relative}
+.booking .knapp-fyll:hover{background:#fff;color:var(--sumi)}
+.booking .knapp-linje{border-color:rgba(247,243,234,.5);color:var(--washi);position:relative}
+.booking .knapp-linje:hover{background:var(--washi);color:var(--sumi)}
+.booking-cta{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+
+.bunn{border-top:1px solid var(--rand)}
+.bunn-inn{width:min(1040px,92vw);margin:0 auto;padding:38px 0;display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:720px){.bunn-inn{grid-template-columns:1.5fr 1fr 1fr}}
+.bunn h5{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--grå);margin-bottom:12px}
+.bunn a,.bunn p{color:var(--grå);font-size:14.5px;display:block;margin-bottom:6px}
+.bunn a:hover{color:var(--shu)}
+.bunn-note{width:min(1040px,92vw);margin:0 auto;padding:14px 0 38px;font-size:12px;color:var(--grå);border-top:1px solid var(--rand);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+.avslor{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.avslor.inne{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+  <header class="topp">
+    <div class="topp-inn">
+      <div class="logo"><span class="maru"></span>Onigiri Café</div>
+      <nav class="nav">
+        <a href="#studio">Lag din onigiri</a>
+        <a href="#meny">Meny</a>
+        <a href="#om">Om oss</a>
+        <a href="#booking" class="knapp knapp-fyll">Finn oss</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seksjon hero">
+    <p class="kanji">おにぎり</p>
+    <h1>Japan, formet for <span>hånden.</span></h1>
+    <p class="ingress">Onigiri Café er et lite pusterom midt i Kristiansand — ferske risboller, grønn te og rolige smaker. Sett sammen din egen onigiri under.</p>
+    <div class="hero-cta">
+      <a href="#studio" class="knapp knapp-fyll">Lag din onigiri ↓</a>
+      <a href="#meny" class="knapp knapp-linje">Se menyen</a>
+    </div>
+  </section>
+
+  <section class="seksjon" id="studio">
+    <div class="studio avslor">
+      <div class="studio-topp">
+        <h2>Lag din onigiri</h2>
+        <p>Velg fyll og topping — så former vi den for deg.</p>
+      </div>
+      <div class="studio-inn">
+        <div class="scene">
+          <div class="onigiri" id="onigiri">
+            <div class="ris"></div>
+            <div class="garnish sesam">
+              <span class="prikk hvit" style="left:38%;top:34%"></span>
+              <span class="prikk" style="left:56%;top:40%"></span>
+              <span class="prikk hvit" style="left:47%;top:52%"></span>
+            </div>
+            <div class="garnish furikake">
+              <span class="spekk" style="left:40%;top:32%;background:#2C3A2E"></span>
+              <span class="spekk" style="left:58%;top:37%;background:#C8483A"></span>
+              <span class="spekk" style="left:46%;top:48%;background:#D9A94C"></span>
+              <span class="spekk" style="left:52%;top:58%;background:#2C3A2E"></span>
+              <span class="spekk" style="left:36%;top:46%;background:#C8483A"></span>
+            </div>
+            <div class="vindu" id="vindu"></div>
+            <div class="nori"></div>
+          </div>
+          <div class="onigiri-navn" id="on-navn">Laks</div>
+          <div class="onigiri-pris" id="on-pris">0 kr</div>
+        </div>
+        <div class="kontroll">
+          <div class="rad"><h3>Fyll</h3><div class="valg" id="g-fyll"></div></div>
+          <div class="rad"><h3>Topping</h3><div class="valg" id="g-topp"></div></div>
+          <div class="studio-cta"><a href="#booking" class="knapp">Bestill i kassa</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="meny">
+    <div class="avsnitt-topp avslor">
+      <p class="kicker">MENY</p>
+      <h2 class="tittel">Litt av det vi lager</h2>
+      <p>Alt lages ferskt hver dag, med ris kokt på japansk vis. Enkelt, rent og godt.</p>
+    </div>
+    <div class="meny avslor">
+      <div class="menyrad"><span class="n">Onigiri med laks<small>Klassikeren, saftig og mild</small></span><span class="p">57 kr</span></div>
+      <div class="menyrad"><span class="n">Misosuppe<small>Med tofu og vårløk</small></span><span class="p">59 kr</span></div>
+      <div class="menyrad"><span class="n">Onigiri-sett (3 stk)<small>Velg dine egne fyll</small></span><span class="p">149 kr</span></div>
+      <div class="menyrad"><span class="n">Matcha latte<small>Ekte seremoniell matcha</small></span><span class="p">62 kr</span></div>
+      <div class="menyrad"><span class="n">Edamame<small>Dampet, med havsalt</small></span><span class="p">49 kr</span></div>
+      <div class="menyrad"><span class="n">Dorayaki<small>Pannekake med rød bønnekrem</small></span><span class="p">45 kr</span></div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="om">
+    <div class="split">
+      <div class="om avslor">
+        <p class="kicker">OM OSS</p>
+        <h2>En liten bit <span>Japan</span> midt i byen.</h2>
+        <p>Onigiri Café startet med et savn: et sted for de rene, rolige smakene vi ble glad i på reise. Vi former hver risball for hånd, og holder menyen liten så alt blir laget skikkelig.</p>
+        <p>Ta den med deg ut, eller sett deg ned med en kopp grønn te. Velkommen inn — irasshaimase.</p>
+      </div>
+      <div class="kort-info avslor">
+        <div class="rad2"><span>Man–fre</span><b>11:00 – 19:00</b></div>
+        <div class="rad2"><span>Lørdag</span><b>11:00 – 17:00</b></div>
+        <div class="rad2"><span>Søndag</span><b>Stengt</b></div>
+        <div class="rad2"><span>Take-away</span><b>Alltid</b></div>
+        <div class="rad2"><span>Vegetar-fyll</span><b>Hver dag</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="booking">
+    <div class="booking avslor">
+      <span class="maru-stor"></span>
+      <h2>Kom innom for en <span style="color:var(--shu)">onigiri</span></h2>
+      <p>Vi står klare i Kristiansand sentrum. Ta den med på farten, eller bli en stund.</p>
+      <div class="booking-cta">
+        <a href="#" class="knapp knapp-fyll" onclick="return false;">Finn oss på kartet</a>
+        <a href="#" class="knapp knapp-linje" onclick="return false;">Se hele menyen</a>
+      </div>
+      <p style="margin-top:18px;font-size:12px;color:rgba(247,243,234,.55)">Demo-side · knappene er kun for visning</p>
+    </div>
+  </section>
+
+  <footer class="bunn">
+    <div class="bunn-inn">
+      <div><div class="logo" style="margin-bottom:10px"><span class="maru"></span>Onigiri Café</div><p>Liten japansk kafé i Kristiansand. Ferske risboller, grønn te, rolige smaker.</p></div>
+      <div><h5>Besøk</h5><p>Kristiansand sentrum</p><p>Man–lør</p><a href="#booking">Finn oss</a></div>
+      <div><h5>Kontakt</h5><a href="#">hei@onigirikafe.no</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+    </div>
+    <div class="bunn-note"><span>© <span id="aar"></span> Onigiri Café — demoside</span><span>Kontaktinfo er plassholdere</span></div>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+  var FYLL = [
+    {id:"laks", navn:"Laks", pris:18, farge:"#E7896A"},
+    {id:"tunmajones", navn:"Tunmajones", pris:12, farge:"#E4CE92"},
+    {id:"teriyaki", navn:"Kylling teriyaki", pris:15, farge:"#8A5A34"},
+    {id:"umeboshi", navn:"Umeboshi", pris:9, farge:"#C8483A"},
+    {id:"veggie", navn:"Veggie (avokado)", pris:12, farge:"#7C8B57"}
+  ];
+  var TOPP = [
+    {id:"sesam", navn:"Sesam", pris:3, cls:"t-sesam"},
+    {id:"furikake", navn:"Furikake", pris:5, cls:"t-furikake"},
+    {id:"nori", navn:"Ekstra nori", pris:6, cls:"t-nori"}
+  ];
+  var BASE = 39;
+
+  var valgtFyll = "laks";
+  var valgteTopp = {};
+  var onigiri = document.getElementById("onigiri");
+  var vindu = document.getElementById("vindu");
+  var navnEl = document.getElementById("on-navn");
+  var prisEl = document.getElementById("on-pris");
+
+  function finn(a,id){ return a.filter(function(x){return x.id===id;})[0]; }
+
+  function oppdater(pop){
+    var f = finn(FYLL, valgtFyll);
+    vindu.style.setProperty("--fyllfarge", f.farge);
+    navnEl.textContent = f.navn;
+    var pris = BASE + f.pris;
+    TOPP.forEach(function(t){
+      onigiri.classList.toggle(t.cls, !!valgteTopp[t.id]);
+      if(valgteTopp[t.id]) pris += t.pris;
+    });
+    prisEl.textContent = pris + " kr";
+    if(pop){ onigiri.classList.remove("byttepop"); void onigiri.offsetWidth; onigiri.classList.add("byttepop"); }
+  }
+
+  var gF = document.getElementById("g-fyll");
+  FYLL.forEach(function(o){
+    var b=document.createElement("button");
+    b.innerHTML = "<span class='dot' style='background:"+o.farge+"'></span>"+o.navn+" +"+o.pris;
+    b.setAttribute("aria-pressed", valgtFyll===o.id?"true":"false");
+    b.addEventListener("click", function(){
+      valgtFyll=o.id;
+      gF.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true");
+      oppdater(true);
+    });
+    gF.appendChild(b);
+  });
+
+  var gT = document.getElementById("g-topp");
+  TOPP.forEach(function(o){
+    var b=document.createElement("button");
+    b.textContent = o.navn+" +"+o.pris;
+    b.setAttribute("aria-pressed","false");
+    b.addEventListener("click", function(){
+      var on = b.getAttribute("aria-pressed")==="true";
+      b.setAttribute("aria-pressed", on?"false":"true");
+      if(on) delete valgteTopp[o.id]; else valgteTopp[o.id]=true;
+      oppdater(false);
+    });
+    gT.appendChild(b);
+  });
+
+  oppdater(false);
+  document.getElementById("aar").textContent = new Date().getFullYear();
+
+  var mål=document.querySelectorAll(".avslor");
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("inne");obs.unobserve(e.target);}});},{threshold:.12});
+    mål.forEach(function(el){obs.observe(el);});
+  } else { mål.forEach(function(el){el.classList.add("inne");}); }
+})();
+</script>
+</body>
+</html>
