@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JK Nails — neglsalong i Kristiansand</title>
+<meta name="description" content="JK Nails er en neglsalong i Kristiansand. Bygg ditt eget sett og se pris og tid med én gang. Book time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F8F6;
+  --panel:#FFFFFF;
+  --mint:#E1F3EA;
+  --emerald:#12A66B;
+  --emerald-dyp:#0C7A4E;
+  --blekk:#15251E;
+  --grå:#5E706A;
+  --korall:#FF6B5C;
+  --rand:rgba(21,37,30,.1);
+  --disp:"Sora",system-ui,sans-serif;
+  --body:"DM Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--blekk);font-family:var(--body);font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--emerald);outline-offset:3px}
+.seksjon{width:min(1080px,92vw);margin:0 auto;padding:clamp(50px,8vw,104px) 0}
+
+.topp{position:sticky;top:0;z-index:20;background:rgba(245,248,246,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--rand)}
+.topp-inn{width:min(1080px,92vw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:15px 0}
+.logo{font-family:var(--disp);font-weight:800;font-size:22px;letter-spacing:-.02em}
+.logo span{color:var(--emerald)}
+.nav{display:flex;gap:24px;align-items:center;font-size:14.5px;font-weight:500}
+.nav a:not(.knapp){color:var(--grå)}
+.nav a:not(.knapp):hover{color:var(--blekk)}
+.knapp{display:inline-block;font-family:var(--disp);font-weight:600;font-size:14.5px;padding:11px 22px;border-radius:12px;cursor:pointer;border:1.5px solid transparent;transition:transform .18s,background .2s,color .2s,box-shadow .2s}
+.knapp-fyll{background:var(--emerald);color:#fff}
+.knapp-fyll:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(18,166,107,.6)}
+.knapp-linje{border-color:var(--blekk);color:var(--blekk)}
+.knapp-linje:hover{background:var(--blekk);color:#fff}
+@media(max-width:720px){.nav a:not(.knapp){display:none}}
+
+.hero{padding-top:clamp(34px,6vw,74px)}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--emerald-dyp);background:var(--mint);border-radius:999px;padding:7px 16px;margin-bottom:24px}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--emerald)}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(40px,7.6vw,82px);line-height:1.02;letter-spacing:-.03em;max-width:15ch}
+.hero h1 span{color:var(--emerald)}
+.hero .ingress{max-width:44ch;margin-top:22px;font-size:18px;color:var(--grå)}
+.hero-cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+
+/* ---- SIGNATURE: BYGG DITT SETT ---- */
+.bygg{background:var(--panel);border:1px solid var(--rand);border-radius:26px;box-shadow:0 40px 80px -50px rgba(21,37,30,.4);overflow:hidden}
+.bygg-inn{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:840px){.bygg-inn{grid-template-columns:1fr 340px}}
+.bygg-valg{padding:clamp(24px,4vw,40px)}
+.bygg-topp h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,36px);letter-spacing:-.02em}
+.bygg-topp p{color:var(--grå);margin-top:6px;max-width:40ch;font-size:15px}
+.gruppe{margin-top:26px}
+.gruppe h3{font-family:var(--disp);font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--grå);text-transform:uppercase;margin-bottom:12px}
+.opsjoner{display:flex;flex-wrap:wrap;gap:10px}
+.opt{
+  font-family:var(--body);font-size:14.5px;color:var(--blekk);background:var(--bg);
+  border:1.5px solid var(--rand);border-radius:12px;padding:11px 16px;cursor:pointer;
+  transition:all .18s;display:inline-flex;align-items:center;gap:8px;
+}
+.opt:hover{border-color:var(--emerald)}
+.opt .p{color:var(--grå);font-size:13px}
+.opt[aria-pressed="true"]{background:var(--mint);border-color:var(--emerald);color:var(--emerald-dyp);font-weight:500}
+.opt[aria-pressed="true"] .p{color:var(--emerald-dyp)}
+
+/* receipt */
+.bygg-kvittering{background:var(--blekk);color:#fff;padding:clamp(24px,4vw,36px);display:flex;flex-direction:column}
+.bygg-kvittering h3{font-family:var(--disp);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.kv-liste{margin-top:16px;flex:1;display:flex;flex-direction:column;gap:10px;font-size:14.5px}
+.kv-rad{display:flex;justify-content:space-between;gap:10px;color:rgba(255,255,255,.85)}
+.kv-rad span:last-child{font-variant-numeric:tabular-nums;color:#fff}
+.kv-delelinje{height:1px;background:rgba(255,255,255,.16);margin:14px 0}
+.kv-total{display:flex;justify-content:space-between;align-items:baseline}
+.kv-total .lbl{font-size:14px;color:rgba(255,255,255,.6)}
+.kv-total .sum{font-family:var(--disp);font-weight:800;font-size:34px;letter-spacing:-.02em}
+.kv-tid{margin-top:6px;font-size:13.5px;color:var(--korall);font-weight:500}
+.kv-cta{margin-top:20px}
+.kv-cta .knapp{width:100%;text-align:center;background:var(--emerald);color:#fff;border:none}
+.kv-cta .knapp:hover{background:var(--emerald-dyp)}
+.kv-note{margin-top:10px;font-size:11.5px;color:rgba(255,255,255,.4);text-align:center}
+
+/* tjenester teaser */
+.tittel{font-family:var(--disp);font-weight:700;font-size:clamp(30px,5vw,54px);line-height:1;letter-spacing:-.02em;max-width:16ch}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--emerald);margin-bottom:12px}
+.avsnitt-topp p{max-width:46ch;margin-top:14px;color:var(--grå)}
+.rutenett{display:grid;grid-template-columns:1fr;gap:16px;margin-top:40px}
+@media(min-width:700px){.rutenett{grid-template-columns:repeat(3,1fr)}}
+.boks{background:var(--panel);border:1px solid var(--rand);border-radius:18px;padding:24px}
+.boks .ikon{width:44px;height:44px;border-radius:12px;background:var(--mint);color:var(--emerald-dyp);display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:20px;margin-bottom:14px}
+.boks h3{font-family:var(--disp);font-weight:600;font-size:19px;margin-bottom:6px}
+.boks p{font-size:14.5px;color:var(--grå)}
+
+/* om */
+.split{display:grid;grid-template-columns:1fr;gap:34px;align-items:center}
+@media(min-width:820px){.split{grid-template-columns:1fr 1fr;gap:54px}}
+.om h2{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,40px);line-height:1.06;letter-spacing:-.02em;margin-bottom:14px}
+.om p{color:var(--grå)}.om p+p{margin-top:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat{background:var(--panel);border:1px solid var(--rand);border-radius:18px;padding:22px}
+.stat .tall{font-family:var(--disp);font-weight:800;font-size:34px;color:var(--emerald);letter-spacing:-.02em}
+.stat .txt{font-size:14px;color:var(--grå);margin-top:4px}
+
+/* booking */
+.booking{text-align:center;background:linear-gradient(160deg,var(--emerald),var(--emerald-dyp));color:#fff;border-radius:26px;padding:clamp(44px,7vw,82px) 20px}
+.booking h2{font-family:var(--disp);font-weight:700;font-size:clamp(30px,6vw,58px);line-height:1.02;letter-spacing:-.02em;max-width:16ch;margin:0 auto}
+.booking p{max-width:40ch;margin:16px auto 0;color:rgba(255,255,255,.85)}
+.booking .knapp-fyll{background:#fff;color:var(--emerald-dyp)}
+.booking .knapp-fyll:hover{background:var(--blekk);color:#fff}
+.booking .knapp-linje{border-color:rgba(255,255,255,.6);color:#fff}
+.booking .knapp-linje:hover{background:#fff;color:var(--emerald-dyp)}
+.booking-cta{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+
+.bunn{border-top:1px solid var(--rand)}
+.bunn-inn{width:min(1080px,92vw);margin:0 auto;padding:38px 0;display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:720px){.bunn-inn{grid-template-columns:1.5fr 1fr 1fr}}
+.bunn h5{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--grå);margin-bottom:12px}
+.bunn a,.bunn p{color:var(--grå);font-size:14.5px;display:block;margin-bottom:6px}
+.bunn a:hover{color:var(--emerald-dyp)}
+.bunn-note{width:min(1080px,92vw);margin:0 auto;padding:14px 0 38px;font-size:12px;color:var(--grå);border-top:1px solid var(--rand);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+.avslor{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.avslor.inne{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+  <header class="topp">
+    <div class="topp-inn">
+      <div class="logo">JK<span>Nails</span></div>
+      <nav class="nav">
+        <a href="#bygg">Bygg sett</a>
+        <a href="#tjenester">Tjenester</a>
+        <a href="#om">Om oss</a>
+        <a href="#booking" class="knapp knapp-fyll">Book time</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seksjon hero">
+    <span class="pill">Neglsalong · Kristiansand</span>
+    <h1>Vet du hva det koster? <span>Nå gjør du det.</span></h1>
+    <p class="ingress">Hos JK Nails er det ingen overraskelser på slutten. Bygg settet ditt under, og se pris og tid med én gang.</p>
+    <div class="hero-cta">
+      <a href="#bygg" class="knapp knapp-fyll">Bygg ditt sett ↓</a>
+      <a href="#booking" class="knapp knapp-linje">Book time</a>
+    </div>
+  </section>
+
+  <section class="seksjon" id="bygg">
+    <div class="bygg avslor">
+      <div class="bygg-inn">
+        <div class="bygg-valg">
+          <div class="bygg-topp">
+            <h2>Bygg ditt sett</h2>
+            <p>Velg det du vil ha — prisen og tiden oppdateres mens du bygger.</p>
+          </div>
+
+          <div class="gruppe">
+            <h3>1 · Behandling</h3>
+            <div class="opsjoner" id="g-behandling" data-single="true"></div>
+          </div>
+          <div class="gruppe">
+            <h3>2 · Lengde</h3>
+            <div class="opsjoner" id="g-lengde" data-single="true"></div>
+          </div>
+          <div class="gruppe">
+            <h3>3 · Tillegg <span style="text-transform:none;font-weight:400;color:var(--grå)">(velg fritt)</span></h3>
+            <div class="opsjoner" id="g-tillegg" data-single="false"></div>
+          </div>
+        </div>
+
+        <aside class="bygg-kvittering">
+          <h3>Ditt sett</h3>
+          <div class="kv-liste" id="kv-liste"></div>
+          <div class="kv-delelinje"></div>
+          <div class="kv-total">
+            <span class="lbl">Estimert pris</span>
+            <span class="sum" id="kv-sum">0 kr</span>
+          </div>
+          <div class="kv-tid" id="kv-tid">Tid i stolen: –</div>
+          <div class="kv-cta"><a href="#booking" class="knapp">Book dette settet</a></div>
+          <div class="kv-note">Estimat · endelig pris avtales i salongen</div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="tjenester">
+    <div class="avsnitt-topp avslor">
+      <p class="kicker">Hva vi tilbyr</p>
+      <h2 class="tittel">Alt for hendene, ett sted</h2>
+      <p>Fra enkelt vedlikehold til full negledesign. Vi bruker kvalitetsprodukter og setter av god tid til hver kunde.</p>
+    </div>
+    <div class="rutenett avslor">
+      <div class="boks"><div class="ikon">✦</div><h3>Gellakk</h3><p>Holdbar farge med perfekt finish som varer i uker.</p></div>
+      <div class="boks"><div class="ikon">◇</div><h3>Forlengelser</h3><p>Bygg i gel eller akryl, formet og lengde som du vil.</p></div>
+      <div class="boks"><div class="ikon">✧</div><h3>Negledesign</h3><p>French, chrome, steiner eller håndmalt kunst.</p></div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="om">
+    <div class="split">
+      <div class="om avslor">
+        <p class="kicker">Om JK Nails</p>
+        <h2>Ryddig, raskt og rett på — slik liker vi det.</h2>
+        <p>JK Nails er en neglsalong i Kristiansand for deg som vil ha et pent resultat uten stress. Vi liker tydelig prat om pris, god tid til jobben, og negler du blir glad i.</p>
+        <p>Book online eller stikk innom når vi har ledig. Vi gleder oss til å se deg.</p>
+      </div>
+      <div class="stats avslor">
+        <div class="stat"><div class="tall">100%</div><div class="txt">Åpenhet på pris — bygg settet selv</div></div>
+        <div class="stat"><div class="tall">Sentralt</div><div class="txt">Midt i Kristiansand</div></div>
+        <div class="stat"><div class="tall">Kvalitet</div><div class="txt">Produkter som holder</div></div>
+        <div class="stat"><div class="tall">Drop-in</div><div class="txt">Når vi har ledig time</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="booking">
+    <div class="booking avslor">
+      <h2>Klar for nye negler?</h2>
+      <p>Book time online, eller send oss en melding så finner vi en tid som passer deg.</p>
+      <div class="booking-cta">
+        <a href="#" class="knapp knapp-fyll" onclick="return false;">Book time online</a>
+        <a href="#" class="knapp knapp-linje" onclick="return false;">Skriv til oss</a>
+      </div>
+      <p style="margin-top:18px;font-size:12px;color:rgba(255,255,255,.6)">Demo-side · knappene er kun for visning</p>
+    </div>
+  </section>
+
+  <footer class="bunn">
+    <div class="bunn-inn">
+      <div><div class="logo" style="margin-bottom:10px">JK<span>Nails</span></div><p>Neglsalong i Kristiansand — ærlig pris, pene negler.</p></div>
+      <div><h5>Besøk</h5><p>Kristiansand sentrum</p><p>Tirsdag–lørdag</p><a href="#booking">Book time</a></div>
+      <div><h5>Kontakt</h5><a href="#">post@jknails.no</a><a href="#">Instagram</a><a href="#">Booking</a></div>
+    </div>
+    <div class="bunn-note"><span>© <span id="aar"></span> JK Nails — demoside</span><span>Kontaktinfo er plassholdere</span></div>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+  var BEHANDLING = [
+    {id:"manikyr", navn:"Klassisk manikyr", pris:490, tid:40},
+    {id:"gellakk", navn:"Gellakk", pris:590, tid:45},
+    {id:"gel", navn:"Forlengelser (gel)", pris:850, tid:75},
+    {id:"akryl", navn:"Forlengelser (akryl)", pris:800, tid:70}
+  ];
+  var LENGDE = [
+    {id:"kort", navn:"Kort", pris:0, tid:0},
+    {id:"medium", navn:"Medium", pris:100, tid:10},
+    {id:"lang", navn:"Lang", pris:200, tid:20},
+    {id:"xl", navn:"XL", pris:350, tid:30}
+  ];
+  var TILLEGG = [
+    {id:"french", navn:"French", pris:150, tid:15},
+    {id:"chrome", navn:"Chrome", pris:200, tid:15},
+    {id:"kunst", navn:"Neglekunst (2 negler)", pris:120, tid:20},
+    {id:"steiner", navn:"Steiner", pris:100, tid:10},
+    {id:"fjerning", navn:"Fjerning av gammelt sett", pris:150, tid:15}
+  ];
+
+  var valgtBeh = "gellakk", valgtLen = "medium", valgteTillegg = {};
+
+  function nokFmt(n){ return n.toLocaleString("nb-NO") + " kr"; }
+  function tidFmt(m){
+    if(m<=0) return "–";
+    var t = Math.floor(m/60), r = m%60;
+    if(t>0) return t + "t " + (r>0 ? r + " min" : "").trim();
+    return r + " min";
+  }
+
+  function lagKnapper(el, data, single, valgtId){
+    data.forEach(function(o){
+      var b = document.createElement("button");
+      b.className = "opt";
+      b.setAttribute("data-id", o.id);
+      var extra = (o.pris>0 ? " +" + o.pris + " kr" : "");
+      b.innerHTML = o.navn + (extra ? " <span class='p'>" + extra + "</span>" : "");
+      if(single && o.id===valgtId) b.setAttribute("aria-pressed","true");
+      else b.setAttribute("aria-pressed","false");
+      b.addEventListener("click", function(){
+        if(single){
+          el.querySelectorAll(".opt").forEach(function(x){x.setAttribute("aria-pressed","false");});
+          b.setAttribute("aria-pressed","true");
+          if(el.id==="g-behandling") valgtBeh=o.id;
+          if(el.id==="g-lengde") valgtLen=o.id;
+        } else {
+          var on = b.getAttribute("aria-pressed")==="true";
+          b.setAttribute("aria-pressed", on?"false":"true");
+          if(on) delete valgteTillegg[o.id]; else valgteTillegg[o.id]=o;
+        }
+        regnUt();
+      });
+      el.appendChild(b);
+    });
+  }
+
+  var liste = document.getElementById("kv-liste");
+  var sumEl = document.getElementById("kv-sum");
+  var tidEl = document.getElementById("kv-tid");
+
+  function finn(arr,id){ return arr.filter(function(x){return x.id===id;})[0]; }
+
+  function rad(navn, pris){
+    var d = document.createElement("div"); d.className="kv-rad";
+    d.innerHTML = "<span>"+navn+"</span><span>"+(pris>0?"+"+pris+" kr":"inkl.")+"</span>";
+    return d;
+  }
+
+  function regnUt(){
+    var pris=0, tid=0;
+    liste.innerHTML="";
+    var b = finn(BEHANDLING, valgtBeh);
+    pris+=b.pris; tid+=b.tid;
+    var rB=document.createElement("div"); rB.className="kv-rad";
+    rB.innerHTML="<span>"+b.navn+"</span><span>"+b.pris+" kr</span>"; liste.appendChild(rB);
+    var l = finn(LENGDE, valgtLen);
+    pris+=l.pris; tid+=l.tid;
+    liste.appendChild(rad("Lengde: "+l.navn, l.pris));
+    Object.keys(valgteTillegg).forEach(function(k){
+      var t=valgteTillegg[k]; pris+=t.pris; tid+=t.tid;
+      liste.appendChild(rad(t.navn, t.pris));
+    });
+    sumEl.textContent = nokFmt(pris);
+    tidEl.textContent = "Tid i stolen: ca. " + tidFmt(tid);
+  }
+
+  lagKnapper(document.getElementById("g-behandling"), BEHANDLING, true, valgtBeh);
+  lagKnapper(document.getElementById("g-lengde"), LENGDE, true, valgtLen);
+  lagKnapper(document.getElementById("g-tillegg"), TILLEGG, false, null);
+  regnUt();
+
+  document.getElementById("aar").textContent = new Date().getFullYear();
+
+  var mål=document.querySelectorAll(".avslor");
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("inne");obs.unobserve(e.target);}});},{threshold:.12});
+    mål.forEach(function(el){obs.observe(el);});
+  } else { mål.forEach(function(el){el.classList.add("inne");}); }
+})();
+</script>
+</body>
+</html>
