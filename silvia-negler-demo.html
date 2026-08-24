@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silvia Negler — neglekunst i Kristiansand</title>
+<meta name="description" content="Silvia Negler er et neglestudio i Kristiansand med fokus på neglekunst og design. Se sesongens uttrykk og book time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --papir:#F4F1EA;
+  --papir-2:#ECE7DC;
+  --blekk:#141414;
+  --grå:#6A6A66;
+  --magenta:#E5195F;
+  --lilla:#7A5CFF;
+  --gull:#D9A94C;
+  --rand:rgba(20,20,20,.12);
+  --disp:"Instrument Serif",Georgia,serif;
+  --ui:"Space Grotesk",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--papir);color:var(--blekk);font-family:var(--ui);font-size:16.5px;line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--magenta);outline-offset:3px}
+.seksjon{width:min(1120px,92vw);margin:0 auto;padding:clamp(52px,8vw,110px) 0}
+
+/* topbar */
+.topp{position:sticky;top:0;z-index:20;background:rgba(244,241,234,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--rand)}
+.topp-inn{width:min(1120px,92vw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-family:var(--disp);font-size:26px;letter-spacing:.01em}
+.logo b{font-weight:400;font-style:italic}
+.nav{display:flex;gap:24px;align-items:center;font-size:14.5px;font-weight:500}
+.nav a:not(.knapp){color:var(--grå);transition:color .2s}
+.nav a:not(.knapp):hover{color:var(--blekk)}
+.knapp{display:inline-block;font-family:var(--ui);font-weight:600;font-size:14.5px;padding:11px 22px;border-radius:2px;cursor:pointer;border:1.5px solid var(--blekk);transition:transform .18s,background .22s,color .22s}
+.knapp-fyll{background:var(--blekk);color:var(--papir)}
+.knapp-fyll:hover{transform:translateY(-2px);background:var(--magenta);border-color:var(--magenta)}
+.knapp-linje{background:transparent;color:var(--blekk)}
+.knapp-linje:hover{background:var(--blekk);color:var(--papir)}
+@media(max-width:720px){.nav a:not(.knapp){display:none}}
+
+/* hero */
+.hero{padding-top:clamp(30px,6vw,70px)}
+.merkelapp{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--magenta);border:1px solid var(--magenta);border-radius:999px;padding:6px 14px;margin-bottom:26px}
+.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(52px,11vw,128px);line-height:.9;letter-spacing:-.01em;max-width:12ch}
+.hero h1 i{color:var(--magenta)}
+.hero .ingress{max-width:44ch;margin-top:26px;font-size:18px;color:var(--grå)}
+.hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+
+/* ---- SIGNATURE: kunstgalleri ---- */
+.galleri{background:var(--blekk);color:var(--papir);border-radius:6px;padding:clamp(24px,4vw,48px);overflow:hidden}
+.galleri-topp{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.galleri-topp h2{font-family:var(--disp);font-weight:400;font-size:clamp(30px,5vw,50px);line-height:1}
+.galleri-topp h2 i{color:var(--magenta)}
+.galleri-topp p{color:rgba(244,241,234,.6);max-width:34ch;font-size:14.5px}
+
+.scene{display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,1.6vw,16px);padding:clamp(30px,6vw,64px) 0 clamp(20px,4vw,40px)}
+.finger{display:flex;flex-direction:column;align-items:center}
+.tupp{
+  width:clamp(38px,5.4vw,58px);height:clamp(60px,9vw,96px);
+  background:#E9C4B4;
+  border-radius:50% 50% 42% 42%/62% 62% 38% 38%;
+  position:relative;overflow:hidden;
+  box-shadow:inset 0 -6px 12px rgba(120,70,60,.3);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  animation:none;
+}
+.finger.f1 .tupp{height:clamp(48px,7vw,74px)}
+.finger.f3 .tupp{height:clamp(70px,10.5vw,112px)}
+.finger.f5 .tupp{height:clamp(52px,7.6vw,80px)}
+/* gloss */
+.tupp::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.5),transparent 42%);pointer-events:none;opacity:.8;transition:opacity .4s}
+.scene.matt .tupp::after{opacity:0}
+
+/* --- ART DESIGNS applied to .tupp --- */
+.scene.french .tupp{background:linear-gradient(to top,#E7C6B6 60%,#fff 60%)}
+.scene.chrome .tupp{background:linear-gradient(140deg,#eef0f3 0%,#b7bcc6 26%,#f7f8fb 48%,#9aa0ad 70%,#dfe2e8 100%)}
+.scene.ombre .tupp{background:linear-gradient(to top,#E5195F,#7A5CFF)}
+.scene.glitter .tupp{
+  background:#C11458;
+  background-image:radial-gradient(rgba(255,255,255,.95) 11%,transparent 12%),radial-gradient(rgba(255,220,120,.9) 11%,transparent 12%);
+  background-size:8px 8px,12px 12px;background-position:0 0,5px 6px;background-blend-mode:screen;
+}
+.scene.matte .tupp{background:#9A3350;filter:saturate(.85) brightness(.96)}
+.scene.blomster .tupp{
+  background:#F5E4DA;
+  background-image:
+    radial-gradient(circle at 32% 34%, #E5195F 8%, transparent 9%),
+    radial-gradient(circle at 66% 30%, #D9A94C 6%, transparent 7%),
+    radial-gradient(circle at 50% 60%, #7A5CFF 7%, transparent 8%),
+    radial-gradient(circle at 30% 74%, #D9A94C 5%, transparent 6%);
+  background-repeat:no-repeat;
+}
+/* pop animation on change */
+@keyframes pop{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-6px) scale(1.05)}100%{transform:translateY(0) scale(1)}}
+.scene.bytte .tupp{animation:pop .5s ease}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding-top:8px;border-top:1px solid rgba(244,241,234,.14)}
+.chips{padding-top:22px}
+.chip{
+  font-family:var(--ui);font-weight:500;font-size:14px;color:rgba(244,241,234,.75);
+  background:transparent;border:1px solid rgba(244,241,234,.24);border-radius:999px;
+  padding:9px 18px;cursor:pointer;transition:all .2s;
+}
+.chip:hover{border-color:var(--papir);color:var(--papir)}
+.chip[aria-pressed="true"]{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.galleri-ut{margin-top:22px;text-align:center;color:rgba(244,241,234,.85);font-size:14.5px}
+.galleri-ut b{color:var(--papir)}
+.galleri-ut .navn{font-family:var(--disp);font-style:italic;font-size:22px;color:var(--magenta);display:block;margin-bottom:2px}
+
+/* tjenester */
+.tittel{font-family:var(--disp);font-weight:400;font-size:clamp(34px,6vw,64px);line-height:.98;max-width:16ch}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta);margin-bottom:14px}
+.avsnitt-topp p{max-width:46ch;margin-top:14px;color:var(--grå)}
+.kort-rad{display:grid;grid-template-columns:1fr;gap:16px;margin-top:44px}
+@media(min-width:700px){.kort-rad{grid-template-columns:repeat(3,1fr)}}
+.kort{background:var(--papir-2);border:1px solid var(--rand);border-radius:4px;padding:26px 24px;transition:transform .25s,box-shadow .25s}
+.kort:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(20,20,20,.4)}
+.kort .nr{font-family:var(--disp);font-style:italic;font-size:30px;color:var(--magenta)}
+.kort h3{font-size:20px;font-weight:600;margin:8px 0 6px}
+.kort p{font-size:14.5px;color:var(--grå)}
+.kort .pris{margin-top:14px;font-weight:600;font-size:15px}
+
+/* om */
+.split{display:grid;grid-template-columns:1fr;gap:36px;align-items:center}
+@media(min-width:820px){.split{grid-template-columns:1fr 1fr;gap:56px}}
+.sitat{font-family:var(--disp);font-weight:400;font-size:clamp(26px,4vw,40px);line-height:1.14}
+.sitat i{color:var(--magenta)}
+.om p{color:var(--grå);margin-top:14px}
+.om p:first-of-type{margin-top:0}
+
+/* booking */
+.booking{text-align:center;background:var(--blekk);color:var(--papir);border-radius:6px;padding:clamp(44px,7vw,84px) 20px}
+.booking h2{font-family:var(--disp);font-weight:400;font-size:clamp(34px,6vw,66px);line-height:1;max-width:16ch;margin:0 auto}
+.booking h2 i{color:var(--magenta)}
+.booking p{max-width:40ch;margin:18px auto 0;color:rgba(244,241,234,.7)}
+.booking .knapp-linje{border-color:var(--papir);color:var(--papir)}
+.booking .knapp-linje:hover{background:var(--papir);color:var(--blekk)}
+.booking-cta{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+
+/* footer */
+.bunn{border-top:1px solid var(--rand)}
+.bunn-inn{width:min(1120px,92vw);margin:0 auto;padding:40px 0;display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:720px){.bunn-inn{grid-template-columns:1.5fr 1fr 1fr}}
+.bunn h5{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--grå);margin-bottom:12px}
+.bunn a,.bunn p{color:var(--grå);font-size:14.5px;display:block;margin-bottom:6px}
+.bunn a:hover{color:var(--blekk)}
+.bunn-note{width:min(1120px,92vw);margin:0 auto;padding:14px 0 40px;font-size:12px;color:var(--grå);border-top:1px solid var(--rand);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+.avslor{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.avslor.inne{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+  <header class="topp">
+    <div class="topp-inn">
+      <div class="logo"><b>Silvia</b> Negler</div>
+      <nav class="nav">
+        <a href="#galleri">Galleri</a>
+        <a href="#tjenester">Tjenester</a>
+        <a href="#om">Om</a>
+        <a href="#booking" class="knapp knapp-fyll">Book time</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seksjon hero">
+    <span class="merkelapp">Neglekunst · Kristiansand</span>
+    <h1>Negler er et lite <i>lerret.</i></h1>
+    <p class="ingress">Hos Silvia Negler handler det om detaljen. Vi lager design som holder — fra diskret french til full kunst på hver negl.</p>
+    <div class="hero-cta">
+      <a href="#booking" class="knapp knapp-fyll">Book time</a>
+      <a href="#galleri" class="knapp knapp-linje">Se sesongens design ↓</a>
+    </div>
+  </section>
+
+  <section class="seksjon" id="galleri">
+    <div class="galleri avslor">
+      <div class="galleri-topp">
+        <h2>Sesongens <i>neglekunst</i></h2>
+        <p>Trykk på et uttrykk og se det på hånden. Dette er utgangspunktene — resten former vi sammen.</p>
+      </div>
+      <div class="scene french" id="scene">
+        <div class="finger f1"><span class="tupp"></span></div>
+        <div class="finger f2"><span class="tupp"></span></div>
+        <div class="finger f3"><span class="tupp"></span></div>
+        <div class="finger f4"><span class="tupp"></span></div>
+        <div class="finger f5"><span class="tupp"></span></div>
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip" data-art="french" aria-pressed="true">French</button>
+        <button class="chip" data-art="chrome" aria-pressed="false">Chrome</button>
+        <button class="chip" data-art="ombre" aria-pressed="false">Ombré</button>
+        <button class="chip" data-art="glitter" aria-pressed="false">Glitter</button>
+        <button class="chip" data-art="matte" aria-pressed="false">Matte</button>
+        <button class="chip" data-art="blomster" aria-pressed="false">Blomster</button>
+      </div>
+      <div class="galleri-ut">
+        <span class="navn" id="ut-navn">French</span>
+        <span id="ut-tekst">Tidløs og elegant — den hvite tuppen som aldri går av moten.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="tjenester">
+    <div class="avsnitt-topp avslor">
+      <p class="kicker">Tjenester · priser fra</p>
+      <h2 class="tittel">Det vi kan gjøre for deg</h2>
+      <p>Vi bruker kvalitetsprodukter og tar oss god tid. Prisene under er startpriser — design og lengde kommer i tillegg.</p>
+    </div>
+    <div class="kort-rad avslor">
+      <div class="kort"><span class="nr">01</span><h3>Gellakk</h3><p>Farge som sitter i uker, med perfekt finish.</p><div class="pris">fra 590 kr</div></div>
+      <div class="kort"><span class="nr">02</span><h3>Forlengelser</h3><p>Bygg i gel, formet og lengde helt som du vil.</p><div class="pris">fra 850 kr</div></div>
+      <div class="kort"><span class="nr">03</span><h3>Neglekunst</h3><p>Fra én detalj til full dekor — pris per negl.</p><div class="pris">fra 40 kr</div></div>
+      <div class="kort"><span class="nr">04</span><h3>Klassisk manikyr</h3><p>Stell, forming og pleie av neglebånd.</p><div class="pris">fra 490 kr</div></div>
+      <div class="kort"><span class="nr">05</span><h3>Påfyll</h3><p>Vedlikehold av eksisterende sett.</p><div class="pris">fra 650 kr</div></div>
+      <div class="kort"><span class="nr">06</span><h3>Fjerning</h3><p>Skånsom fjerning av gammelt sett.</p><div class="pris">fra 250 kr</div></div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="om">
+    <div class="split">
+      <div class="om avslor">
+        <p class="kicker">Om Silvia</p>
+        <p class="sitat">«Jeg vil at du skal gå ut herfra og glede deg over hendene dine <i>hele måneden.</i>»</p>
+        <p>Silvia Negler er et lite studio i Kristiansand drevet av lidenskap for detaljer. Her får du tid, en rolig prat og et resultat som er laget for akkurat deg.</p>
+        <p>Enten du vil ha en ren, naturlig look eller et design som virkelig synes — vi finner uttrykket sammen.</p>
+      </div>
+      <div class="avslor">
+        <div class="kort" style="background:var(--papir-2)">
+          <p class="kicker">Godt å vite</p>
+          <h3>Rent, trygt og nøye</h3>
+          <p style="color:var(--grå)">Sterilisert utstyr og friske filer til hver kunde. Vi dobbeltbooker aldri, og tar oss tid til å gjøre jobben skikkelig.</p>
+          <h3 style="margin-top:18px">Midt i Kristiansand</h3>
+          <p style="color:var(--grå)">Sentralt plassert — lett å stikke innom. Book online eller send oss en melding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="booking">
+    <div class="booking avslor">
+      <h2>Klar for nye <i>negler?</i></h2>
+      <p>Book time online, eller send oss en melding så finner vi en tid som passer.</p>
+      <div class="booking-cta">
+        <a href="#" class="knapp knapp-fyll" onclick="return false;">Book time</a>
+        <a href="#" class="knapp knapp-linje" onclick="return false;">Skriv til oss</a>
+      </div>
+      <p style="margin-top:20px;font-size:12px;color:rgba(244,241,234,.5)">Demo-side · knappene er kun for visning</p>
+    </div>
+  </section>
+
+  <footer class="bunn">
+    <div class="bunn-inn">
+      <div><div class="logo" style="margin-bottom:10px"><b>Silvia</b> Negler</div><p>Neglestudio med hjerte for design. Kristiansand.</p></div>
+      <div><h5>Besøk</h5><p>Kristiansand sentrum</p><p>Tirsdag–lørdag</p><a href="#booking">Book time</a></div>
+      <div><h5>Kontakt</h5><a href="#">post@silvianegler.no</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+    </div>
+    <div class="bunn-note"><span>© <span id="aar"></span> Silvia Negler — demoside</span><span>Kontaktinfo er plassholdere</span></div>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+  var ART = {
+    french:  {navn:"French",   tekst:"Tidløs og elegant — den hvite tuppen som aldri går av moten."},
+    chrome:  {navn:"Chrome",   tekst:"Speilblank metalleffekt som fanger lyset fra alle vinkler."},
+    ombre:   {navn:"Ombré",    tekst:"Mykt fargeforløp fra rot til tupp — vår signatur."},
+    glitter: {navn:"Glitter",  tekst:"Litt ekstra glimt for dagene som fortjener det."},
+    matte:   {navn:"Matte",    tekst:"Dus, matt finish for et rått og moderne uttrykk."},
+    blomster:{navn:"Blomster", tekst:"Håndmalte detaljer — små blomster for en leken vår."}
+  };
+  var scene = document.getElementById("scene");
+  var chips = document.getElementById("chips");
+  var utNavn = document.getElementById("ut-navn");
+  var utTekst = document.getElementById("ut-tekst");
+  var arter = ["french","chrome","ombre","glitter","matte","blomster"];
+
+  chips.querySelectorAll(".chip").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var a = btn.getAttribute("data-art");
+      arter.forEach(function(x){ scene.classList.remove(x); });
+      scene.classList.add(a);
+      chips.querySelectorAll(".chip").forEach(function(b){ b.setAttribute("aria-pressed","false"); });
+      btn.setAttribute("aria-pressed","true");
+      utNavn.textContent = ART[a].navn;
+      utTekst.textContent = ART[a].tekst;
+      scene.classList.remove("bytte"); void scene.offsetWidth; scene.classList.add("bytte");
+    });
+  });
+
+  document.getElementById("aar").textContent = new Date().getFullYear();
+
+  var mål = document.querySelectorAll(".avslor");
+  if("IntersectionObserver" in window){
+    var obs = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("inne");obs.unobserve(e.target);}});},{threshold:.14});
+    mål.forEach(function(el){obs.observe(el);});
+  } else { mål.forEach(function(el){el.classList.add("inne");}); }
+})();
+</script>
+</body>
+</html>
