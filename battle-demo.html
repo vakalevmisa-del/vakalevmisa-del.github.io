@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>PHYSIQUE BATTLE — Who's got the better physique?</title>
+<meta name="description" content="Physique Battle — a head-to-head duel of who has the more aesthetic physique. Fun, shareable, gym culture." />
+<meta property="og:title" content="PHYSIQUE BATTLE" />
+<meta property="og:description" content="Head-to-head physique face-off. Vote. Crown a winner. Share the card." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.browser.min.js"></script>
+<style>
+  :root{
+    --bg:#08090c;
+    --bg2:#0e1016;
+    --panel:#12141c;
+    --panel2:#171a24;
+    --line:#242938;
+    --txt:#f4f6fb;
+    --muted:#8b93a7;
+    --lime:#c6ff00;
+    --lime2:#a6e400;
+    --cyan:#00e5ff;
+    --red:#ff3b6b;
+    --gold:#ffd23f;
+    --shadow:0 20px 60px rgba(0,0,0,.55);
+    --r:18px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(900px 600px at 85% -10%, rgba(0,229,255,.10), transparent 60%),
+      radial-gradient(900px 700px at 0% 110%, rgba(198,255,0,.10), transparent 55%),
+      var(--bg);
+    color:var(--txt);
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{max-width:520px;margin:0 auto;padding:0 16px 120px;position:relative}
+  @media(min-width:900px){.app{max-width:960px}}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 4px 10px;position:sticky;top:0;z-index:40;
+    background:linear-gradient(var(--bg), rgba(8,9,12,.65) 70%, transparent);
+    backdrop-filter:blur(4px);
+  }
+  .brand{display:flex;align-items:center;gap:9px;cursor:pointer;font-weight:900;letter-spacing:.5px}
+  .brand .bolt{
+    width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--lime),var(--cyan));color:#05060a;font-size:17px;
+    box-shadow:0 6px 18px rgba(198,255,0,.35);
+  }
+  .brand small{font-family:'Anton';font-size:19px;letter-spacing:1px}
+  .navbtns{display:flex;gap:6px}
+  .navbtns button{
+    background:var(--panel);border:1px solid var(--line);color:var(--muted);
+    padding:8px 12px;border-radius:11px;font-weight:700;font-size:12.5px;cursor:pointer;transition:.15s;
+  }
+  .navbtns button:hover{color:var(--txt);border-color:#39415a}
+
+  /* ---------- screens ---------- */
+  .screen{display:none;animation:fade .35s ease both}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* ---------- landing ---------- */
+  .hero{padding:26px 6px 6px;text-align:center}
+  .kicker{
+    display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--lime);background:rgba(198,255,0,.08);border:1px solid rgba(198,255,0,.25);
+    padding:6px 13px;border-radius:999px;margin-bottom:18px;
+  }
+  h1.title{
+    font-family:'Anton';font-weight:400;line-height:.92;margin:0;
+    font-size:clamp(52px,17vw,104px);letter-spacing:1px;
+    background:linear-gradient(180deg,#fff 30%,#b9c0d0);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 40px rgba(0,229,255,.10);
+  }
+  h1.title .b{
+    display:block;
+    background:linear-gradient(135deg,var(--lime),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .tagline{color:var(--muted);font-size:16px;max-width:340px;margin:16px auto 0;line-height:1.5;font-weight:500}
+  .cta-row{margin-top:26px;display:flex;flex-direction:column;gap:12px;align-items:center}
+  .btn{
+    border:none;cursor:pointer;font-weight:800;font-family:'Inter';border-radius:14px;transition:.18s transform,.18s box-shadow,.18s background;
+    font-size:16px;padding:16px 26px;display:inline-flex;align-items:center;gap:10px;justify-content:center;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--lime),var(--lime2));color:#06070b;
+    box-shadow:0 12px 34px rgba(198,255,0,.35);width:100%;max-width:340px;font-size:18px;
+  }
+  .btn-primary:hover{box-shadow:0 16px 44px rgba(198,255,0,.5)}
+  .btn-cyan{background:linear-gradient(135deg,var(--cyan),#0bd);color:#04121a;box-shadow:0 12px 34px rgba(0,229,255,.3)}
+  .btn-ghost{background:var(--panel);color:var(--txt);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:#3a445f}
+  .btn-block{width:100%;max-width:340px}
+  .btn-sm{padding:11px 16px;font-size:14px;border-radius:12px}
+
+  .how{
+    margin:34px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:440px;
+  }
+  .how .step{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 10px;text-align:center;
+  }
+  .how .n{
+    width:32px;height:32px;border-radius:10px;margin:0 auto 9px;display:grid;place-items:center;
+    font-family:'Anton';color:#06070b;background:linear-gradient(135deg,var(--lime),var(--cyan));font-size:16px;
+  }
+  .how .step b{display:block;font-size:13px;margin-bottom:3px}
+  .how .step span{color:var(--muted);font-size:11.5px;line-height:1.35}
+
+  .stats-strip{display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px 16px;text-align:center;min-width:92px}
+  .stat b{font-family:'Anton';font-size:24px;display:block;color:var(--lime)}
+  .stat span{color:var(--muted);font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+
+  /* ---------- generic section ---------- */
+  .section-head{text-align:center;margin:8px 0 20px}
+  .section-head h2{font-family:'Anton';font-weight:400;font-size:34px;margin:6px 0 6px;letter-spacing:.5px}
+  .section-head p{color:var(--muted);margin:0;font-size:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+
+  label.fld{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin:0 0 7px 2px;text-transform:uppercase;letter-spacing:.6px}
+  input[type=text]{
+    width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);
+    padding:14px 15px;border-radius:12px;font-size:16px;font-weight:600;font-family:inherit;outline:none;transition:.15s;
+  }
+  input[type=text]:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(198,255,0,.12)}
+
+  /* ---------- uploader ---------- */
+  .drop{
+    border:2px dashed var(--line);border-radius:16px;background:var(--bg2);
+    aspect-ratio:3/4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    cursor:pointer;overflow:hidden;position:relative;transition:.15s;text-align:center;padding:10px;
+  }
+  .drop:hover{border-color:#3a445f}
+  .drop.drag{border-color:var(--lime);background:rgba(198,255,0,.06)}
+  .drop.filled{border-style:solid;border-color:var(--line)}
+  .drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .drop .ic{font-size:30px}
+  .drop .up-txt{color:var(--muted);font-size:12.5px;font-weight:600;line-height:1.4}
+  .drop .re{
+    position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.18);
+    color:#fff;border-radius:9px;padding:6px 10px;font-size:11px;font-weight:700;display:none;z-index:2;
+  }
+  .drop.filled .re{display:block}
+
+  .note{
+    display:flex;gap:10px;align-items:flex-start;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.22);
+    border-radius:12px;padding:12px 14px;color:#cfe9ee;font-size:12.5px;line-height:1.5;margin-top:16px;
+  }
+  .note .ic{font-size:16px;flex-shrink:0}
+
+  /* ---------- profiles list ---------- */
+  .prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:12px;margin-top:16px}
+  .prof{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:.15s;position:relative}
+  .prof:hover{border-color:#3a445f}
+  .prof.sel{border-color:var(--lime);box-shadow:0 0 0 3px rgba(198,255,0,.12)}
+  .prof .av{width:52px;height:52px;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block;background:var(--bg);border:2px solid var(--line)}
+  .prof b{font-size:12.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prof span{font-size:10.5px;color:var(--muted)}
+  .prof .del{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:13px;cursor:pointer;display:none;line-height:1}
+  .prof:hover .del{display:block}
+
+  /* ---------- create battle ---------- */
+  .vs-setup{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;margin-top:6px}
+  @media(max-width:400px){.vs-setup{gap:8px}}
+  .contender-col label.fld{text-align:center}
+  .vs-badge{align-self:center;margin-top:40px;font-family:'Anton';font-size:26px;color:var(--red);text-shadow:0 0 18px rgba(255,59,107,.5)}
+  .contender-col input[type=text]{margin-top:10px;text-align:center;padding:11px}
+  .side-a .drop.drag,.side-a .drop.filled{border-color:var(--cyan)}
+  .side-b .drop.drag,.side-b .drop.filled{border-color:var(--red)}
+
+  .pick-existing{margin-top:8px;text-align:center}
+  .pick-existing button{background:none;border:none;color:var(--lime);font-weight:700;font-size:12.5px;cursor:pointer;text-decoration:underline}
+
+  /* ---------- category ---------- */
+  .cats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  .cat{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 14px;cursor:pointer;transition:.15s;text-align:left;position:relative;overflow:hidden;
+  }
+  .cat:hover{border-color:#3a445f;transform:translateY(-2px)}
+  .cat.sel{border-color:var(--lime);box-shadow:0 0 0 3px rgba(198,255,0,.14)}
+  .cat .ic{font-size:28px}
+  .cat b{display:block;font-size:16px;margin:10px 0 3px}
+  .cat span{color:var(--muted);font-size:12px;line-height:1.4}
+  .cat.sel .check{opacity:1;transform:scale(1)}
+  .cat .check{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#06070b;display:grid;place-items:center;font-weight:900;font-size:14px;opacity:0;transform:scale(.5);transition:.15s}
+
+  /* ---------- battle screen ---------- */
+  .arena{margin-top:10px}
+  .cat-pill{display:block;text-align:center;margin:0 auto 16px;width:fit-content;background:rgba(198,255,0,.08);border:1px solid rgba(198,255,0,.25);color:var(--lime);font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:7px 16px;border-radius:999px}
+  .duel{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative}
+  .fighter{background:var(--panel);border:2px solid var(--line);border-radius:18px;overflow:hidden;transition:.2s;position:relative}
+  .fighter.a{border-color:rgba(0,229,255,.4)}
+  .fighter.b{border-color:rgba(255,59,107,.4)}
+  .fighter.win{transform:scale(1.02)}
+  .fighter .ph{aspect-ratio:3/4;width:100%;object-fit:cover;display:block;background:var(--bg2)}
+  .fighter .nm{padding:11px 10px;text-align:center;font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vs-mid{
+    position:absolute;top:34%;left:50%;transform:translate(-50%,-50%);z-index:5;
+    font-family:'Anton';font-size:34px;color:#fff;
+    width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 30% 30%,#2a2f40,#0c0e14);border:2px solid var(--red);
+    box-shadow:0 0 26px rgba(255,59,107,.6);
+  }
+  .score-block{padding:0 10px 14px}
+  .score-block .val{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:5px}
+  .score-block .val b{font-family:'Anton';font-size:20px;color:var(--txt)}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:7px;border-radius:99px;background:var(--line);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--lime);cursor:pointer;border:3px solid #06070b;box-shadow:0 0 12px rgba(198,255,0,.6)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--lime);cursor:pointer;border:3px solid #06070b}
+  .side-b input[type=range]::-webkit-slider-thumb{background:var(--red);box-shadow:0 0 12px rgba(255,59,107,.6)}
+  .side-b input[type=range]::-moz-range-thumb{background:var(--red)}
+
+  .pick-btn{
+    width:100%;margin-top:8px;padding:12px;border-radius:12px;border:1px solid var(--line);
+    background:var(--panel2);color:var(--txt);font-weight:800;font-size:13px;cursor:pointer;transition:.15s;
+  }
+  .fighter.a .pick-btn.on{background:linear-gradient(135deg,var(--cyan),#0bd);color:#04121a;border-color:transparent}
+  .fighter.b .pick-btn.on{background:linear-gradient(135deg,var(--red),#e02b58);color:#fff;border-color:transparent}
+  .judge-hint{text-align:center;color:var(--muted);font-size:13px;margin:16px 0 4px;line-height:1.5}
+
+  /* ---------- result ---------- */
+  .result-wrap{text-align:center;padding-top:6px}
+  .crown{font-size:44px;filter:drop-shadow(0 6px 18px rgba(255,210,63,.5));animation:pop .5s ease both}
+  @keyframes pop{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+  .winner-name{font-family:'Anton';font-size:clamp(38px,11vw,60px);margin:6px 0 2px;background:linear-gradient(135deg,var(--gold),#ffb800);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .winner-sub{color:var(--muted);font-weight:600;margin-bottom:18px}
+  .scorecard{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:0 auto 18px;max-width:400px}
+  .sc-side{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 8px}
+  .sc-side.w{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,210,63,.14)}
+  .sc-side img{width:64px;height:64px;border-radius:50%;object-fit:cover;margin:0 auto 8px;display:block;border:2px solid var(--line)}
+  .sc-side .snm{font-weight:800;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sc-side .sval{font-family:'Anton';font-size:30px;margin-top:4px}
+  .sc-side.a .sval{color:var(--cyan)}
+  .sc-side.b .sval{color:var(--red)}
+  .sc-vs{font-family:'Anton';font-size:20px;color:var(--muted)}
+
+  .share-card-frame{margin:6px auto 18px;max-width:360px}
+  .share-card-frame canvas{width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);display:block}
+  .result-actions{display:flex;flex-direction:column;gap:10px;align-items:center;max-width:340px;margin:0 auto}
+
+  /* ---------- leaderboard ---------- */
+  .lb{margin-top:8px}
+  .lb-row{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+  .lb-row .rank{font-family:'Anton';font-size:22px;width:34px;text-align:center;color:var(--muted)}
+  .lb-row.top1 .rank{color:var(--gold)}
+  .lb-row.top2 .rank{color:#cfd6e6}
+  .lb-row.top3 .rank{color:#e0955a}
+  .lb-row .av{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--line);background:var(--bg)}
+  .lb-row .who{flex:1;min-width:0}
+  .lb-row .who b{display:block;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lb-row .who span{font-size:12px;color:var(--muted)}
+  .lb-row .wl{text-align:right;font-size:12px;color:var(--muted)}
+  .lb-row .wl b{font-family:'Anton';font-size:20px;color:var(--lime);display:block}
+  .empty{text-align:center;color:var(--muted);padding:36px 10px;font-size:14px}
+
+  .footer-note{text-align:center;color:#4a5266;font-size:11px;margin-top:30px;line-height:1.6}
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);
+    background:var(--lime);color:#06070b;font-weight:800;padding:13px 22px;border-radius:13px;
+    box-shadow:0 12px 34px rgba(198,255,0,.4);opacity:0;transition:.3s;z-index:100;font-size:14px;pointer-events:none;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .divider{height:1px;background:var(--line);margin:22px 0}
+  .center{text-align:center}
+  .mt16{margin-top:16px}.mt24{margin-top:24px}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<!--
+  ============================================================================
+  PHYSIQUE BATTLE — client-side prototype (v1)
+  ----------------------------------------------------------------------------
+  This is a fully client-side demo. All data (profiles, photos, leaderboard)
+  is stored in the browser via localStorage on THIS device only.
+
+  >>> FUTURE / BACKEND HOOKS (where a real version would connect) <<<
+  Search this file for the tag [BACKEND-HOOK] to find the integration points:
+    1. Real accounts / auth ......... see saveProfile()      [BACKEND-HOOK #1]
+    2. Cloud photo storage .......... see readImage()        [BACKEND-HOOK #2]
+    3. Global / cross-device board .. see renderLeaderboard() [BACKEND-HOOK #3]
+    4. Matchmaking against strangers  see startBattle()       [BACKEND-HOOK #4]
+    5. Monetization (boosts, pro) ... see shareResult()       [BACKEND-HOOK #5]
+  These are intentionally stubbed for the prototype and marked clearly.
+  ============================================================================
+-->
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand" onclick="show('landing')">
+      <span class="bolt">&#9889;</span><small>PHYSIQUE BATTLE</small>
+    </div>
+    <div class="navbtns">
+      <button onclick="show('profile')">Profile</button>
+      <button onclick="show('leaderboard')">Ranks</button>
+    </div>
+  </div>
+
+  <!-- ===================== LANDING ===================== -->
+  <section id="screen-landing" class="screen active">
+    <div class="hero">
+      <span class="kicker">Gym Culture &middot; Head-to-Head</span>
+      <h1 class="title">PHYSIQUE<span class="b">BATTLE</span></h1>
+      <p class="tagline">Two physiques enter. One gets crowned. Set the matchup, cast the vote, and share the result card. Pure gym hype. &#128170;</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" onclick="startFlow()">&#9889; Start Battle</button>
+        <button class="btn btn-ghost btn-block btn-sm" onclick="show('leaderboard')">View Leaderboard</button>
+      </div>
+      <div class="stats-strip">
+        <div class="stat"><b id="stat-battles">0</b><span>Battles</span></div>
+        <div class="stat"><b id="stat-profiles">0</b><span>Contenders</span></div>
+        <div class="stat"><b>&#128293;</b><span>Hype</span></div>
+      </div>
+      <div class="how">
+        <div class="step"><div class="n">1</div><b>Upload</b><span>Two physiques, two photos</span></div>
+        <div class="step"><div class="n">2</div><b>Judge</b><span>Pick + score 1&ndash;100</span></div>
+        <div class="step"><div class="n">3</div><b>Share</b><span>Download the result card</span></div>
+      </div>
+      <p class="footer-note">18+ &middot; Upload only your own photos &middot; Keep it respectful.<br/>Prototype &mdash; everything stays on your device.</p>
+    </div>
+  </section>
+
+  <!-- ===================== PROFILE ===================== -->
+  <section id="screen-profile" class="screen">
+    <div class="section-head">
+      <span class="kicker">Optional</span>
+      <h2>Your Profile</h2>
+      <p>Create a profile so your wins &amp; losses are tracked on this device.</p>
+    </div>
+    <div class="card">
+      <label class="fld">Username</label>
+      <input type="text" id="prof-name" maxlength="18" placeholder="e.g. IronMike" />
+      <div style="height:16px"></div>
+      <label class="fld">Your Photo</label>
+      <div class="drop" id="prof-drop" style="max-width:190px;margin:0 auto">
+        <div class="ph-empty">
+          <div class="ic">&#128248;</div>
+          <div class="up-txt">Tap or drop<br/>a photo</div>
+        </div>
+        <div class="re">Replace</div>
+        <input type="file" accept="image/*" class="file-in" style="display:none" />
+      </div>
+      <div class="note">
+        <span class="ic">&#9888;&#65039;</span>
+        <span><b>18+ only.</b> Upload only your own photos. This is about fitness &amp; physique aesthetics &mdash; keep it tasteful and respectful. No nudity, no harassment.</span>
+      </div>
+      <button class="btn btn-primary mt16" style="max-width:none;width:100%" onclick="saveProfile()">Save Profile</button>
+    </div>
+
+    <div id="prof-existing"></div>
+    <p class="footer-note">Profiles are stored only in this browser (localStorage).</p>
+  </section>
+
+  <!-- ===================== CREATE BATTLE ===================== -->
+  <section id="screen-create" class="screen">
+    <div class="section-head">
+      <span class="kicker">Step 1 of 3</span>
+      <h2>The Matchup</h2>
+      <p>Set two contenders. Play against a friend on the same phone.</p>
+    </div>
+    <div class="card">
+      <div class="vs-setup">
+        <div class="contender-col side-a">
+          <label class="fld">Contender A</label>
+          <div class="drop" id="drop-a">
+            <div class="ph-empty"><div class="ic">&#128100;</div><div class="up-txt">Tap / drop<br/>photo</div></div>
+            <div class="re">Replace</div>
+            <input type="file" accept="image/*" class="file-in" style="display:none" />
+          </div>
+          <input type="text" id="name-a" maxlength="16" placeholder="Name A" />
+          <div class="pick-existing"><button onclick="pickFromProfiles('a')">use a profile</button></div>
+        </div>
+        <div class="vs-badge">VS</div>
+        <div class="contender-col side-b">
+          <label class="fld">Contender B</label>
+          <div class="drop" id="drop-b">
+            <div class="ph-empty"><div class="ic">&#128100;</div><div class="up-txt">Tap / drop<br/>photo</div></div>
+            <div class="re">Replace</div>
+            <input type="file" accept="image/*" class="file-in" style="display:none" />
+          </div>
+          <input type="text" id="name-b" maxlength="16" placeholder="Name B" />
+          <div class="pick-existing"><button onclick="pickFromProfiles('b')">use a profile</button></div>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ic">&#9888;&#65039;</span>
+        <span>18+ &middot; Own photos only &middot; Keep it respectful. Both contenders should be cool with the face-off.</span>
+      </div>
+      <button class="btn btn-primary mt16" style="max-width:none;width:100%" onclick="goCategory()">Next: Pick Category &rarr;</button>
+    </div>
+  </section>
+
+  <!-- ===================== CATEGORY ===================== -->
+  <section id="screen-category" class="screen">
+    <div class="section-head">
+      <span class="kicker">Step 2 of 3</span>
+      <h2>Judge On&hellip;</h2>
+      <p>What are we rating in this battle?</p>
+    </div>
+    <div class="cats">
+      <div class="cat" data-cat="Overall" onclick="pickCat(this)">
+        <div class="check">&#10003;</div><div class="ic">&#127942;</div>
+        <b>Overall</b><span>The complete package</span>
+      </div>
+      <div class="cat" data-cat="Aesthetics" onclick="pickCat(this)">
+        <div class="check">&#10003;</div><div class="ic">&#10024;</div>
+        <b>Aesthetics</b><span>Symmetry &amp; proportion</span>
+      </div>
+      <div class="cat" data-cat="Muscularity" onclick="pickCat(this)">
+        <div class="check">&#10003;</div><div class="ic">&#128170;</div>
+        <b>Muscularity</b><span>Size &amp; fullness</span>
+      </div>
+      <div class="cat" data-cat="Conditioning" onclick="pickCat(this)">
+        <div class="check">&#10003;</div><div class="ic">&#128293;</div>
+        <b>Conditioning</b><span>Definition &amp; leanness</span>
+      </div>
+    </div>
+    <button class="btn btn-primary mt24 btn-block" style="max-width:none;width:100%" onclick="goBattle()">Enter the Arena &#9889;</button>
+  </section>
+
+  <!-- ===================== BATTLE ===================== -->
+  <section id="screen-battle" class="screen">
+    <div class="section-head" style="margin-bottom:8px">
+      <h2 style="font-size:28px">FACE-OFF</h2>
+    </div>
+    <span class="cat-pill" id="battle-cat">Overall</span>
+    <div class="arena">
+      <div class="duel">
+        <div class="vs-mid">VS</div>
+        <div class="fighter a" id="fighter-a">
+          <img class="ph" id="ph-a" alt="Contender A" />
+          <div class="nm" id="nm-a">A</div>
+          <div class="score-block side-a">
+            <div class="val"><span>Score</span><b id="sv-a">50</b></div>
+            <input type="range" min="1" max="100" value="50" id="range-a" oninput="document.getElementById('sv-a').textContent=this.value" />
+            <button class="pick-btn" id="pick-a" onclick="pickWinner('a')">&#9733; Pick Winner</button>
+          </div>
+        </div>
+        <div class="fighter b" id="fighter-b">
+          <img class="ph" id="ph-b" alt="Contender B" />
+          <div class="nm" id="nm-b">B</div>
+          <div class="score-block side-b">
+            <div class="val"><span>Score</span><b id="sv-b">50</b></div>
+            <input type="range" min="1" max="100" value="50" id="range-b" oninput="document.getElementById('sv-b').textContent=this.value" />
+            <button class="pick-btn" id="pick-b" onclick="pickWinner('b')">&#9733; Pick Winner</button>
+          </div>
+        </div>
+      </div>
+      <p class="judge-hint">&#128075; Pass the phone to the judge.<br/>Slide the scores, tap a winner, then reveal.</p>
+      <button class="btn btn-primary btn-block" style="max-width:none;width:100%" onclick="revealResult()">&#128165; Reveal Winner</button>
+    </div>
+  </section>
+
+  <!-- ===================== RESULT ===================== -->
+  <section id="screen-result" class="screen">
+    <div class="result-wrap">
+      <div class="crown">&#128081;</div>
+      <div class="winner-name" id="win-name">&mdash;</div>
+      <div class="winner-sub" id="win-sub">wins the battle</div>
+
+      <div class="scorecard">
+        <div class="sc-side a" id="rc-a">
+          <img id="rc-img-a" alt="" /><div class="snm" id="rc-nm-a">A</div><div class="sval" id="rc-sv-a">0</div>
+        </div>
+        <div class="sc-vs">VS</div>
+        <div class="sc-side b" id="rc-b">
+          <img id="rc-img-b" alt="" /><div class="snm" id="rc-nm-b">B</div><div class="sval" id="rc-sv-b">0</div>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin:6px 0 6px"><p>&#128248; Your shareable result card</p></div>
+      <div class="share-card-frame">
+        <canvas id="share-canvas" width="720" height="900"></canvas>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn btn-primary" style="max-width:none;width:100%" onclick="downloadCard()">&#11015;&#65039; Download Card (PNG)</button>
+        <button class="btn btn-cyan btn-block" style="max-width:none;width:100%" onclick="shareResult()">&#128279; Copy Share Text</button>
+        <button class="btn btn-ghost btn-block btn-sm" onclick="startFlow()">&#128260; New Battle</button>
+        <button class="btn btn-ghost btn-block btn-sm" onclick="show('leaderboard')">See Leaderboard</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LEADERBOARD ===================== -->
+  <section id="screen-leaderboard" class="screen">
+    <div class="section-head">
+      <span class="kicker">This device</span>
+      <h2>Leaderboard</h2>
+      <p>Ranked by wins across profiles saved here.</p>
+    </div>
+    <div class="lb" id="lb-list"></div>
+    <button class="btn btn-primary btn-block mt16" style="max-width:none;width:100%" onclick="startFlow()">&#9889; Start a Battle</button>
+    <p class="footer-note">
+      <!-- [BACKEND-HOOK #3] A production build would merge this with a GLOBAL,
+           cross-device leaderboard served from a backend API. -->
+      Local ranks only. A global leaderboard would live in the real app.
+    </p>
+  </section>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   PHYSIQUE BATTLE — client-side logic
+   ============================================================ */
+const LS_PROFILES = 'pb_profiles_v1';
+const LS_STATS    = 'pb_stats_v1';
+
+/* current battle state */
+let battle = {
+  a:{name:'', img:null, profileId:null},
+  b:{name:'', img:null, profileId:null},
+  category:'Overall',
+  judgePick:null,
+  result:null
+};
+
+/* ---------- storage helpers ---------- */
+function loadProfiles(){ try{return JSON.parse(localStorage.getItem(LS_PROFILES))||[]}catch(e){return[]} }
+function saveProfiles(p){ localStorage.setItem(LS_PROFILES, JSON.stringify(p)); }
+function loadStats(){ try{return JSON.parse(localStorage.getItem(LS_STATS))||{battles:0}}catch(e){return{battles:0}} }
+function saveStats(s){ localStorage.setItem(LS_STATS, JSON.stringify(s)); }
+
+/* ---------- navigation ---------- */
+function show(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById('screen-'+name);
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+  if(name==='landing') refreshLanding();
+  if(name==='profile') renderProfiles();
+  if(name==='leaderboard') renderLeaderboard();
+}
+
+function startFlow(){
+  /* reset the transient battle build */
+  battle = {a:{name:'',img:null,profileId:null}, b:{name:'',img:null,profileId:null}, category:'Overall', judgePick:null, result:null};
+  ['a','b'].forEach(k=>{
+    const d=document.getElementById('drop-'+k); resetDrop(d);
+    document.getElementById('name-'+k).value='';
+  });
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('sel'));
+  show('create');
+}
+
+/* ---------- image reading ---------- */
+/* [BACKEND-HOOK #2] Cloud photo storage: in production, instead of keeping the
+   base64 data URL in-memory / localStorage, we'd upload the File to object
+   storage (S3/GCS) and keep only the returned URL. */
+function readImage(file, cb){
+  if(!file || !file.type.startsWith('image/')){ toast('Please choose an image'); return; }
+  const r = new FileReader();
+  r.onload = e => cb(e.target.result);
+  r.readAsDataURL(file);
+}
+
+/* ---------- drop zone wiring ---------- */
+function resetDrop(drop){
+  drop.classList.remove('filled');
+  const img = drop.querySelector('img.preview'); if(img) img.remove();
+  const empty = drop.querySelector('.ph-empty'); if(empty) empty.style.display='';
+  const fi = drop.querySelector('.file-in'); if(fi) fi.value='';
+}
+function fillDrop(drop, dataUrl){
+  let img = drop.querySelector('img.preview');
+  if(!img){ img=document.createElement('img'); img.className='preview'; drop.insertBefore(img, drop.firstChild); }
+  img.src = dataUrl;
+  drop.classList.add('filled');
+  const empty = drop.querySelector('.ph-empty'); if(empty) empty.style.display='none';
+}
+function wireDrop(drop, onImg){
+  const fi = drop.querySelector('.file-in');
+  drop.addEventListener('click', ()=> fi.click());
+  fi.addEventListener('change', e=>{ if(e.target.files[0]) readImage(e.target.files[0], d=>{fillDrop(drop,d); onImg(d);}); });
+  ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev, e=>{e.preventDefault();drop.classList.add('drag');}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev, e=>{e.preventDefault();drop.classList.remove('drag');}));
+  drop.addEventListener('drop', e=>{ const f=e.dataTransfer.files[0]; if(f) readImage(f, d=>{fillDrop(drop,d); onImg(d);}); });
+}
+
+/* ---------- profiles ---------- */
+/* [BACKEND-HOOK #1] Real accounts: replace this local profile record with a
+   server-side user (auth, unique handle, email/social login, avatar CDN URL). */
+function saveProfile(){
+  const name = document.getElementById('prof-name').value.trim();
+  const drop = document.getElementById('prof-drop');
+  const img  = drop.querySelector('img.preview');
+  if(!name){ toast('Enter a username'); return; }
+  if(!img){ toast('Add a photo'); return; }
+  const profiles = loadProfiles();
+  profiles.push({ id:'p'+Date.now(), name, img:img.src, wins:0, losses:0 });
+  saveProfiles(profiles);
+  document.getElementById('prof-name').value='';
+  resetDrop(drop);
+  toast('Profile saved &#9889;');
+  renderProfiles();
+}
+function deleteProfile(id, ev){
+  ev.stopPropagation();
+  saveProfiles(loadProfiles().filter(p=>p.id!==id));
+  renderProfiles();
+}
+function renderProfiles(){
+  const profiles = loadProfiles();
+  const box = document.getElementById('prof-existing');
+  if(!profiles.length){ box.innerHTML=''; return; }
+  box.innerHTML = '<div class="divider"></div><label class="fld">Saved on this device</label><div class="prof-grid">'+
+    profiles.map(p=>`
+      <div class="prof">
+        <button class="del" onclick="deleteProfile('${p.id}',event)">&times;</button>
+        <img class="av" src="${p.img}" alt=""/>
+        <b>${escapeHtml(p.name)}</b>
+        <span>${p.wins}W &middot; ${p.losses}L</span>
+      </div>`).join('')+'</div>';
+}
+
+/* choose an existing profile as a contender */
+let pickTarget=null;
+function pickFromProfiles(side){
+  const profiles = loadProfiles();
+  if(!profiles.length){ toast('No profiles yet — make one in Profile'); return; }
+  pickTarget = side;
+  // simple inline chooser via prompt-less UI: cycle a lightweight picker
+  const overlay = document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px';
+  overlay.innerHTML = `<div class="card" style="max-width:360px;width:100%">
+     <label class="fld">Pick a profile for ${side.toUpperCase()}</label>
+     <div class="prof-grid">${profiles.map(p=>`
+        <div class="prof" onclick="chooseProfile('${p.id}')">
+          <img class="av" src="${p.img}" alt=""/><b>${escapeHtml(p.name)}</b><span>${p.wins}W</span>
+        </div>`).join('')}</div>
+     <button class="btn btn-ghost btn-sm mt16" style="width:100%" onclick="this.closest('.pb-overlay').remove()">Cancel</button>
+  </div>`;
+  overlay.className='pb-overlay';
+  document.body.appendChild(overlay);
+}
+function chooseProfile(id){
+  const p = loadProfiles().find(x=>x.id===id);
+  if(!p) return;
+  const side = pickTarget;
+  battle[side].name=p.name; battle[side].img=p.img; battle[side].profileId=p.id;
+  document.getElementById('name-'+side).value=p.name;
+  fillDrop(document.getElementById('drop-'+side), p.img);
+  document.querySelector('.pb-overlay')?.remove();
+}
+
+/* ---------- create -> category ---------- */
+function goCategory(){
+  battle.a.name = document.getElementById('name-a').value.trim() || 'Contender A';
+  battle.b.name = document.getElementById('name-b').value.trim() || 'Contender B';
+  if(!battle.a.img || !battle.b.img){ toast('Add a photo for both contenders'); return; }
+  show('category');
+}
+function pickCat(el){
+  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  battle.category = el.dataset.cat;
+}
+function goBattle(){
+  if(!document.querySelector('.cat.sel')){ toast('Pick a category'); return; }
+  /* [BACKEND-HOOK #4] Matchmaking: a real build could pair the user against a
+     random online contender here instead of a same-device opponent. */
+  battle.judgePick=null;
+  document.getElementById('battle-cat').textContent = battle.category;
+  document.getElementById('ph-a').src = battle.a.img;
+  document.getElementById('ph-b').src = battle.b.img;
+  document.getElementById('nm-a').textContent = battle.a.name;
+  document.getElementById('nm-b').textContent = battle.b.name;
+  document.getElementById('range-a').value=50; document.getElementById('sv-a').textContent='50';
+  document.getElementById('range-b').value=50; document.getElementById('sv-b').textContent='50';
+  document.getElementById('pick-a').classList.remove('on'); document.getElementById('pick-a').innerHTML='&#9733; Pick Winner';
+  document.getElementById('pick-b').classList.remove('on'); document.getElementById('pick-b').innerHTML='&#9733; Pick Winner';
+  document.getElementById('fighter-a').classList.remove('win');
+  document.getElementById('fighter-b').classList.remove('win');
+  show('battle');
+}
+function pickWinner(side){
+  battle.judgePick = side;
+  ['a','b'].forEach(k=>{
+    const btn=document.getElementById('pick-'+k);
+    if(k===side){ btn.classList.add('on'); btn.innerHTML='&#9989; Your Pick'; }
+    else{ btn.classList.remove('on'); btn.innerHTML='&#9733; Pick Winner'; }
+  });
+}
+
+/* ---------- result ---------- */
+function revealResult(){
+  const sa = parseInt(document.getElementById('range-a').value,10);
+  const sb = parseInt(document.getElementById('range-b').value,10);
+  // judge tap adds weight on top of the aesthetic score
+  let fa = sa + (battle.judgePick==='a'?15:0);
+  let fb = sb + (battle.judgePick==='b'?15:0);
+  fa=Math.min(100,fa); fb=Math.min(100,fb);
+  let winner;
+  if(fa===fb){ winner = battle.judgePick || (Math.random()<.5?'a':'b'); }
+  else winner = fa>fb ? 'a':'b';
+
+  battle.result = {sa,sb,fa,fb,winner};
+
+  // update leaderboard for any linked profiles
+  recordResult(winner);
+
+  // stats
+  const st=loadStats(); st.battles=(st.battles||0)+1; saveStats(st);
+
+  // fill result UI
+  const w = battle[winner], loser = battle[winner==='a'?'b':'a'];
+  document.getElementById('win-name').textContent = w.name;
+  const closeMsg = Math.abs(fa-fb)<=5 ? 'edges it in a nail-biter — both looking shredded!' : 'takes the crown';
+  document.getElementById('win-sub').textContent = closeMsg + ' · ' + battle.category;
+  document.getElementById('rc-img-a').src=battle.a.img;
+  document.getElementById('rc-img-b').src=battle.b.img;
+  document.getElementById('rc-nm-a').textContent=battle.a.name;
+  document.getElementById('rc-nm-b').textContent=battle.b.name;
+  document.getElementById('rc-sv-a').textContent=fa;
+  document.getElementById('rc-sv-b').textContent=fb;
+  document.getElementById('rc-a').classList.toggle('w', winner==='a');
+  document.getElementById('rc-b').classList.toggle('w', winner==='b');
+
+  show('result');
+  drawShareCard();
+  celebrate();
+}
+
+function recordResult(winner){
+  const profiles=loadProfiles(); let changed=false;
+  const wId=battle[winner].profileId, lId=battle[winner==='a'?'b':'a'].profileId;
+  profiles.forEach(p=>{
+    if(p.id===wId){ p.wins++; changed=true; }
+    if(p.id===lId){ p.losses++; changed=true; }
+  });
+  if(changed) saveProfiles(profiles);
+}
+
+function celebrate(){
+  if(typeof confetti!=='function') return;
+  const end=Date.now()+900;
+  (function frame(){
+    confetti({particleCount:5,angle:60,spread:60,origin:{x:0},colors:['#c6ff00','#00e5ff','#ffd23f']});
+    confetti({particleCount:5,angle:120,spread:60,origin:{x:1},colors:['#c6ff00','#00e5ff','#ffd23f']});
+    if(Date.now()<end) requestAnimationFrame(frame);
+  })();
+  confetti({particleCount:120,spread:80,origin:{y:.35},colors:['#c6ff00','#00e5ff','#ffd23f','#ff3b6b']});
+}
+
+/* ---------- shareable canvas card ---------- */
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function drawImgCover(ctx,img,x,y,w,h,r){
+  ctx.save(); roundRect(ctx,x,y,w,h,r); ctx.clip();
+  const ir=img.width/img.height, tr=w/h; let dw,dh,dx,dy;
+  if(ir>tr){ dh=h; dw=h*ir; dx=x-(dw-w)/2; dy=y; } else { dw=w; dh=w/ir; dx=x; dy=y-(dh-h)/2; }
+  ctx.drawImage(img,dx,dy,dw,dh); ctx.restore();
+}
+function drawShareCard(){
+  const c=document.getElementById('share-canvas'), ctx=c.getContext('2d');
+  const W=c.width,H=c.height, r=battle.result;
+  // bg
+  ctx.fillStyle='#0a0c11'; ctx.fillRect(0,0,W,H);
+  const g=ctx.createRadialGradient(W*0.15,H*0.9,50,W*0.15,H*0.9,700);
+  g.addColorStop(0,'rgba(198,255,0,0.14)'); g.addColorStop(1,'rgba(198,255,0,0)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  const g2=ctx.createRadialGradient(W*0.9,60,40,W*0.9,60,650);
+  g2.addColorStop(0,'rgba(0,229,255,0.14)'); g2.addColorStop(1,'rgba(0,229,255,0)'); ctx.fillStyle=g2; ctx.fillRect(0,0,W,H);
+
+  // header
+  ctx.textAlign='center';
+  ctx.fillStyle='#c6ff00'; ctx.font='700 22px Inter, sans-serif';
+  ctx.fillText('⚡ PHYSIQUE BATTLE', W/2, 58);
+  ctx.fillStyle='#8b93a7'; ctx.font='600 20px Inter, sans-serif';
+  ctx.fillText('Category · '+battle.category.toUpperCase(), W/2, 90);
+
+  // photos
+  const pad=40, pw=(W-pad*3)/2, ph=440, py=120;
+  const imgA=document.getElementById('ph-a'), imgB=document.getElementById('ph-b');
+  drawImgCover(ctx,imgA,pad,py,pw,ph,24);
+  drawImgCover(ctx,imgB,pad*2+pw,py,pw,ph,24);
+  // borders + winner glow
+  ctx.lineWidth=6;
+  ctx.strokeStyle = r.winner==='a' ? '#ffd23f' : 'rgba(0,229,255,.5)';
+  roundRect(ctx,pad,py,pw,ph,24); ctx.stroke();
+  ctx.strokeStyle = r.winner==='b' ? '#ffd23f' : 'rgba(255,59,107,.5)';
+  roundRect(ctx,pad*2+pw,py,pw,ph,24); ctx.stroke();
+
+  // names + scores
+  ctx.textAlign='center';
+  ctx.font='800 30px Inter, sans-serif'; ctx.fillStyle='#f4f6fb';
+  ctx.fillText(clip(battle.a.name,12), pad+pw/2, py+ph+52);
+  ctx.fillText(clip(battle.b.name,12), pad*2+pw+pw/2, py+ph+52);
+  ctx.font='400 62px Anton, sans-serif';
+  ctx.fillStyle = r.winner==='a'?'#ffd23f':'#00e5ff'; ctx.fillText(r.fa, pad+pw/2, py+ph+118);
+  ctx.fillStyle = r.winner==='b'?'#ffd23f':'#ff3b6b'; ctx.fillText(r.fb, pad*2+pw+pw/2, py+ph+118);
+
+  // VS medallion
+  ctx.fillStyle='#0c0e14'; ctx.beginPath(); ctx.arc(W/2, py+ph/2, 46, 0, Math.PI*2); ctx.fill();
+  ctx.lineWidth=5; ctx.strokeStyle='#ff3b6b'; ctx.stroke();
+  ctx.fillStyle='#fff'; ctx.font='400 40px Anton, sans-serif'; ctx.fillText('VS', W/2, py+ph/2+15);
+
+  // winner banner
+  const by=py+ph+150, bw=W-80, bx=40, bh=110;
+  const bg=ctx.createLinearGradient(bx,0,bx+bw,0); bg.addColorStop(0,'#ffd23f'); bg.addColorStop(1,'#ffb800');
+  ctx.fillStyle=bg; roundRect(ctx,bx,by,bw,bh,20); ctx.fill();
+  ctx.fillStyle='#06070b'; ctx.font='700 22px Inter, sans-serif';
+  ctx.fillText('👑 WINNER', W/2, by+40);
+  ctx.font='400 52px Anton, sans-serif';
+  ctx.fillText(clip(battle[r.winner].name,16).toUpperCase(), W/2, by+92);
+
+  // footer
+  ctx.fillStyle='#5a6274'; ctx.font='600 18px Inter, sans-serif';
+  ctx.fillText('Think you can beat this? · physique-battle', W/2, H-28);
+}
+function clip(s,n){ s=s||''; return s.length>n ? s.slice(0,n-1)+'…' : s; }
+
+function downloadCard(){
+  const c=document.getElementById('share-canvas');
+  const a=document.createElement('a');
+  a.download='physique-battle-'+battle[battle.result.winner].name.replace(/\s+/g,'_')+'.png';
+  a.href=c.toDataURL('image/png');
+  a.click();
+  toast('Card downloaded &#11015;&#65039;');
+}
+
+/* [BACKEND-HOOK #5] Monetization: share = growth loop. A real app would add a
+   deep link back to the app, "boost your battle" purchases, and pro filters. */
+function shareResult(){
+  const r=battle.result;
+  const txt = `⚡ PHYSIQUE BATTLE — ${battle.category}\n👑 ${battle[r.winner].name} WINS!\n${battle.a.name}: ${r.fa}  vs  ${battle.b.name}: ${r.fb}\nThink you can beat this?`;
+  if(navigator.share){
+    navigator.share({title:'Physique Battle', text:txt}).catch(()=>copyText(txt));
+  } else copyText(txt);
+}
+function copyText(txt){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>toast('Share text copied &#128203;')).catch(()=>fallbackCopy(txt));
+  } else fallbackCopy(txt);
+}
+function fallbackCopy(txt){
+  const t=document.createElement('textarea'); t.value=txt; document.body.appendChild(t); t.select();
+  try{document.execCommand('copy'); toast('Share text copied &#128203;');}catch(e){toast('Copy failed');}
+  t.remove();
+}
+
+/* ---------- leaderboard ---------- */
+/* [BACKEND-HOOK #3] Global leaderboard would be fetched from an API and merged. */
+function renderLeaderboard(){
+  const profiles = loadProfiles().slice().sort((a,b)=> b.wins-a.wins || a.losses-b.losses);
+  const box=document.getElementById('lb-list');
+  if(!profiles.length){
+    box.innerHTML='<div class="empty">No contenders yet.<br/>Create a profile, then battle to climb the ranks. &#128170;</div>';
+    return;
+  }
+  box.innerHTML = profiles.map((p,i)=>{
+    const total=p.wins+p.losses;
+    const wr = total? Math.round(p.wins/total*100):0;
+    return `<div class="lb-row ${i<3?'top'+(i+1):''}">
+      <div class="rank">${i+1}</div>
+      <img class="av" src="${p.img}" alt=""/>
+      <div class="who"><b>${escapeHtml(p.name)}</b><span>${total} battle${total===1?'':'s'} · ${wr}% win rate</span></div>
+      <div class="wl"><b>${p.wins}</b>${p.losses}L</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- landing stats ---------- */
+function refreshLanding(){
+  document.getElementById('stat-profiles').textContent = loadProfiles().length;
+  document.getElementById('stat-battles').textContent = (loadStats().battles||0);
+}
+
+/* ---------- utils ---------- */
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+let toastTimer;
+function toast(msg){
+  const t=document.getElementById('toast'); t.innerHTML=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+/* ---------- init ---------- */
+wireDrop(document.getElementById('prof-drop'), ()=>{});
+wireDrop(document.getElementById('drop-a'), d=>{battle.a.img=d; battle.a.profileId=null;});
+wireDrop(document.getElementById('drop-b'), d=>{battle.b.img=d; battle.b.profileId=null;});
+refreshLanding();
+</script>
+</body>
+</html>
