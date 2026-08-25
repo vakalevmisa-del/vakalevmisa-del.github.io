@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camillo Bastrup — kaffebar i Kristiansand</title>
+<meta name="description" content="Camillo Bastrup er en lokal kaffebar i Kristiansand med fokus på godt håndverk. Finn bryggeguiden din og book bord.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --krem:#F1EAD9;
+  --krem-2:#E6DBC4;
+  --skog:#22402E;
+  --skog-lys:#325A42;
+  --messing:#BC8A2E;
+  --messing-dyp:#9A6E1D;
+  --blekk:#201C17;
+  --grå:#6F6656;
+  --rand:rgba(32,28,23,.14);
+  --disp:"Spectral",Georgia,serif;
+  --body:"Archivo",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--krem);color:var(--blekk);font-family:var(--body);font-size:16.5px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--messing);outline-offset:3px}
+.seksjon{width:min(1060px,92vw);margin:0 auto;padding:clamp(52px,8vw,112px) 0}
+
+.topp{position:sticky;top:0;z-index:20;background:rgba(241,234,217,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--rand)}
+.topp-inn{width:min(1060px,92vw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:15px 0}
+.logo{font-family:var(--disp);font-weight:600;font-size:23px;letter-spacing:.01em}
+.logo span{color:var(--messing-dyp)}
+.nav{display:flex;gap:24px;align-items:center;font-size:14.5px;font-weight:500}
+.nav a:not(.knapp){color:var(--grå)}
+.nav a:not(.knapp):hover{color:var(--blekk)}
+.knapp{display:inline-block;font-family:var(--body);font-weight:600;font-size:14.5px;padding:11px 22px;border-radius:4px;cursor:pointer;border:1.5px solid transparent;transition:transform .18s,background .2s,color .2s}
+.knapp-fyll{background:var(--skog);color:var(--krem)}
+.knapp-fyll:hover{transform:translateY(-2px);background:var(--messing-dyp)}
+.knapp-linje{border-color:var(--skog);color:var(--skog)}
+.knapp-linje:hover{background:var(--skog);color:var(--krem)}
+@media(max-width:720px){.nav a:not(.knapp){display:none}}
+
+.hero{padding-top:clamp(34px,6vw,74px)}
+.eyebrow{font-family:var(--body);font-size:12.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--messing-dyp);margin-bottom:20px}
+.hero h1{font-family:var(--disp);font-weight:500;font-size:clamp(44px,8.5vw,98px);line-height:1;letter-spacing:-.01em;max-width:15ch}
+.hero h1 em{font-style:italic;color:var(--skog-lys)}
+.hero .ingress{max-width:46ch;margin-top:22px;font-size:18px;color:var(--grå)}
+.hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+.hero-note{margin-top:16px;font-size:13px;color:var(--grå);font-style:italic;font-family:var(--disp)}
+
+/* ---- SIGNATURE: BRYGGEGUIDE ---- */
+.guide{background:var(--skog);color:var(--krem);border-radius:14px;overflow:hidden}
+.guide-inn{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:860px){.guide-inn{grid-template-columns:1fr 340px}}
+.guide-valg{padding:clamp(26px,4vw,44px)}
+.guide-topp h2{font-family:var(--disp);font-weight:500;font-size:clamp(28px,4.4vw,42px)}
+.guide-topp p{color:rgba(241,234,217,.6);margin-top:4px;max-width:38ch;font-size:15px}
+.gruppe{margin-top:26px}
+.gruppe h3{font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(241,234,217,.5);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chips button{
+  font-family:var(--body);font-size:14.5px;font-weight:500;color:var(--krem);
+  background:rgba(241,234,217,.06);border:1.5px solid rgba(241,234,217,.22);border-radius:6px;
+  padding:10px 15px;cursor:pointer;transition:all .18s;
+}
+.chips button:hover{border-color:var(--messing)}
+.chips button[aria-pressed="true"]{background:var(--messing);border-color:var(--messing);color:var(--blekk);font-weight:700}
+/* recipe stats */
+.oppskrift{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+@media(min-width:520px){.oppskrift{grid-template-columns:repeat(4,1fr)}}
+.stat{background:rgba(241,234,217,.06);border:1px solid rgba(241,234,217,.14);border-radius:8px;padding:14px}
+.stat .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(241,234,217,.5)}
+.stat .val{font-family:var(--disp);font-weight:600;font-size:22px;margin-top:4px}
+.stat .val small{font-family:var(--body);font-size:13px;font-weight:400;color:rgba(241,234,217,.7)}
+
+/* timer panel */
+.timer{background:var(--blekk);padding:clamp(26px,4vw,40px);display:flex;flex-direction:column;justify-content:center;text-align:center}
+.timer .ur{font-family:var(--disp);font-weight:600;font-size:clamp(48px,9vw,72px);line-height:1;letter-spacing:.02em;color:var(--krem)}
+.timer .steg{margin-top:8px;font-size:14.5px;color:var(--messing);min-height:22px;font-weight:500}
+.bar{height:6px;background:rgba(241,234,217,.14);border-radius:99px;overflow:hidden;margin-top:20px}
+.bar i{display:block;height:100%;width:0;background:var(--messing);border-radius:99px;transition:width .2s linear}
+.timer-cta{margin-top:22px;display:flex;gap:10px;justify-content:center}
+.timer-cta button{font-family:var(--body);font-weight:600;font-size:14.5px;padding:11px 20px;border-radius:4px;cursor:pointer;border:1.5px solid transparent;transition:all .2s}
+.btn-start{background:var(--messing);color:var(--blekk);border:none}
+.btn-start:hover{background:var(--krem)}
+.btn-reset{background:transparent;color:rgba(241,234,217,.7);border-color:rgba(241,234,217,.3)}
+.btn-reset:hover{color:var(--krem);border-color:var(--krem)}
+
+/* meny */
+.tittel{font-family:var(--disp);font-weight:500;font-size:clamp(32px,5.5vw,58px);line-height:1.02;letter-spacing:-.01em}
+.kicker{font-family:var(--body);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--messing-dyp);margin-bottom:12px}
+.avsnitt-topp p{max-width:46ch;margin-top:14px;color:var(--grå)}
+.meny{margin-top:44px;display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:760px){.meny{grid-template-columns:1fr 1fr;gap:8px 48px}}
+.menyrad{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--rand)}
+.menyrad .n{font-family:var(--disp);font-size:20px;font-weight:500}
+.menyrad .n small{display:block;font-family:var(--body);font-size:13px;color:var(--grå);margin-top:2px}
+.menyrad .p{font-weight:600;color:var(--skog-lys);white-space:nowrap}
+
+/* om */
+.split{display:grid;grid-template-columns:1fr;gap:34px;align-items:center}
+@media(min-width:820px){.split{grid-template-columns:1fr 1fr;gap:56px}}
+.om h2{font-family:var(--disp);font-weight:500;font-size:clamp(28px,4.4vw,44px);line-height:1.08;margin-bottom:14px}
+.om h2 em{font-style:italic;color:var(--skog-lys)}
+.om p{color:var(--grå)}.om p+p{margin-top:12px}
+.kort-info{background:var(--krem-2);border:1px solid var(--rand);border-radius:10px;padding:30px}
+.kort-info .r{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--rand);font-size:15px}
+.kort-info .r:last-child{border-bottom:none}.kort-info b{font-weight:600}
+
+/* booking */
+.booking{text-align:center;background:var(--skog);color:var(--krem);border-radius:14px;padding:clamp(44px,7vw,84px) 20px}
+.booking h2{font-family:var(--disp);font-weight:500;font-size:clamp(32px,6vw,60px);line-height:1.02;max-width:16ch;margin:0 auto}
+.booking h2 em{font-style:italic;color:var(--messing)}
+.booking p{max-width:42ch;margin:16px auto 0;color:rgba(241,234,217,.72)}
+.booking .knapp-fyll{background:var(--messing);color:var(--blekk)}
+.booking .knapp-fyll:hover{background:var(--krem)}
+.booking .knapp-linje{border-color:rgba(241,234,217,.5);color:var(--krem)}
+.booking .knapp-linje:hover{background:var(--krem);color:var(--skog)}
+.booking-cta{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+
+.bunn{border-top:1px solid var(--rand)}
+.bunn-inn{width:min(1060px,92vw);margin:0 auto;padding:38px 0;display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:720px){.bunn-inn{grid-template-columns:1.5fr 1fr 1fr}}
+.bunn h5{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--grå);margin-bottom:12px}
+.bunn a,.bunn p{color:var(--grå);font-size:14.5px;display:block;margin-bottom:6px}
+.bunn a:hover{color:var(--messing-dyp)}
+.bunn-note{width:min(1060px,92vw);margin:0 auto;padding:14px 0 38px;font-size:12px;color:var(--grå);border-top:1px solid var(--rand);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+.avslor{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.avslor.inne{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.avslor{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+  <header class="topp">
+    <div class="topp-inn">
+      <div class="logo">Camillo <span>Bastrup</span></div>
+      <nav class="nav">
+        <a href="#guide">Bryggeguide</a>
+        <a href="#meny">Meny</a>
+        <a href="#om">Om oss</a>
+        <a href="#booking" class="knapp knapp-fyll">Finn oss</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="seksjon hero">
+    <p class="eyebrow">Kaffebar · Kristiansand</p>
+    <h1>God kaffe, <em>uten</em> hastverk.</h1>
+    <p class="ingress">Camillo Bastrup er en liten, uavhengig kaffebar midt i Kristiansand — nybrent kaffe, dyktige baristaer og tid til å sitte litt. Vil du brygge like godt hjemme? Prøv guiden vår.</p>
+    <div class="hero-cta">
+      <a href="#guide" class="knapp knapp-fyll">Åpne bryggeguiden ↓</a>
+      <a href="#meny" class="knapp knapp-linje">Se menyen</a>
+    </div>
+    <p class="hero-note">Oppkalt etter kaffemannen som brakte kaffen til Sørlandet.</p>
+  </section>
+
+  <section class="seksjon" id="guide">
+    <div class="guide avslor">
+      <div class="guide-inn">
+        <div class="guide-valg">
+          <div class="guide-topp">
+            <h2>Bryggeguiden</h2>
+            <p>Velg metode og antall kopper — så får du oppskriften og en bryggetimer.</p>
+          </div>
+          <div class="gruppe">
+            <h3>Metode</h3>
+            <div class="chips" id="g-metode"></div>
+          </div>
+          <div class="gruppe">
+            <h3>Kopper</h3>
+            <div class="chips" id="g-kopper"></div>
+          </div>
+          <div class="oppskrift">
+            <div class="stat"><div class="lbl">Kaffe</div><div class="val" id="v-kaffe">–</div></div>
+            <div class="stat"><div class="lbl">Vann</div><div class="val" id="v-vann">–</div></div>
+            <div class="stat"><div class="lbl">Kvern</div><div class="val" id="v-kvern" style="font-size:17px">–</div></div>
+            <div class="stat"><div class="lbl">Temp</div><div class="val" id="v-temp">–</div></div>
+          </div>
+        </div>
+        <aside class="timer">
+          <div class="ur" id="ur">0:00</div>
+          <div class="steg" id="steg">Klar når du er</div>
+          <div class="bar"><i id="bar"></i></div>
+          <div class="timer-cta">
+            <button class="btn-start" id="btn-start">Start bryggetimer</button>
+            <button class="btn-reset" id="btn-reset">Nullstill</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="meny">
+    <div class="avsnitt-topp avslor">
+      <p class="kicker">Fra baren</p>
+      <h2 class="tittel">Litt av det vi lager</h2>
+      <p>Vi trakter på ferskbrente bønner fra små brennerier, og lager alt med omhu. Her er noen faste favoritter.</p>
+    </div>
+    <div class="meny avslor">
+      <div class="menyrad"><span class="n">Espresso<small>Dagens bønne, dobbel shot</small></span><span class="p">39 kr</span></div>
+      <div class="menyrad"><span class="n">Flat white<small>Silkemyk melk, tett crema</small></span><span class="p">54 kr</span></div>
+      <div class="menyrad"><span class="n">Filterkaffe<small>Trakta på V60 — spør om dagens</small></span><span class="p">48 kr</span></div>
+      <div class="menyrad"><span class="n">Cortado<small>Espresso i balanse med melk</small></span><span class="p">46 kr</span></div>
+      <div class="menyrad"><span class="n">Kanelsnurr<small>Nybakt, med ekte smør</small></span><span class="p">45 kr</span></div>
+      <div class="menyrad"><span class="n">Bønner (250 g)<small>Ta med brenneriets ferske bønner hjem</small></span><span class="p">159 kr</span></div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="om">
+    <div class="split">
+      <div class="om avslor">
+        <p class="kicker">Om oss</p>
+        <h2>Litt <em>historie</em> i hver kopp.</h2>
+        <p>Vi har tatt navnet vårt fra Camillo Bastrup — mannen som i sin tid importerte og spredte kaffen på Sørlandet. Den arven prøver vi å leve opp til: godt håndverk, ekte råvarer og folk som kan faget sitt.</p>
+        <p>Stikk innom for en prat, en bok eller bare en god kopp. Du er alltid velkommen.</p>
+      </div>
+      <div class="kort-info avslor">
+        <div class="r"><span>Man–fre</span><b>07:30 – 18:00</b></div>
+        <div class="r"><span>Lørdag</span><b>09:00 – 17:00</b></div>
+        <div class="r"><span>Søndag</span><b>10:00 – 16:00</b></div>
+        <div class="r"><span>Bønner</span><b>Ferskbrent, til salgs</b></div>
+        <div class="r"><span>Beliggenhet</span><b>Markens gate, Kristiansand</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seksjon" id="booking">
+    <div class="booking avslor">
+      <h2>Kom innom for en <em>kopp</em></h2>
+      <p>Vi står klare bak baren midt i Kristiansand. Ta med en venn — eller en god bok.</p>
+      <div class="booking-cta">
+        <a href="#" class="knapp knapp-fyll" onclick="return false;">Finn oss på kartet</a>
+        <a href="#" class="knapp knapp-linje" onclick="return false;">Se hele menyen</a>
+      </div>
+      <p style="margin-top:18px;font-size:12px;color:rgba(241,234,217,.6)">Demo-side · knappene er kun for visning</p>
+    </div>
+  </section>
+
+  <footer class="bunn">
+    <div class="bunn-inn">
+      <div><div class="logo" style="margin-bottom:10px">Camillo <span>Bastrup</span></div><p>Uavhengig kaffebar i Kristiansand. Nybrent, nytraktet, uten hastverk.</p></div>
+      <div><h5>Besøk</h5><p>Markens gate, Kristiansand</p><p>Man–søn</p><a href="#booking">Finn oss</a></div>
+      <div><h5>Kontakt</h5><a href="#">hei@camillobastrup.no</a><a href="#">Instagram</a><a href="#">Facebook</a></div>
+    </div>
+    <div class="bunn-note"><span>© <span id="aar"></span> Camillo Bastrup — demoside</span><span>Kontaktinfo er plassholdere</span></div>
+  </footer>
+
+<script>
+(function(){
+  "use strict";
+  var METODER = [
+    {id:"v60", navn:"V60", kaffe:15, vann:250, kvern:"Medium-fin", temp:94, tid:150,
+      steg:[{t:0,l:"Bloom — hell 45 ml, vent"},{t:30,l:"Første hell — sakte, i sirkel"},{t:75,l:"Andre hell — fyll opp"},{t:120,l:"La renne ferdig"}]},
+    {id:"chemex", navn:"Chemex", kaffe:16, vann:250, kvern:"Medium-grov", temp:94, tid:240,
+      steg:[{t:0,l:"Bloom — hell 50 ml, vent"},{t:45,l:"Hell i pulser"},{t:150,l:"Siste hell"},{t:210,l:"La renne ferdig"}]},
+    {id:"presskanne", navn:"Presskanne", kaffe:17, vann:250, kvern:"Grov", temp:96, tid:240,
+      steg:[{t:0,l:"Hell alt vannet"},{t:30,l:"Rør forsiktig, legg på lokk"},{t:60,l:"La trekke"},{t:230,l:"Press stempelet sakte ned"}]},
+    {id:"aeropress", navn:"AeroPress", kaffe:15, vann:230, kvern:"Medium", temp:85, tid:90,
+      steg:[{t:0,l:"Hell vann, rør 3 ganger"},{t:20,l:"Sett på lokk, la trekke"},{t:60,l:"Press sakte ned"}]},
+    {id:"espresso", navn:"Espresso", kaffe:18, vann:36, kvern:"Fin", temp:92, tid:28, enhet:"shot",
+      steg:[{t:0,l:"Start ekstraksjonen"},{t:8,l:"Se på fargen — mørk til lys"},{t:25,l:"Stopp — nyt straks"}]}
+  ];
+
+  var valgtId = "v60", kopper = 1;
+  var gM = document.getElementById("g-metode");
+  var gK = document.getElementById("g-kopper");
+
+  function finn(){ return METODER.filter(function(m){return m.id===valgtId;})[0]; }
+  function fmt(sec){ var m=Math.floor(sec/60), s=sec%60; return m+":"+(s<10?"0":"")+s; }
+
+  function tegnKopper(){
+    var m = finn();
+    var enhet = m.enhet==="shot" ? "shot" : "kopp";
+    gK.innerHTML="";
+    [1,2,3].forEach(function(n){
+      var b=document.createElement("button");
+      b.textContent = n + " " + enhet + (n>1?"er":"");
+      b.setAttribute("aria-pressed", n===kopper?"true":"false");
+      b.addEventListener("click", function(){
+        kopper=n;
+        gK.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        b.setAttribute("aria-pressed","true");
+        oppdater();
+      });
+      gK.appendChild(b);
+    });
+  }
+
+  function oppdater(){
+    var m = finn();
+    document.getElementById("v-kaffe").innerHTML = (m.kaffe*kopper) + " <small>g</small>";
+    document.getElementById("v-vann").innerHTML = (m.vann*kopper) + " <small>ml</small>";
+    document.getElementById("v-kvern").textContent = m.kvern;
+    document.getElementById("v-temp").innerHTML = m.temp + " <small>°C</small>";
+    nullstill();
+  }
+
+  METODER.forEach(function(m){
+    var b=document.createElement("button");
+    b.textContent=m.navn;
+    b.setAttribute("aria-pressed", m.id===valgtId?"true":"false");
+    b.addEventListener("click", function(){
+      valgtId=m.id;
+      gM.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      b.setAttribute("aria-pressed","true");
+      if(kopper>3) kopper=1;
+      tegnKopper();
+      oppdater();
+    });
+    gM.appendChild(b);
+  });
+
+  // timer
+  var ur=document.getElementById("ur"), stegEl=document.getElementById("steg"), bar=document.getElementById("bar");
+  var startBtn=document.getElementById("btn-start"), resetBtn=document.getElementById("btn-reset");
+  var intervall=null, gaatt=0;
+
+  function nullstill(){
+    if(intervall){ clearInterval(intervall); intervall=null; }
+    gaatt=0; ur.textContent="0:00"; bar.style.width="0%";
+    stegEl.textContent="Klar når du er"; startBtn.textContent="Start bryggetimer";
+  }
+  function stegNaa(m, sek){
+    var s=m.steg[0].l;
+    m.steg.forEach(function(st){ if(sek>=st.t) s=st.l; });
+    return s;
+  }
+  function start(){
+    var m=finn();
+    if(intervall){ clearInterval(intervall); intervall=null; startBtn.textContent="Fortsett"; return; }
+    startBtn.textContent="Pause";
+    var t0=Date.now()-gaatt*1000;
+    intervall=setInterval(function(){
+      gaatt=(Date.now()-t0)/1000;
+      if(gaatt>=m.tid){
+        gaatt=m.tid; clearInterval(intervall); intervall=null;
+        ur.textContent=fmt(Math.round(m.tid)); bar.style.width="100%";
+        stegEl.textContent="Ferdig — nyt kaffen ☕"; startBtn.textContent="Start bryggetimer";
+        return;
+      }
+      ur.textContent=fmt(Math.floor(gaatt));
+      bar.style.width=(gaatt/m.tid*100)+"%";
+      stegEl.textContent=stegNaa(m, gaatt);
+    },100);
+  }
+  startBtn.addEventListener("click", start);
+  resetBtn.addEventListener("click", nullstill);
+
+  tegnKopper(); oppdater();
+  document.getElementById("aar").textContent = new Date().getFullYear();
+
+  var mål=document.querySelectorAll(".avslor");
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("inne");obs.unobserve(e.target);}});},{threshold:.12});
+    mål.forEach(function(el){obs.observe(el);});
+  } else { mål.forEach(function(el){el.classList.add("inne");}); }
+})();
+</script>
+</body>
+</html>
