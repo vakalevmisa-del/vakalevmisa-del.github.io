@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilverksted Sør — når skal bilen din på EU-kontroll?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;800&family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asfalt:#2A2C2F;
+  --asfalt-2:#35383C;
+  --stripe:#F2C230;
+  --hvit:#F4F4F1;
+  --dus:#A9ADB2;
+  --skilt-bla:#1D4FA3;
+  --font:"Chivo",system-ui,sans-serif;
+  --skilt:"Barlow Semi Condensed",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--asfalt);color:var(--hvit);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--stripe);outline-offset:3px}
+.inn{width:min(1040px,92vw);margin:0 auto}
+.topp{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-weight:800;font-size:21px}
+.topp a{text-decoration:none;font-weight:600;border-bottom:2px solid var(--stripe)}
+
+.hero{padding:clamp(36px,6vw,72px) 0 clamp(50px,7vw,84px)}
+h1{font-weight:800;font-size:clamp(38px,6.4vw,72px);line-height:1;letter-spacing:-.02em;max-width:16ch}
+.hero .lead{color:var(--dus);font-size:18px;margin-top:18px;max-width:44ch}
+
+/* signatur: skiltet */
+.sjekk{margin-top:34px;display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:start}
+@media (max-width:820px){.sjekk{grid-template-columns:1fr}}
+.skilt{display:flex;align-items:stretch;background:#fff;border:3px solid #111;border-radius:8px;overflow:hidden;width:min(420px,100%)}
+.skilt .land{background:var(--skilt-bla);color:#fff;font-family:var(--skilt);font-weight:700;display:flex;align-items:flex-end;justify-content:center;padding:6px 10px;font-size:20px;min-width:46px}
+.skilt label{position:absolute;left:-9999px}
+.skilt input{border:0;font-family:var(--skilt);font-weight:700;font-size:clamp(40px,7vw,58px);letter-spacing:.06em;color:#111;width:100%;padding:4px 14px;text-transform:uppercase;background:transparent}
+.skilt input::placeholder{color:#C9CBCE}
+.felt{margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.felt label{color:var(--dus);font-size:15px}
+.felt select{font:inherit;background:var(--asfalt-2);color:var(--hvit);border:1px solid #4A4E53;border-radius:6px;padding:9px 12px}
+.resultat{background:var(--asfalt-2);border-left:6px solid var(--stripe);padding:22px 24px;min-height:150px}
+.resultat .stor{font-family:var(--skilt);font-weight:700;font-size:clamp(30px,4vw,44px);line-height:1.05}
+.resultat p{color:var(--dus);margin-top:8px}
+.resultat a{display:inline-block;margin-top:14px;background:var(--stripe);color:#1A1A1A;text-decoration:none;font-weight:800;padding:12px 20px;border-radius:4px}
+
+.vei{height:10px;background:repeating-linear-gradient(90deg,var(--stripe) 0 60px,transparent 60px 100px);margin:clamp(30px,5vw,56px) 0}
+
+.tjenester{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,32px);padding-bottom:clamp(50px,7vw,84px)}
+@media (max-width:760px){.tjenester{grid-template-columns:1fr}}
+.tjenester h2{font-size:22px;font-weight:800;margin-bottom:6px}
+.tjenester p{color:var(--dus)}
+
+.kontakt{background:var(--hvit);color:var(--asfalt)}
+.kontakt .inn{padding:clamp(50px,7vw,84px) 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:end}
+.kontakt h2{font-weight:800;font-size:clamp(30px,4.5vw,46px);line-height:1.05;max-width:16ch}
+.kontakt p{font-size:18px;line-height:1.9}
+footer{padding:26px 0 44px;color:var(--dus);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+</style>
+</head>
+<body>
+<div class="inn">
+  <div class="topp">
+    <div class="logo">Bilverksted Sør</div>
+    <a href="tel:+4791169518">911 69 518</a>
+  </div>
+
+  <section class="hero">
+    <h1>Når skal bilen din på EU-kontroll?</h1>
+    <p class="lead">Velg året bilen ble registrert første gang, så regner vi ut fristen. Vi tar EU-kontroll og retter feilene samme sted.</p>
+
+    <div class="sjekk">
+      <div>
+        <div class="skilt">
+          <div class="land">N</div>
+          <label for="reg">Registreringsnummer</label>
+          <input id="reg" maxlength="8" placeholder="EL 12345" autocomplete="off">
+        </div>
+        <div class="felt">
+          <label for="aar">Første gang registrert</label>
+          <select id="aar"></select>
+        </div>
+      </div>
+      <div class="resultat" id="res" aria-live="polite"><p>Velg årstall for å se når neste kontroll er.</p></div>
+    </div>
+  </section>
+
+  <div class="vei" aria-hidden="true"></div>
+
+  <section class="tjenester">
+    <div><h2>EU-kontroll</h2><p>Finner vi feil, får du pris på reparasjon før vi gjør noe.</p></div>
+    <div><h2>Service</h2><p>Service etter fabrikkens program, så garantien din fortsatt gjelder.</p></div>
+    <div><h2>Reparasjon</h2><p>Bremser, clutch, eksos og feilsøking — på alle bilmerker.</p></div>
+  </section>
+</div>
+
+<section class="kontakt">
+  <div class="inn">
+    <h2>Bestill time hos Tor Atle</h2>
+    <p><a href="tel:+4791169518">911 69 518</a><br>tor.atle@bvsor.no<br>Kongsgård allé 53, Kristiansand</p>
+  </div>
+</section>
+
+<div class="inn">
+  <footer><span>Bilverksted Sør AS — Kristiansand</span><span>Designforslag — ikke en offisiell nettside</span></footer>
+</div>
+
+<script>
+// Personbil: første EU-kontroll senest 4 år etter første registrering, deretter hvert 2. år.
+const aar=document.getElementById("aar"), res=document.getElementById("res");
+const naa=new Date().getFullYear();
+aar.innerHTML='<option value="">Velg år</option>'+Array.from({length:25},(_,i)=>naa-i).map(y=>`<option>${y}</option>`).join("");
+aar.addEventListener("change",()=>{
+  const y=+aar.value; if(!y){res.innerHTML='<p>Velg årstall for å se når neste kontroll er.</p>';return;}
+  let neste=y+4; while(neste<naa) neste+=2;
+  const reg=document.getElementById("reg").value.trim().toUpperCase();
+  const hvem=reg?reg:"Bilen din";
+  const tekst = neste===naa ? `${hvem} skal på EU-kontroll i år` : `${hvem} skal på EU-kontroll i ${neste}`;
+  res.innerHTML=`<div class="stor">${tekst}</div><p>Nøyaktig frist står i vognkortet og hos Statens vegvesen. Første kontroll er senest fire år etter første registrering, deretter hvert annet år.</p><a href="tel:+4791169518">Bestill EU-kontroll</a>`;
+});
+</script>
+</body>
+</html>
