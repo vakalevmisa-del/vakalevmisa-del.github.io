@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malermester Tommy Mørk — prøv fargen på huset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --grunn:#E8ECEA;
+  --blekk:#1E2A2F;
+  --dus:#5E6B70;
+  --himmel:#CFDDE3;
+  --gress:#7E9B6E;
+  --vegg:#C8A24A;
+  --serif:"Young Serif",Georgia,serif;
+  --sans:"Instrument Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--grunn);color:var(--blekk);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blekk);outline-offset:3px}
+.inn{width:min(1080px,92vw);margin:0 auto}
+.topp{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-family:var(--serif);font-size:22px}
+.topp a{text-decoration:none;font-weight:600}
+
+.studio{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,60px);align-items:center;padding:clamp(28px,5vw,60px) 0 clamp(56px,8vw,90px)}
+@media (max-width:840px){.studio{grid-template-columns:1fr}}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,70px);line-height:1.02;letter-spacing:-.01em}
+.studio .tekst p{color:var(--dus);margin-top:18px;max-width:40ch;font-size:18px}
+.palett{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.palett button{width:52px;height:52px;border-radius:50%;border:3px solid #fff;cursor:pointer;box-shadow:0 0 0 1px rgba(30,42,47,.2);transition:transform 150ms ease}
+.palett button:hover{transform:scale(1.06)}
+@media (max-width:420px){.palett{gap:8px}.palett button{width:46px;height:46px}}
+.palett button[aria-pressed="true"]{box-shadow:0 0 0 3px var(--blekk)}
+.fargenavn{margin-top:14px;font-weight:600}
+.fargenavn span{color:var(--dus);font-weight:400}
+.hus{background:var(--himmel);border-radius:6px;overflow:hidden}
+.hus svg{display:block;width:100%;height:auto}
+#vegg,#vegg2{transition:fill 600ms ease}
+
+.tommy{background:#fff}
+.tommy .inn{padding:clamp(56px,8vw,96px) 0;display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(28px,5vw,64px)}
+@media (max-width:760px){.tommy .inn{grid-template-columns:1fr}}
+.tommy h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.5vw,46px);line-height:1.05}
+.tommy p{color:var(--dus);max-width:52ch;margin-bottom:14px}
+.jobber{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:clamp(56px,8vw,90px) 0}
+@media (max-width:760px){.jobber{grid-template-columns:1fr}}
+.jobber h3{font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:6px}
+.jobber p{color:var(--dus)}
+.ring{background:var(--blekk);color:#fff}
+.ring .inn{padding:clamp(48px,7vw,80px) 0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.ring h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4vw,42px)}
+.ring a{background:#fff;color:var(--blekk);text-decoration:none;font-weight:600;padding:14px 24px;border-radius:99px}
+footer{padding:26px 0 44px;color:var(--dus);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="inn">
+  <div class="topp">
+    <div class="logo">Malermester Tommy Mørk</div>
+    <a href="tel:+4799300800">99 30 08 00</a>
+  </div>
+
+  <section class="studio">
+    <div class="tekst">
+      <h1>Se huset i ny farge før vi åpner spannet.</h1>
+      <p>Trykk på en farge. Det er lettere å bestemme seg når du ser fargen på et hus, ikke på en liten fargeprøve.</p>
+      <div class="palett" role="group" aria-label="Velg farge">
+        <button type="button" style="background:#F1EEE6" data-navn="Hvit" data-hint="tidløst, krever litt mer vedlikehold" aria-label="Hvit"></button>
+        <button type="button" style="background:#C8A24A" data-navn="Okergul" data-hint="klassisk sørlandsk, varm i solen" aria-label="Okergul" aria-pressed="true"></button>
+        <button type="button" style="background:#8E2F27" data-navn="Låverød" data-hint="tradisjonell, skjuler skitt godt" aria-label="Låverød"></button>
+        <button type="button" style="background:#6E7C7F" data-navn="Skifergrå" data-hint="moderne, passer nyere hus" aria-label="Skifergrå"></button>
+        <button type="button" style="background:#3E5A6E" data-navn="Fjordblå" data-hint="mørk og rolig, mot grønt landskap" aria-label="Fjordblå"></button>
+        <button type="button" style="background:#9AAE8F" data-navn="Lyngrønn" data-hint="myk, glir inn i hagen" aria-label="Lyngrønn"></button>
+      </div>
+      <p class="fargenavn" id="navn">Okergul <span>— klassisk sørlandsk, varm i solen</span></p>
+    </div>
+    <div class="hus">
+      <svg viewBox="0 0 480 360" role="img" aria-label="Tegning av et hus i valgt farge">
+        <rect x="0" y="290" width="480" height="70" fill="#7E9B6E"/>
+        <polygon points="70,160 240,60 410,160" fill="#3B3F44"/>
+        <rect id="vegg" x="90" y="155" width="300" height="140" fill="#C8A24A"/>
+        <g fill="#FFFFFF" opacity=".92">
+          <rect x="120" y="185" width="54" height="64"/><rect x="306" y="185" width="54" height="64"/>
+        </g>
+        <g stroke="#FFFFFF" stroke-width="5" fill="none">
+          <rect x="120" y="185" width="54" height="64"/><rect x="306" y="185" width="54" height="64"/>
+          <line x1="147" y1="185" x2="147" y2="249"/><line x1="333" y1="185" x2="333" y2="249"/>
+        </g>
+        <rect x="214" y="205" width="52" height="90" fill="#2E3438"/>
+        <rect x="208" y="199" width="64" height="8" fill="#FFFFFF"/>
+        <g id="vegg2" fill="#C8A24A"><rect x="400" y="215" width="60" height="80"/></g>
+        <polygon points="392,215 430,190 468,215" fill="#3B3F44"/>
+      </svg>
+    </div>
+  </section>
+</div>
+
+<section class="tommy">
+  <div class="inn">
+    <h2>Du snakker med Tommy, og det er Tommy som maler.</h2>
+    <div>
+      <p>Malermester Tommy Mørk AS er et lite firma i Kristiansand. Det betyr at personen som gir deg tilbudet, er den samme som står på stigen.</p>
+      <p>Vi tar oppdrag for privatpersoner: utvendig maling, innvendig oppussing og tapetsering.</p>
+    </div>
+  </div>
+</section>
+
+<div class="inn">
+  <section class="jobber">
+    <div><h3>Utvendig</h3><p>Vask, skraping og to strøk. Vi gir råd om farge og maling som tåler sørlandsk vær.</p></div>
+    <div><h3>Innvendig</h3><p>Vegger, tak og listverk. Vi dekker til, rydder etter oss og holder avtalt tid.</p></div>
+    <div><h3>Tapet</h3><p>Fra rolige mønstre til fotovegger — vi hjelper deg å velge og setter opp.</p></div>
+  </section>
+</div>
+
+<section class="ring">
+  <div class="inn">
+    <h2>Vil du ha et tilbud på huset ditt?</h2>
+    <a href="tel:+4799300800">Ring Tommy — 99 30 08 00</a>
+  </div>
+</section>
+
+<div class="inn">
+  <footer><span>Malermester Tommy Mørk AS — Stemmane 24D, Kristiansand</span><span>Designforslag — ikke en offisiell nettside</span></footer>
+</div>
+
+<script>
+const knapper=document.querySelectorAll(".palett button"), navn=document.getElementById("navn");
+knapper.forEach(b=>b.addEventListener("click",()=>{
+  knapper.forEach(x=>x.setAttribute("aria-pressed","false"));
+  b.setAttribute("aria-pressed","true");
+  const c=getComputedStyle(b).backgroundColor;
+  document.getElementById("vegg").setAttribute("fill",c);
+  document.getElementById("vegg2").setAttribute("fill",c);
+  navn.innerHTML=b.dataset.navn+" <span>— "+b.dataset.hint+"</span>";
+}));
+</script>
+</body>
+</html>
