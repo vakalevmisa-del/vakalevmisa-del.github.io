@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malermester Knutson — maling av store bygg i Kristiansand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marine:#1C2A4A;
+  --marine-2:#24365E;
+  --stillas:#A9B3BC;
+  --kalk:#F3F4F2;
+  --ny:#E6D3A8;
+  --signal:#E8792F;
+  --dus:#B8C1CC;
+  --font:"Bricolage Grotesque",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--marine);color:var(--kalk);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+
+.oppsett{display:grid;grid-template-columns:minmax(260px,38%) 1fr;min-height:100vh}
+@media (max-width:860px){.oppsett{grid-template-columns:1fr}}
+
+/* signatur: fasaden males mens du blar */
+.fasade{position:sticky;top:0;height:100vh;padding:28px;display:flex;flex-direction:column}
+@media (max-width:860px){
+  .fasade{height:auto;padding:12px 20px;z-index:2;background:var(--marine);display:grid;grid-template-columns:96px 1fr;grid-template-rows:auto auto;column-gap:16px;align-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .fasade .logo{margin:0;font-size:17px;grid-column:2}
+  .fasade .bygg{grid-column:1;grid-row:1 / span 2;min-height:0;height:72px;border-width:3px}
+  .fasade .bygg .vinduer i{border-width:2px}
+  .fasade .mann{margin:0;grid-column:2}
+}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.01em;margin-bottom:22px}
+.bygg{flex:1;min-height:340px;position:relative;border:6px solid var(--stillas);border-bottom:0;background:#8C97A3;overflow:hidden}
+.bygg .maling{position:absolute;left:0;right:0;bottom:0;height:0%;background:var(--ny);transition:height 120ms linear}
+.bygg .vinduer{position:absolute;inset:6% 10%;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:9% 14%}
+.bygg .vinduer i{background:var(--marine);border:3px solid var(--kalk);opacity:.9}
+.bygg .stillas{position:absolute;inset:0;background-image:linear-gradient(var(--stillas) 3px,transparent 3px),linear-gradient(90deg,var(--stillas) 3px,transparent 3px);background-size:100% 25%,33.3% 100%;opacity:.55}
+.mann{margin-top:12px;font-size:14px;color:var(--dus)}
+.mann b{color:var(--kalk)}
+
+.innhold{padding:clamp(28px,5vw,64px) clamp(20px,5vw,72px) 40px;background:var(--marine-2)}
+.innhold section{padding:clamp(40px,7vw,90px) 0;border-bottom:1px solid rgba(243,244,242,.12)}
+.innhold section:last-of-type{border-bottom:0}
+h1{font-weight:800;font-size:clamp(40px,6vw,74px);line-height:.98;letter-spacing:-.025em;max-width:13ch}
+.innhold .lead{color:var(--dus);font-size:19px;margin-top:20px;max-width:44ch}
+h2{font-weight:800;font-size:clamp(28px,4vw,42px);line-height:1.05;letter-spacing:-.015em;max-width:20ch}
+.innhold p{color:var(--dus);max-width:56ch;margin-top:14px}
+.rad{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+@media (max-width:700px){.rad{grid-template-columns:1fr}}
+.rad div{border-top:3px solid var(--signal);padding-top:12px}
+.rad strong{display:block;font-size:20px}
+.rad span{color:var(--dus);font-size:15px}
+.knapp{display:inline-block;margin-top:26px;background:var(--signal);color:#1A1A1A;font-weight:600;text-decoration:none;padding:14px 24px;border-radius:3px}
+.knapp:hover{background:#F08B45}
+.kontakt{font-size:18px;line-height:1.9;margin-top:18px}
+footer{padding:26px clamp(20px,5vw,72px) 40px;color:var(--dus);font-size:14px;background:var(--marine-2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="oppsett">
+  <aside class="fasade" aria-hidden="true">
+    <div class="logo">Malermester Knutson</div>
+    <div class="bygg">
+      <div class="maling" id="maling"></div>
+      <div class="stillas"></div>
+      <div class="vinduer"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <p class="mann" id="mann"><b>0 %</b> av fasaden er malt</p>
+  </aside>
+
+  <main class="innhold">
+    <section>
+      <h1>Borettslaget skal males. Vi har folkene til det.</h1>
+      <p class="lead">Malermester Knutson tar fasader, oppganger og næringsbygg i Kristiansand — prosjekter der det trengs mange hender samtidig og en fast kontaktperson.</p>
+      <a class="knapp" href="#kontakt">Be om befaring</a>
+    </section>
+
+    <section>
+      <h2>Ett prosjekt, én kontaktperson</h2>
+      <p>Styret i et borettslag har ikke tid til å følge opp ti håndverkere. Hos oss får dere én prosjektleder som planlegger stillas, varsler beboerne og rapporterer fremdrift.</p>
+      <div class="rad">
+        <div><strong>Fasader</strong><span>Borettslag, sameier og større eneboliger</span></div>
+        <div><strong>Oppganger</strong><span>Maling uten å stenge trappen for beboerne</span></div>
+        <div><strong>Næringsbygg</strong><span>Kontor, butikk og lager — også utenom arbeidstid</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Slik foregår et fasadeprosjekt</h2>
+      <p>Befaring og tilbud. Fargevalg sammen med styret. Stillas og varsling av beboere. Vask og skraping, deretter to strøk. Til slutt en befaring sammen med dere før stillaset tas ned.</p>
+    </section>
+
+    <section id="kontakt">
+      <h2>Ta kontakt for befaring</h2>
+      <p>Fortell oss om bygget, så kommer vi og ser på det.</p>
+      <div class="kontakt">
+        <a href="tel:+4738149080">38 14 90 80</a><br>
+        post@knutson.no<br>
+        Skibåsen 26C, Kristiansand
+      </div>
+    </section>
+  </main>
+</div>
+<footer>Malermester Knutson AS — Designforslag, ikke en offisiell nettside</footer>
+
+<script>
+const maling=document.getElementById("maling"), mann=document.getElementById("mann");
+function tegn(){
+  const h=document.documentElement;
+  const andel=Math.min(1,Math.max(0,h.scrollTop/(h.scrollHeight-h.clientHeight||1)));
+  maling.style.height=(andel*100)+"%";
+  mann.innerHTML="<b>"+Math.round(andel*100)+" %</b> av fasaden er malt";
+}
+window.addEventListener("scroll",tegn,{passive:true});
+window.addEventListener("resize",tegn);
+tegn();
+</script>
+</body>
+</html>
