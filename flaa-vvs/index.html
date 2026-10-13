@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flaa VVS — rørlegger i Kristiansand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --skifer:#1F2C38;
+  --skifer-2:#2A3A48;
+  --kobber:#C27445;
+  --vann:#4FA3C7;
+  --papir:#F1F4F4;
+  --dus:#A8B6C0;
+  --rand:rgba(241,244,244,.14);
+  --disp:"Barlow Condensed",system-ui,sans-serif;
+  --body:"Barlow",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--skifer);color:var(--papir);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--vann);outline-offset:3px}
+.inn{width:min(1060px,92vw);margin:0 auto}
+
+.topp{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.02em}
+.logo b{color:var(--kobber);font-weight:700}
+.vakt{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;background:var(--kobber);color:#fff;padding:10px 16px;border-radius:6px}
+.vakt .prikk{width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.7);animation:puls 1.8s infinite}
+@keyframes puls{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 10px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+
+/* hero: problemvelger */
+.hero{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,64px);padding:clamp(36px,6vw,72px) 0 clamp(56px,8vw,96px);align-items:start}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(46px,7.4vw,84px);line-height:.95;letter-spacing:-.005em}
+.hero .intro{color:var(--dus);margin-top:20px;max-width:40ch;font-size:18px}
+.velger{background:var(--skifer-2);border:1px solid var(--rand);border-radius:12px;padding:clamp(20px,3vw,30px)}
+.velger h2{font-family:var(--disp);font-weight:600;font-size:24px;margin-bottom:14px}
+.valg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.valg button{
+  font:inherit;font-weight:500;text-align:left;cursor:pointer;color:var(--papir);
+  background:transparent;border:1px solid var(--rand);border-radius:8px;padding:14px 14px;
+  transition:border-color 150ms ease,background 150ms ease;
+}
+.valg button:hover{border-color:var(--vann)}
+.valg button[aria-pressed="true"]{background:var(--vann);border-color:var(--vann);color:var(--skifer)}
+.svar{margin-top:20px;border-top:1px solid var(--rand);padding-top:18px;min-height:190px}
+.svar .grad{display:inline-block;font-weight:600;font-size:14px;padding:3px 10px;border-radius:99px;margin-bottom:10px}
+.grad.akutt{background:#E5484D;color:#fff}
+.grad.snart{background:var(--kobber);color:#fff}
+.grad.plan{background:var(--vann);color:var(--skifer)}
+.svar h3{font-family:var(--disp);font-size:26px;font-weight:600;line-height:1.1}
+.svar ol{margin:12px 0 0 20px;color:var(--dus)}
+.svar ol li{margin-bottom:6px}
+.svar .ring{display:inline-block;margin-top:16px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--kobber);padding-bottom:2px}
+.svar .tom{color:var(--dus)}
+
+/* rør-skille */
+.ror{height:14px;background:linear-gradient(var(--kobber),#9C5530);border-radius:7px;position:relative;margin:0 0 clamp(48px,7vw,80px)}
+.ror::before,.ror::after{content:"";position:absolute;top:-6px;width:26px;height:26px;border-radius:5px;background:#A85F36}
+.ror::before{left:18%}.ror::after{right:22%}
+
+.tjenester{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,3vw,36px);padding-bottom:clamp(56px,8vw,96px)}
+@media (max-width:760px){.tjenester{grid-template-columns:1fr}}
+.tjenester h3{font-family:var(--disp);font-weight:600;font-size:28px;margin-bottom:8px}
+.tjenester p{color:var(--dus)}
+
+.lys{background:var(--papir);color:var(--skifer)}
+.lys .inn{padding:clamp(56px,8vw,96px) 0;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px)}
+@media (max-width:760px){.lys .inn{grid-template-columns:1fr}}
+.lys h2{font-family:var(--disp);font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1}
+.lys p{margin-top:16px;max-width:46ch;color:#4A5966}
+.fakta{display:grid;gap:14px;align-content:start}
+.fakta div{border-left:4px solid var(--kobber);padding:4px 0 4px 16px}
+.fakta strong{display:block;font-family:var(--disp);font-size:22px}
+.fakta span{color:#4A5966}
+
+footer{padding:28px 0 46px;color:var(--dus);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="inn">
+  <div class="topp">
+    <div class="logo">Flaa <b>VVS</b></div>
+    <a class="vakt" href="tel:+4738011171"><span class="prikk" aria-hidden="true"></span>Vakttelefon 38 01 11 71</a>
+  </div>
+
+  <section class="hero">
+    <div>
+      <h1>Vann der det ikke skal være? Start her.</h1>
+      <p class="intro">Velg hva som skjer hjemme hos deg. Du får beskjed om hva du kan gjøre selv de neste minuttene — og når du bør ringe oss.</p>
+    </div>
+    <div class="velger" aria-live="polite">
+      <h2>Hva er problemet?</h2>
+      <div class="valg" role="group" aria-label="Velg problem">
+        <button type="button" data-k="lekk" aria-pressed="false">Det lekker</button>
+        <button type="button" data-k="tett" aria-pressed="false">Tett avløp</button>
+        <button type="button" data-k="varm" aria-pressed="false">Ikke varmt vann</button>
+        <button type="button" data-k="bad" aria-pressed="false">Vil pusse opp badet</button>
+      </div>
+      <div class="svar" id="svar"><p class="tom">Trykk på ett av valgene over.</p></div>
+    </div>
+  </section>
+
+  <div class="ror" aria-hidden="true"></div>
+
+  <section class="tjenester">
+    <div><h3>Akutt hjelp</h3><p>Lekkasjer, frostsprengte rør og vann på avveie. Vakttelefonen er bemannet når det haster.</p></div>
+    <div><h3>Bad og kjøkken</h3><p>Fra første befaring til siste fuge — vi koordinerer resten av fagfolkene for deg.</p></div>
+    <div><h3>Varme og varmtvann</h3><p>Bytte av bereder, varmepumpe for vann og vannbåren varme i nye og gamle hus.</p></div>
+  </section>
+</div>
+
+<section class="lys">
+  <div class="inn">
+    <div>
+      <h2>Lokale rørleggere i Rigedalen</h2>
+      <p>Vi holder til i Rigedalen 45A og kjører ut i hele Kristiansand. Ring for akutte saker, eller send en melding om du planlegger noe større — så kommer vi på befaring.</p>
+    </div>
+    <div class="fakta">
+      <div><strong>Vakttelefon</strong><span><a href="tel:+4738011171">38 01 11 71</a></span></div>
+      <div><strong>Adresse</strong><span>Rigedalen 45A, Kristiansand</span></div>
+      <div><strong>E-post</strong><span>post@flaavvs.no</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="inn">
+  <footer><span>Flaa VVS AS — Kristiansand</span><span>Designforslag — ikke en offisiell nettside</span></footer>
+</div>
+
+<script>
+const R={
+  lekk:{g:"akutt",t:"Akutt",h:"Steng vannet først",s:["Finn hovedstoppekranen — ofte under kjøkkenvasken, i vaskerommet eller der vannet kommer inn i huset.","Vri med klokka til den stopper.","Skru av strømmen til rom der vannet når stikkontakter.","Ring vakttelefonen — vi forteller deg hva som skjer videre."]},
+  tett:{g:"snart",t:"Bør fikses i dag",h:"Ikke bruk kjemikalier ennå",s:["Slutt å bruke vasken eller toalettet som er tett.","Prøv en vaskepropp (stempel) med litt vann i bunnen.","Renner det opp flere steder samtidig, er det felles avløp — ring oss."]},
+  varm:{g:"snart",t:"Bør fikses snart",h:"Sjekk sikringen til berederen",s:["Se i sikringsskapet om sikringen for varmtvannsberederen har gått.","Slå den på igjen én gang. Går den igjen, la den være av.","Berederen er ofte 10–15 år gammel når den svikter — vi hjelper deg å bytte den."]},
+  bad:{g:"plan",t:"Planlegging",h:"Vi kommer på befaring",s:["Ta noen bilder av badet slik det er i dag.","Tenk gjennom hva som er viktigst: plass, oppbevaring eller varme i gulvet.","Send oss en melding — vi avtaler en befaring og gir deg et pristilbud."]}
+};
+const svar=document.getElementById("svar");
+document.querySelectorAll(".valg button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll(".valg button").forEach(x=>x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    const r=R[b.dataset.k];
+    svar.innerHTML=`<span class="grad ${r.g}">${r.t}</span><h3>${r.h}</h3><ol>${r.s.map(x=>`<li>${x}</li>`).join("")}</ol><a class="ring" href="tel:+4738011171">Ring 38 01 11 71</a>`;
+  });
+});
+</script>
+</body>
+</html>
