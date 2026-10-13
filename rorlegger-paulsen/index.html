@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rørlegger Paulsen — nytt bad, steg for steg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=Archivo+Narrow:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --flis:#E9EEEC;
+  --fuge:#C9D3D0;
+  --gronn:#2F6B5E;
+  --gronn-mork:#1D4840;
+  --blekk:#17211F;
+  --dus:#5B6A66;
+  --disp:"Archivo",system-ui,sans-serif;
+  --smal:"Archivo Narrow",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  color:var(--blekk);font-family:var(--disp);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-color:var(--flis);
+  background-image:linear-gradient(var(--fuge) 2px,transparent 2px),linear-gradient(90deg,var(--fuge) 2px,transparent 2px);
+  background-size:72px 72px;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gronn);outline-offset:3px}
+.inn{width:min(1040px,92vw);margin:0 auto}
+
+.topp{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-weight:800;font-size:21px;letter-spacing:-.01em}
+.topp a{font-family:var(--smal);font-weight:600;text-decoration:none;font-size:16px}
+
+.hero{padding:clamp(40px,7vw,90px) 0 clamp(40px,6vw,70px);max-width:820px}
+h1{font-weight:800;font-size:clamp(42px,7vw,82px);line-height:.98;letter-spacing:-.03em}
+.hero p{margin-top:22px;font-size:19px;color:var(--dus);max-width:46ch}
+.knapp{display:inline-block;margin-top:28px;background:var(--gronn);color:#fff;text-decoration:none;font-weight:700;padding:15px 26px;border-radius:4px;transition:background 150ms ease}
+.knapp:hover{background:var(--gronn-mork)}
+
+/* signatur: fremdriftsflis */
+.prosess{display:grid;grid-template-columns:220px 1fr;gap:clamp(24px,5vw,60px);padding:clamp(30px,5vw,60px) 0 clamp(60px,8vw,100px)}
+@media (max-width:760px){.prosess{grid-template-columns:1fr}}
+.tavle{position:sticky;top:24px;align-self:start;background:#fff;border:2px solid var(--fuge);padding:16px;border-radius:4px}
+@media (max-width:760px){.tavle{top:0;z-index:2;padding:10px 12px;border-radius:0 0 4px 4px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}.tavle p{margin:0}.tavle small{margin:0}.tavle .ruter{grid-template-columns:repeat(15,1fr);gap:2px}}
+.tavle p{font-family:var(--smal);font-weight:600;font-size:15px;margin-bottom:10px}
+.ruter{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.ruter span{aspect-ratio:1;background:var(--flis);border-radius:2px;transition:background 400ms ease}
+.ruter span.lagt{background:var(--gronn)}
+.tavle small{display:block;margin-top:10px;color:var(--dus);font-size:14px}
+.steg{display:grid;gap:18px}
+.kort{background:#fff;border:2px solid var(--fuge);border-radius:4px;padding:clamp(20px,3vw,30px)}
+.kort .uke{font-family:var(--smal);font-weight:600;color:var(--gronn)}
+.kort h2{font-size:clamp(24px,3vw,30px);font-weight:700;letter-spacing:-.01em;margin-top:2px}
+.kort p{color:var(--dus);margin-top:8px;max-width:60ch}
+
+.kontakt{background:var(--blekk);color:#fff}
+.kontakt .inn{padding:clamp(56px,8vw,96px) 0;display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+@media (max-width:760px){.kontakt .inn{grid-template-columns:1fr}}
+.kontakt h2{font-size:clamp(32px,5vw,50px);font-weight:800;line-height:1;letter-spacing:-.02em}
+.kontakt p{color:#B9C4C1;margin-top:14px;max-width:44ch}
+form{display:grid;gap:12px}
+label{font-family:var(--smal);font-weight:600;font-size:15px}
+input,textarea{font:inherit;width:100%;padding:12px;border-radius:4px;border:1px solid #3B4A46;background:#212D2A;color:#fff}
+textarea{min-height:110px;resize:vertical}
+form button{font:inherit;font-weight:700;background:var(--gronn);color:#fff;border:0;padding:14px;border-radius:4px;cursor:pointer}
+form button:hover{background:#3A8273}
+.info{margin-top:22px;font-family:var(--smal);font-size:16px;line-height:1.8}
+
+footer{padding:26px 0 44px;color:var(--dus);font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="inn">
+  <div class="topp">
+    <div class="logo">Rørlegger Paulsen</div>
+    <a href="tel:+4798235388">98 23 53 88</a>
+  </div>
+
+  <header class="hero">
+    <h1>Nytt bad uten å lure på hva som skjer neste uke.</h1>
+    <p>Et baderom er mange fag i riktig rekkefølge. Her ser du hele løpet før vi starter — og hvor langt vi har kommet mens vi jobber.</p>
+    <a class="knapp" href="#kontakt">Be om befaring</a>
+  </header>
+
+  <section class="prosess">
+    <aside class="tavle" aria-hidden="true">
+      <p>Badet ditt</p>
+      <div class="ruter" id="ruter"></div>
+      <small id="status">0 av 6 steg</small>
+    </aside>
+    <div class="steg">
+      <article class="kort" data-steg="1"><p class="uke">Steg 1 · Befaring</p><h2>Vi ser på rommet sammen</h2><p>Vi måler opp, sjekker avløp og vanntilførsel, og hører hva du vil ha. Du får et skriftlig tilbud etterpå.</p></article>
+      <article class="kort" data-steg="2"><p class="uke">Steg 2 · Riving</p><h2>Det gamle ut</h2><p>Fliser, sluk og gamle rør fjernes. Nå ser vi hva som skjuler seg bak veggene — og sier fra med en gang om noe må endres.</p></article>
+      <article class="kort" data-steg="3"><p class="uke">Steg 3 · Rør og sluk</p><h2>Nye rør i vegg og gulv</h2><p>Rør-i-rør, nytt sluk og forberedelse for varme i gulvet. Dette er delen som avgjør om badet holder i 30 år.</p></article>
+      <article class="kort" data-steg="4"><p class="uke">Steg 4 · Membran</p><h2>Vanntett før flisene</h2><p>Membranen legges og dokumenteres med bilder, slik at du har det på papiret ved et senere salg.</p></article>
+      <article class="kort" data-steg="5"><p class="uke">Steg 5 · Fliser</p><h2>Flisleggeren tar over</h2><p>Vi avtaler rekkefølgen med flisleggeren, så du slipper å koordinere håndverkerne selv.</p></article>
+      <article class="kort" data-steg="6"><p class="uke">Steg 6 · Montering</p><h2>Klart til bruk</h2><p>Toalett, servant, dusj og armaturer monteres og testes. Du får samsvarserklæring og en gjennomgang av alt.</p></article>
+    </div>
+  </section>
+</div>
+
+<section class="kontakt" id="kontakt">
+  <div class="inn">
+    <div>
+      <h2>Fortell oss om badet ditt</h2>
+      <p>Skriv kort hva du ønsker, så ringer vi deg tilbake og avtaler en befaring i Kristiansand-området.</p>
+      <div class="info">Rigedalen 50, Kristiansand<br><a href="tel:+4798235388">98 23 53 88</a><br>sven@rorleggerpaulsen.no</div>
+    </div>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Takk — vi ringer deg (demo)';">
+      <div><label for="navn">Navn</label><input id="navn" required></div>
+      <div><label for="tlf">Telefon</label><input id="tlf" type="tel" required></div>
+      <div><label for="hva">Hva ønsker du?</label><textarea id="hva" placeholder="F.eks. totalrenovering av bad på 5 m², varme i gulvet"></textarea></div>
+      <button type="submit">Send forespørsel</button>
+    </form>
+  </div>
+</section>
+
+<div class="inn">
+  <footer><span>Rørlegger Paulsen AS — Kristiansand</span><span>Designforslag — ikke en offisiell nettside</span></footer>
+</div>
+
+<script>
+const ruter=document.getElementById("ruter"), status=document.getElementById("status");
+const N=30; for(let i=0;i<N;i++){ruter.appendChild(document.createElement("span"));}
+const tiles=[...ruter.children];
+function oppdater(steg){
+  const n=Math.round(N*steg/6);
+  tiles.forEach((t,i)=>t.classList.toggle("lagt",i<n));
+  status.textContent=steg+" av 6 steg";
+}
+const kort=document.querySelectorAll(".kort");
+if("IntersectionObserver" in window){
+  const sett=new Set();
+  const obs=new IntersectionObserver(e=>{
+    e.forEach(x=>{ if(x.isIntersecting) sett.add(+x.target.dataset.steg); });
+    oppdater(sett.size?Math.max(...sett):0);
+  },{rootMargin:"0px 0px -45% 0px"});
+  kort.forEach(k=>obs.observe(k));
+} else { oppdater(6); }
+</script>
+</body>
+</html>
